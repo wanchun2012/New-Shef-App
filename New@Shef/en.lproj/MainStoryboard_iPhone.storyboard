@@ -67,14 +67,17 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="SocialCell" id="G7j-bL-2hS">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SocialCell" id="G7j-bL-2hS">
                                 <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="TNs-vr-OUd" kind="push" id="yGT-WW-v1C"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ChecklistCell" id="SwD-km-6bd">
                                 <rect key="frame" x="0.0" y="154" width="320" height="44"/>
@@ -121,14 +124,17 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="FAQsCell" id="CLm-If-8Jq">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FAQsCell" id="CLm-If-8Jq">
                                 <rect key="frame" x="0.0" y="374" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="Tk0-Ue-UA9" kind="push" id="qwR-P6-n6x"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -141,6 +147,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbr-Ef-xbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="264" y="-30"/>
+        </scene>
+        <!--Qs View Controller - FAQs-->
+        <scene sceneID="0pi-cG-OZT">
+            <objects>
+                <viewController id="Tk0-Ue-UA9" customClass="NSFAQsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gIV-9d-fGB">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5e-hO-CDa">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Send Email">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendEmail" destination="Tk0-Ue-UA9" eventType="touchUpInside" id="2Bj-Qs-ERL"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbW-wB-uh5">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="90R-mW-SjS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wbW-wB-uh5" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="3dk-rA-5Qj"/>
+                            <constraint firstAttribute="bottom" secondItem="z5e-hO-CDa" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="Aau-yg-hiv"/>
+                            <constraint firstItem="wbW-wB-uh5" firstAttribute="centerX" secondItem="z5e-hO-CDa" secondAttribute="centerX" type="default" id="V9E-Ax-BYT"/>
+                            <constraint firstItem="wbW-wB-uh5" firstAttribute="leading" secondItem="gIV-9d-fGB" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Y1I-49-ge7"/>
+                            <constraint firstItem="wbW-wB-uh5" firstAttribute="top" secondItem="gIV-9d-fGB" secondAttribute="top" constant="20" symbolic="YES" type="default" id="hSQ-Ww-78t"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="FAQs" id="9YH-ad-zn5"/>
+                    <connections>
+                        <outlet property="emailbody" destination="wbW-wB-uh5" id="gdj-YE-0QA"/>
+                        <outlet property="sendbutton" destination="z5e-hO-CDa" id="aZf-k1-odt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8NC-x0-jvX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="496" y="601"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="RbN-Rg-qKn">
@@ -170,10 +225,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="News" id="Ooc-3N-Wqh"/>
+                    <connections>
+                        <outlet property="tableView" destination="bIs-lc-18D" id="Bj2-kA-RZ4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NNj-jz-msJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="-30"/>
+            <point key="canvasLocation" x="845" y="-990"/>
         </scene>
         <!--News Content View Controller-->
         <scene sceneID="aBH-tA-1AA">
@@ -202,7 +260,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Re-jY-8gA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1125" y="-30"/>
+            <point key="canvasLocation" x="1301" y="-990"/>
+        </scene>
+        <!--Social Options-->
+        <scene sceneID="zre-Cb-yMh">
+            <objects>
+                <tableViewController id="TNs-vr-OUd" userLabel="Social Options" customClass="NSSocialOptionsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pWN-M2-dfo">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FacebookCell" id="4gN-Rz-cE5">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="pFU-Sm-X8V" kind="push" id="NNU-sT-JrU"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="TwitterCell" id="r6u-IK-Zh2">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="YoutubeCell" id="Bba-Nu-M3J">
+                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TNs-vr-OUd" id="s7k-DI-nFB"/>
+                            <outlet property="delegate" destination="TNs-vr-OUd" id="9Jd-fR-E8U"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Social Options" id="dha-g9-R0Z"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AHp-8Q-Cda" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="789" y="-30"/>
+        </scene>
+        <!--Facebook View Controller-->
+        <scene sceneID="K4n-Hn-jSd">
+            <objects>
+                <viewController id="pFU-Sm-X8V" userLabel="Facebook View Controller" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZLa-BX-IjD">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Facebook" id="eLe-bT-Qaf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DPY-Sj-uD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1301" y="-30"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BUH-I6-H5M">
@@ -220,6 +344,40 @@
             <point key="canvasLocation" x="-198" y="-30"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="NSFAQsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSFAQsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendEmail"/>
+                <relationship kind="outlet" name="emailbody" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="sendbutton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NSHomeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSHomeViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NSNewsContentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSNewsContentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NSNewsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSNewsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSSocialOptionsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSSocialOptionsViewController.h"/>
+        </class>
+        <class className="NSWelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSWelcomeViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

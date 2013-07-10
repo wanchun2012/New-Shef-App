@@ -10,4 +10,7 @@
 
 @interface NSNewsViewController : UIViewController <NSXMLParserDelegate>
 
+ 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 @end

@@ -118,7 +118,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     
-    [self.tvNews reloadData];
+   [self.tableView reloadData];
     
 }
 

@@ -7,7 +7,6 @@
         <!--Welcome View Controller-->
         <scene sceneID="5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <viewController id="2" customClass="NSWelcomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
@@ -34,6 +33,7 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-578" y="-30"/>
         </scene>
@@ -88,14 +88,17 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="UCardCell" id="pRr-HS-BuE">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UCardCell" id="pRr-HS-BuE">
                                 <rect key="frame" x="0.0" y="198" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="1jD-7M-d9V" kind="push" id="hF4-OA-MEk"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="StructureCell" id="xuZ-MT-in8">
                                 <rect key="frame" x="0.0" y="242" width="320" height="44"/>
@@ -148,6 +151,106 @@
             </objects>
             <point key="canvasLocation" x="264" y="-30"/>
         </scene>
+        <!--Card View Controller - UCard-->
+        <scene sceneID="gLn-gK-YbG">
+            <objects>
+                <viewController id="1jD-7M-d9V" customClass="NSUCardViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cJc-ZT-ryr">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Take or choose a photo and click &quot;send emal&quot; to drop us an email and collect your UCard at Hicks" translatesAutoresizingMaskIntoConstraints="NO" id="OUo-HK-qfN">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="9IQ-KY-qOg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsK-AZ-EJ5">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Take a phote">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="TakePhoto" destination="1jD-7M-d9V" eventType="touchUpInside" id="iDf-3h-OEe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCU-8c-9CP">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="146" id="Y5T-G6-qH7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Choose a photo">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ChoosePhoto" destination="1jD-7M-d9V" eventType="touchUpInside" id="AWn-DX-RnS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="view your photo:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WtL-nN-DLY">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kzq-Eq-UyR">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="XNZ-Hc-npR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="send ur photo">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SendEmail" destination="1jD-7M-d9V" eventType="touchUpInside" id="eYJ-7I-seq"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-dX-X8d">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="hs9-bc-74J"/>
+                                    <constraint firstAttribute="width" constant="240" id="ovn-xo-X5C"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qsK-AZ-EJ5" firstAttribute="top" secondItem="OUo-HK-qfN" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="2v7-8a-1Aj"/>
+                            <constraint firstAttribute="bottom" secondItem="Kzq-Eq-UyR" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="3pZ-bK-Bur"/>
+                            <constraint firstItem="OUo-HK-qfN" firstAttribute="leading" secondItem="cJc-ZT-ryr" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="MZG-fP-FDN"/>
+                            <constraint firstItem="aCU-8c-9CP" firstAttribute="leading" secondItem="qsK-AZ-EJ5" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Q8o-RM-JCF"/>
+                            <constraint firstItem="aCU-8c-9CP" firstAttribute="baseline" secondItem="qsK-AZ-EJ5" secondAttribute="baseline" type="default" id="WxH-n7-mx6"/>
+                            <constraint firstAttribute="trailing" secondItem="OUo-HK-qfN" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="aed-1G-TUo"/>
+                            <constraint firstItem="qsK-AZ-EJ5" firstAttribute="leading" secondItem="cJc-ZT-ryr" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="d6i-Qy-KwE"/>
+                            <constraint firstItem="aCU-8c-9CP" firstAttribute="leading" secondItem="cJc-ZT-ryr" secondAttribute="leading" constant="155" id="gRq-t5-wm4"/>
+                            <constraint firstItem="uRA-dX-X8d" firstAttribute="top" secondItem="WtL-nN-DLY" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="hrP-eQ-Cqi"/>
+                            <constraint firstItem="WtL-nN-DLY" firstAttribute="trailing" secondItem="qsK-AZ-EJ5" secondAttribute="trailing" type="default" id="j9S-nU-xbs"/>
+                            <constraint firstItem="OUo-HK-qfN" firstAttribute="top" secondItem="cJc-ZT-ryr" secondAttribute="top" constant="20" symbolic="YES" type="default" id="jqc-1R-x6d"/>
+                            <constraint firstItem="WtL-nN-DLY" firstAttribute="top" secondItem="qsK-AZ-EJ5" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="oLq-Or-GOO"/>
+                            <constraint firstItem="Kzq-Eq-UyR" firstAttribute="centerX" secondItem="uRA-dX-X8d" secondAttribute="centerX" type="default" id="uhf-ai-EUd"/>
+                            <constraint firstItem="Kzq-Eq-UyR" firstAttribute="centerX" secondItem="OUo-HK-qfN" secondAttribute="centerX" type="default" id="vy2-n7-ZLQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="UCard" id="gOZ-Zj-1AX"/>
+                    <connections>
+                        <outlet property="imageView" destination="uRA-dX-X8d" id="Tb3-XO-9I1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rO1-NY-OC9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="797" y="119"/>
+        </scene>
         <!--Qs View Controller - FAQs-->
         <scene sceneID="0pi-cG-OZT">
             <objects>
@@ -195,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8NC-x0-jvX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="496" y="601"/>
+            <point key="canvasLocation" x="789" y="777"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="RbN-Rg-qKn">
@@ -231,7 +334,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NNj-jz-msJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="845" y="-990"/>
+            <point key="canvasLocation" x="789" y="-1234"/>
         </scene>
         <!--News Content View Controller-->
         <scene sceneID="aBH-tA-1AA">
@@ -260,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Re-jY-8gA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1301" y="-990"/>
+            <point key="canvasLocation" x="1317" y="-1234"/>
         </scene>
         <!--Social Options-->
         <scene sceneID="zre-Cb-yMh">
@@ -311,7 +414,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AHp-8Q-Cda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="-30"/>
+            <point key="canvasLocation" x="789" y="-530"/>
         </scene>
         <!--Facebook View Controller-->
         <scene sceneID="K4n-Hn-jSd">
@@ -326,7 +429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPY-Sj-uD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1301" y="-30"/>
+            <point key="canvasLocation" x="1285" y="-538"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BUH-I6-H5M">
@@ -373,6 +476,15 @@
         </class>
         <class className="NSSocialOptionsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSSocialOptionsViewController.h"/>
+        </class>
+        <class className="NSUCardViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSUCardViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="ChoosePhoto"/>
+                <relationship kind="action" name="SendEmail"/>
+                <relationship kind="action" name="TakePhoto"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
         </class>
         <class className="NSWelcomeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSWelcomeViewController.h"/>

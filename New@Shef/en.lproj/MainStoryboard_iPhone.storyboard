@@ -76,7 +76,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="TNs-vr-OUd" kind="push" id="yGT-WW-v1C"/>
+                                    <segue destination="jC7-Ia-Bxu" kind="push" id="rS7-Uv-Mul"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ChecklistCell" id="SwD-km-6bd">
@@ -109,14 +109,17 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ContactsCell" id="cGL-O3-eBl">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ContactsCell" id="cGL-O3-eBl">
                                 <rect key="frame" x="0.0" y="286" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="b7J-WT-GB4" kind="push" id="Id5-op-S9S"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="UsefulLinksCell" id="akz-d1-f4M">
                                 <rect key="frame" x="0.0" y="330" width="320" height="44"/>
@@ -150,6 +153,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbr-Ef-xbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="264" y="-30"/>
+        </scene>
+        <!--Contacts View Controller - Contacts-->
+        <scene sceneID="Vsx-vq-wB6">
+            <objects>
+                <viewController id="b7J-WT-GB4" customClass="NSContactsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J3I-eZ-0yl">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oly-ap-j7z">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Oly-ap-j7z" firstAttribute="trailing" secondItem="J3I-eZ-0yl" secondAttribute="trailing" type="default" id="Gz9-9d-96X"/>
+                            <constraint firstItem="Oly-ap-j7z" firstAttribute="bottom" secondItem="J3I-eZ-0yl" secondAttribute="bottom" type="default" id="Mzl-4N-tJv"/>
+                            <constraint firstItem="Oly-ap-j7z" firstAttribute="top" secondItem="J3I-eZ-0yl" secondAttribute="top" type="default" id="Ote-2l-2O2"/>
+                            <constraint firstItem="Oly-ap-j7z" firstAttribute="leading" secondItem="J3I-eZ-0yl" secondAttribute="leading" type="default" id="vV1-gC-dI0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Contacts" id="D7N-2c-T0c"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sA4-5g-lBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1309" y="969"/>
         </scene>
         <!--Card View Controller - UCard-->
         <scene sceneID="gLn-gK-YbG">
@@ -249,7 +280,94 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rO1-NY-OC9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="797" y="119"/>
+            <point key="canvasLocation" x="1315" y="-520"/>
+        </scene>
+        <!--Facebook View Controller-->
+        <scene sceneID="HaN-m0-bsR">
+            <objects>
+                <viewController id="Oc1-cf-L7z" userLabel="Facebook View Controller" customClass="NSFacebookViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zKh-EW-qrc">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqs-p4-jx1">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cqs-p4-jx1" firstAttribute="trailing" secondItem="zKh-EW-qrc" secondAttribute="trailing" type="default" id="5tU-YK-3nr"/>
+                            <constraint firstItem="cqs-p4-jx1" firstAttribute="bottom" secondItem="zKh-EW-qrc" secondAttribute="bottom" type="default" id="Wlp-Qx-k5n"/>
+                            <constraint firstItem="cqs-p4-jx1" firstAttribute="top" secondItem="zKh-EW-qrc" secondAttribute="top" type="default" id="Xs8-j3-9MX"/>
+                            <constraint firstItem="cqs-p4-jx1" firstAttribute="leading" secondItem="zKh-EW-qrc" secondAttribute="leading" type="default" id="rfo-vX-e2q"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Facebook" id="gC7-LQ-ZkY"/>
+                    <connections>
+                        <outlet property="webview" destination="cqs-p4-jx1" id="qDr-vm-AZY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdD-uc-Jrk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235" y="-686"/>
+        </scene>
+        <!--Twitter View Controller-->
+        <scene sceneID="UkC-ep-ZNg">
+            <objects>
+                <viewController id="56C-do-Kgw" userLabel="Twitter View Controller" customClass="NSTwitterViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iOh-1h-AYm">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mj-qV-jWK">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4mj-qV-jWK" firstAttribute="trailing" secondItem="iOh-1h-AYm" secondAttribute="trailing" type="default" id="674-FY-FR7"/>
+                            <constraint firstItem="4mj-qV-jWK" firstAttribute="top" secondItem="iOh-1h-AYm" secondAttribute="top" type="default" id="FWm-C9-ILS"/>
+                            <constraint firstItem="4mj-qV-jWK" firstAttribute="leading" secondItem="iOh-1h-AYm" secondAttribute="leading" type="default" id="mdi-Gs-7uY"/>
+                            <constraint firstItem="4mj-qV-jWK" firstAttribute="bottom" secondItem="iOh-1h-AYm" secondAttribute="bottom" type="default" id="sfj-gC-D3g"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Twitter" id="Qha-6r-ggd"/>
+                    <connections>
+                        <outlet property="webview" destination="4mj-qV-jWK" id="hnk-yV-pY7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="udj-4P-ukz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235" y="750"/>
+        </scene>
+        <!--Youtube View Controller-->
+        <scene sceneID="ffz-sn-RQj">
+            <objects>
+                <viewController id="Qet-N7-3iM" userLabel="Youtube View Controller" customClass="NSYoutubeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="An4-kh-C5u">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ApO-h7-skm">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ApO-h7-skm" firstAttribute="trailing" secondItem="An4-kh-C5u" secondAttribute="trailing" type="default" id="44j-1D-NQN"/>
+                            <constraint firstItem="ApO-h7-skm" firstAttribute="bottom" secondItem="An4-kh-C5u" secondAttribute="bottom" type="default" id="87I-qz-bix"/>
+                            <constraint firstItem="ApO-h7-skm" firstAttribute="leading" secondItem="An4-kh-C5u" secondAttribute="leading" type="default" id="Cv2-1r-wtg"/>
+                            <constraint firstItem="ApO-h7-skm" firstAttribute="top" secondItem="An4-kh-C5u" secondAttribute="top" type="default" id="gyD-O8-xOz"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Youtube" id="qKB-u6-XM6"/>
+                    <connections>
+                        <outlet property="webview" destination="ApO-h7-skm" id="KbC-Qg-uDB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S8O-NH-gB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235" y="30"/>
         </scene>
         <!--Qs View Controller - FAQs-->
         <scene sceneID="0pi-cG-OZT">
@@ -298,7 +416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8NC-x0-jvX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="777"/>
+            <point key="canvasLocation" x="1315" y="1748"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="RbN-Rg-qKn">
@@ -334,7 +452,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NNj-jz-msJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="-1234"/>
+            <point key="canvasLocation" x="1315" y="-1295"/>
         </scene>
         <!--News Content View Controller-->
         <scene sceneID="aBH-tA-1AA">
@@ -363,73 +481,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Re-jY-8gA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1317" y="-1234"/>
-        </scene>
-        <!--Social Options-->
-        <scene sceneID="zre-Cb-yMh">
-            <objects>
-                <tableViewController id="TNs-vr-OUd" userLabel="Social Options" customClass="NSSocialOptionsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pWN-M2-dfo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FacebookCell" id="4gN-Rz-cE5">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <connections>
-                                    <segue destination="pFU-Sm-X8V" kind="push" id="NNU-sT-JrU"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="TwitterCell" id="r6u-IK-Zh2">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="YoutubeCell" id="Bba-Nu-M3J">
-                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="TNs-vr-OUd" id="s7k-DI-nFB"/>
-                            <outlet property="delegate" destination="TNs-vr-OUd" id="9Jd-fR-E8U"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Social Options" id="dha-g9-R0Z"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AHp-8Q-Cda" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="789" y="-530"/>
-        </scene>
-        <!--Facebook View Controller-->
-        <scene sceneID="K4n-Hn-jSd">
-            <objects>
-                <viewController id="pFU-Sm-X8V" userLabel="Facebook View Controller" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZLa-BX-IjD">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Facebook" id="eLe-bT-Qaf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DPY-Sj-uD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1285" y="-538"/>
+            <point key="canvasLocation" x="1763" y="-1295"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BUH-I6-H5M">
@@ -446,14 +498,44 @@
             </objects>
             <point key="canvasLocation" x="-198" y="-30"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="uQf-Ud-cgk">
+            <objects>
+                <tabBarController id="jC7-Ia-Bxu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="z12-85-jQe"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="8o1-mX-yy1">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Oc1-cf-L7z" kind="relationship" relationship="viewControllers" id="fSh-yK-IDA"/>
+                        <segue destination="56C-do-Kgw" kind="relationship" relationship="viewControllers" id="y15-FX-CzP"/>
+                        <segue destination="Qet-N7-3iM" kind="relationship" relationship="viewControllers" id="0ql-5Q-9Yi"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i5F-sw-VkW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1303" y="211"/>
+        </scene>
     </scenes>
     <classes>
+        <class className="NSContactsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSContactsViewController.h"/>
+        </class>
         <class className="NSFAQsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSFAQsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="sendEmail"/>
                 <relationship kind="outlet" name="emailbody" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="sendbutton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NSFacebookViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSFacebookViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
             </relationships>
         </class>
         <class className="NSHomeViewController" superclassName="UITableViewController">
@@ -474,8 +556,11 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="NSSocialOptionsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSSocialOptionsViewController.h"/>
+        <class className="NSTwitterViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSTwitterViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
+            </relationships>
         </class>
         <class className="NSUCardViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSUCardViewController.h"/>
@@ -488,6 +573,12 @@
         </class>
         <class className="NSWelcomeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSWelcomeViewController.h"/>
+        </class>
+        <class className="NSYoutubeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSYoutubeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

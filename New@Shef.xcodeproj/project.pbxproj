@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C00832591791B2F500A5EFE2 /* NSContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C00832581791B2F500A5EFE2 /* NSContactsViewController.m */; };
+		C090EA431796D9F000771382 /* NSContactDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EA421796D9F000771382 /* NSContactDetailViewController.m */; };
+		C090EAB51797D13D00771382 /* ExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAB41797D13D00771382 /* ExpandableTableView.m */; };
+		C090EAB81797D1A400771382 /* ExpandableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAB71797D1A400771382 /* ExpandableTableViewController.m */; };
 		C0B86794178D8628006E198F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86793178D8628006E198F /* UIKit.framework */; };
 		C0B86796178D8628006E198F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86795178D8628006E198F /* Foundation.framework */; };
 		C0B86798178D8628006E198F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86797178D8628006E198F /* CoreGraphics.framework */; };
@@ -18,10 +22,30 @@
 		C0B867AA178D8628006E198F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0B867A9178D8628006E198F /* Default-568h@2x.png */; };
 		C0B867AD178D8628006E198F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0B867AB178D8628006E198F /* MainStoryboard_iPhone.storyboard */; };
 		C0B867B0178D8628006E198F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0B867AE178D8628006E198F /* MainStoryboard_iPad.storyboard */; };
-		C0B867B3178D8628006E198F /* NSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867B2178D8628006E198F /* NSViewController.m */; };
+		C0B867BB178D86A2006E198F /* NSWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867BA178D86A2006E198F /* NSWelcomeViewController.m */; };
+		C0B867C5178D961C006E198F /* NSNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867C4178D961C006E198F /* NSNewsViewController.m */; };
+		C0B867CB178D96DA006E198F /* NSNewsContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867CA178D96DA006E198F /* NSNewsContentViewController.m */; };
+		C0B867D7178DBBD4006E198F /* NSFAQsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867D6178DBBD4006E198F /* NSFAQsViewController.m */; };
+		C0B867D9178DBCF6006E198F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B867D8178DBCF6006E198F /* MessageUI.framework */; };
+		C0B867DD178DCCB5006E198F /* NSUCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867DC178DCCB5006E198F /* NSUCardViewController.m */; };
+		C0B867F0178EA29F006E198F /* pContactsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0B867EF178EA29F006E198F /* pContactsList.plist */; };
+		C0B86822178F223D006E198F /* NSFacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B86821178F223D006E198F /* NSFacebookViewController.m */; };
+		C0B86825178F224D006E198F /* NSTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B86824178F224D006E198F /* NSTwitterViewController.m */; };
+		C0B86828178F225C006E198F /* NSYoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B86827178F225C006E198F /* NSYoutubeViewController.m */; };
+		C0C69C1517917961006514F0 /* pUEBDetails.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0C69C1417917961006514F0 /* pUEBDetails.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C00832571791B2F500A5EFE2 /* NSContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSContactsViewController.h; sourceTree = "<group>"; };
+		C00832581791B2F500A5EFE2 /* NSContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSContactsViewController.m; sourceTree = "<group>"; };
+		C090EA411796D9F000771382 /* NSContactDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSContactDetailViewController.h; sourceTree = "<group>"; };
+		C090EA421796D9F000771382 /* NSContactDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSContactDetailViewController.m; sourceTree = "<group>"; };
+		C090EAB31797D13D00771382 /* ExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTableView.h; sourceTree = "<group>"; };
+		C090EAB41797D13D00771382 /* ExpandableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableTableView.m; sourceTree = "<group>"; };
+		C090EAB61797D1A400771382 /* ExpandableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTableViewController.h; sourceTree = "<group>"; };
+		C090EAB71797D1A400771382 /* ExpandableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableTableViewController.m; sourceTree = "<group>"; };
+		C090EAB91797D1FD00771382 /* ExpandableTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTableViewDelegate.h; sourceTree = "<group>"; };
+		C090EABC1797D27700771382 /* ExpandableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTableViewDataSource.h; sourceTree = "<group>"; };
 		C0B86790178D8628006E198F /* New@Shef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New@Shef.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B86793178D8628006E198F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C0B86795178D8628006E198F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -37,8 +61,25 @@
 		C0B867A9178D8628006E198F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C0B867AC178D8628006E198F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		C0B867AF178D8628006E198F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		C0B867B1178D8628006E198F /* NSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSViewController.h; sourceTree = "<group>"; };
-		C0B867B2178D8628006E198F /* NSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSViewController.m; sourceTree = "<group>"; };
+		C0B867B9178D86A2006E198F /* NSWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWelcomeViewController.h; sourceTree = "<group>"; };
+		C0B867BA178D86A2006E198F /* NSWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSWelcomeViewController.m; sourceTree = "<group>"; };
+		C0B867C3178D961C006E198F /* NSNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNewsViewController.h; sourceTree = "<group>"; };
+		C0B867C4178D961C006E198F /* NSNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNewsViewController.m; sourceTree = "<group>"; };
+		C0B867C9178D96DA006E198F /* NSNewsContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNewsContentViewController.h; sourceTree = "<group>"; };
+		C0B867CA178D96DA006E198F /* NSNewsContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNewsContentViewController.m; sourceTree = "<group>"; };
+		C0B867D5178DBBD4006E198F /* NSFAQsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFAQsViewController.h; sourceTree = "<group>"; };
+		C0B867D6178DBBD4006E198F /* NSFAQsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFAQsViewController.m; sourceTree = "<group>"; };
+		C0B867D8178DBCF6006E198F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		C0B867DB178DCCB5006E198F /* NSUCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUCardViewController.h; sourceTree = "<group>"; };
+		C0B867DC178DCCB5006E198F /* NSUCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUCardViewController.m; sourceTree = "<group>"; };
+		C0B867EF178EA29F006E198F /* pContactsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pContactsList.plist; sourceTree = "<group>"; };
+		C0B86820178F223D006E198F /* NSFacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFacebookViewController.h; sourceTree = "<group>"; };
+		C0B86821178F223D006E198F /* NSFacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFacebookViewController.m; sourceTree = "<group>"; };
+		C0B86823178F224D006E198F /* NSTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTwitterViewController.h; sourceTree = "<group>"; };
+		C0B86824178F224D006E198F /* NSTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTwitterViewController.m; sourceTree = "<group>"; };
+		C0B86826178F225C006E198F /* NSYoutubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSYoutubeViewController.h; sourceTree = "<group>"; };
+		C0B86827178F225C006E198F /* NSYoutubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSYoutubeViewController.m; sourceTree = "<group>"; };
+		C0C69C1417917961006514F0 /* pUEBDetails.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pUEBDetails.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B867D9178DBCF6006E198F /* MessageUI.framework in Frameworks */,
 				C0B86794178D8628006E198F /* UIKit.framework in Frameworks */,
 				C0B86796178D8628006E198F /* Foundation.framework in Frameworks */,
 				C0B86798178D8628006E198F /* CoreGraphics.framework in Frameworks */,
@@ -55,6 +97,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C090EAAE1797D05900771382 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				C090EAAF1797D06700771382 /* Table */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		C090EAAF1797D06700771382 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				C090EAB31797D13D00771382 /* ExpandableTableView.h */,
+				C090EAB41797D13D00771382 /* ExpandableTableView.m */,
+				C090EAB61797D1A400771382 /* ExpandableTableViewController.h */,
+				C090EAB71797D1A400771382 /* ExpandableTableViewController.m */,
+				C090EAB91797D1FD00771382 /* ExpandableTableViewDelegate.h */,
+				C090EABC1797D27700771382 /* ExpandableTableViewDataSource.h */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
 		C0B86787178D8628006E198F = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +138,7 @@
 		C0B86792178D8628006E198F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C0B867D8178DBCF6006E198F /* MessageUI.framework */,
 				C0B86793178D8628006E198F /* UIKit.framework */,
 				C0B86795178D8628006E198F /* Foundation.framework */,
 				C0B86797178D8628006E198F /* CoreGraphics.framework */,
@@ -85,12 +149,11 @@
 		C0B86799178D8628006E198F /* New@Shef */ = {
 			isa = PBXGroup;
 			children = (
+				C0B867BC178D86AA006E198F /* Controllers */,
 				C0B867A2178D8628006E198F /* NSAppDelegate.h */,
 				C0B867A3178D8628006E198F /* NSAppDelegate.m */,
 				C0B867AB178D8628006E198F /* MainStoryboard_iPhone.storyboard */,
 				C0B867AE178D8628006E198F /* MainStoryboard_iPad.storyboard */,
-				C0B867B1178D8628006E198F /* NSViewController.h */,
-				C0B867B2178D8628006E198F /* NSViewController.m */,
 				C0B8679A178D8628006E198F /* Supporting Files */,
 			);
 			path = "New@Shef";
@@ -99,6 +162,10 @@
 		C0B8679A178D8628006E198F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C0B867E2178DE5A9006E198F /* Useful Link Details */,
+				C0B867E1178DE599006E198F /* Welcome Talk Details */,
+				C0B867E0178DE589006E198F /* Uni Structure Details */,
+				C0B867DF178DE578006E198F /* Contact Details */,
 				C0B8679B178D8628006E198F /* New@Shef-Info.plist */,
 				C0B8679C178D8628006E198F /* InfoPlist.strings */,
 				C0B8679F178D8628006E198F /* main.m */,
@@ -108,6 +175,128 @@
 				C0B867A9178D8628006E198F /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C0B867BC178D86AA006E198F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C090EAAE1797D05900771382 /* Custom */,
+				C0B86829178F3277006E198F /* UEB */,
+				C0B867DE178DE2FE006E198F /* Contacts */,
+				C0B867DA178DC612006E198F /* UCard */,
+				C0B867D4178DBB44006E198F /* FAQs */,
+				C0B867CC178D9E9B006E198F /* Social */,
+				C0B867C2178D95E6006E198F /* News */,
+				C0B867BE178D87F4006E198F /* Home */,
+				C0B867BD178D86B6006E198F /* Welcome View Controller */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C0B867BD178D86B6006E198F /* Welcome View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C0B867BA178D86A2006E198F /* NSWelcomeViewController.m */,
+				C0B867B9178D86A2006E198F /* NSWelcomeViewController.h */,
+			);
+			name = "Welcome View Controller";
+			sourceTree = "<group>";
+		};
+		C0B867BE178D87F4006E198F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		C0B867C2178D95E6006E198F /* News */ = {
+			isa = PBXGroup;
+			children = (
+				C0B867C3178D961C006E198F /* NSNewsViewController.h */,
+				C0B867C4178D961C006E198F /* NSNewsViewController.m */,
+				C0B867C9178D96DA006E198F /* NSNewsContentViewController.h */,
+				C0B867CA178D96DA006E198F /* NSNewsContentViewController.m */,
+			);
+			name = News;
+			sourceTree = "<group>";
+		};
+		C0B867CC178D9E9B006E198F /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				C0B86820178F223D006E198F /* NSFacebookViewController.h */,
+				C0B86821178F223D006E198F /* NSFacebookViewController.m */,
+				C0B86823178F224D006E198F /* NSTwitterViewController.h */,
+				C0B86824178F224D006E198F /* NSTwitterViewController.m */,
+				C0B86826178F225C006E198F /* NSYoutubeViewController.h */,
+				C0B86827178F225C006E198F /* NSYoutubeViewController.m */,
+			);
+			name = Social;
+			sourceTree = "<group>";
+		};
+		C0B867D4178DBB44006E198F /* FAQs */ = {
+			isa = PBXGroup;
+			children = (
+				C0B867D5178DBBD4006E198F /* NSFAQsViewController.h */,
+				C0B867D6178DBBD4006E198F /* NSFAQsViewController.m */,
+			);
+			name = FAQs;
+			sourceTree = "<group>";
+		};
+		C0B867DA178DC612006E198F /* UCard */ = {
+			isa = PBXGroup;
+			children = (
+				C0B867DB178DCCB5006E198F /* NSUCardViewController.h */,
+				C0B867DC178DCCB5006E198F /* NSUCardViewController.m */,
+			);
+			name = UCard;
+			sourceTree = "<group>";
+		};
+		C0B867DE178DE2FE006E198F /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				C00832571791B2F500A5EFE2 /* NSContactsViewController.h */,
+				C00832581791B2F500A5EFE2 /* NSContactsViewController.m */,
+				C090EA411796D9F000771382 /* NSContactDetailViewController.h */,
+				C090EA421796D9F000771382 /* NSContactDetailViewController.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		C0B867DF178DE578006E198F /* Contact Details */ = {
+			isa = PBXGroup;
+			children = (
+				C0B867EF178EA29F006E198F /* pContactsList.plist */,
+			);
+			name = "Contact Details";
+			sourceTree = "<group>";
+		};
+		C0B867E0178DE589006E198F /* Uni Structure Details */ = {
+			isa = PBXGroup;
+			children = (
+				C0C69C1417917961006514F0 /* pUEBDetails.plist */,
+			);
+			name = "Uni Structure Details";
+			sourceTree = "<group>";
+		};
+		C0B867E1178DE599006E198F /* Welcome Talk Details */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Welcome Talk Details";
+			sourceTree = "<group>";
+		};
+		C0B867E2178DE5A9006E198F /* Useful Link Details */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Useful Link Details";
+			sourceTree = "<group>";
+		};
+		C0B86829178F3277006E198F /* UEB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UEB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +357,8 @@
 				C0B867AA178D8628006E198F /* Default-568h@2x.png in Resources */,
 				C0B867AD178D8628006E198F /* MainStoryboard_iPhone.storyboard in Resources */,
 				C0B867B0178D8628006E198F /* MainStoryboard_iPad.storyboard in Resources */,
+				C0B867F0178EA29F006E198F /* pContactsList.plist in Resources */,
+				C0C69C1517917961006514F0 /* pUEBDetails.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +371,18 @@
 			files = (
 				C0B867A0178D8628006E198F /* main.m in Sources */,
 				C0B867A4178D8628006E198F /* NSAppDelegate.m in Sources */,
-				C0B867B3178D8628006E198F /* NSViewController.m in Sources */,
+				C0B867BB178D86A2006E198F /* NSWelcomeViewController.m in Sources */,
+				C0B867C5178D961C006E198F /* NSNewsViewController.m in Sources */,
+				C0B867CB178D96DA006E198F /* NSNewsContentViewController.m in Sources */,
+				C0B867D7178DBBD4006E198F /* NSFAQsViewController.m in Sources */,
+				C0B867DD178DCCB5006E198F /* NSUCardViewController.m in Sources */,
+				C0B86822178F223D006E198F /* NSFacebookViewController.m in Sources */,
+				C0B86825178F224D006E198F /* NSTwitterViewController.m in Sources */,
+				C0B86828178F225C006E198F /* NSYoutubeViewController.m in Sources */,
+				C00832591791B2F500A5EFE2 /* NSContactsViewController.m in Sources */,
+				C090EA431796D9F000771382 /* NSContactDetailViewController.m in Sources */,
+				C090EAB51797D13D00771382 /* ExpandableTableView.m in Sources */,
+				C090EAB81797D1A400771382 /* ExpandableTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +515,7 @@
 				C0B867B8178D8628006E198F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

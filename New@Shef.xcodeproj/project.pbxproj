@@ -11,6 +11,19 @@
 		C090EA431796D9F000771382 /* NSContactDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EA421796D9F000771382 /* NSContactDetailViewController.m */; };
 		C090EAB51797D13D00771382 /* ExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAB41797D13D00771382 /* ExpandableTableView.m */; };
 		C090EAB81797D1A400771382 /* ExpandableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAB71797D1A400771382 /* ExpandableTableViewController.m */; };
+		C090EAC117984D7D00771382 /* NSUEBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAC017984D7D00771382 /* NSUEBViewController.m */; };
+		C090EAC417984D9700771382 /* NSUEBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAC317984D9700771382 /* NSUEBDetailViewController.m */; };
+		C090EAC617986ED400771382 /* Mr Andrew Dodman.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EAC517986ED400771382 /* Mr Andrew Dodman.txt */; };
+		C090EACE17986EE400771382 /* Professor Jacqueline Labbe.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EAC717986EE300771382 /* Professor Jacqueline Labbe.txt */; };
+		C090EACF17986EE400771382 /* Professor Tony Weetman.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EAC817986EE400771382 /* Professor Tony Weetman.txt */; };
+		C090EAD017986EE400771382 /* Professor Mike Hounslow.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EAC917986EE400771382 /* Professor Mike Hounslow.txt */; };
+		C090EAD117986EE400771382 /* Professor Tony Ryan.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EACA17986EE400771382 /* Professor Tony Ryan.txt */; };
+		C090EAD217986EE400771382 /* Professor Gill Valentine.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EACB17986EE400771382 /* Professor Gill Valentine.txt */; };
+		C090EAD317986EE400771382 /* Dr Philip Harvey.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EACC17986EE400771382 /* Dr Philip Harvey.txt */; };
+		C090EAD417986EE400771382 /* Mr Robert Rabone.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EACD17986EE400771382 /* Mr Robert Rabone.txt */; };
+		C090EAD817986EEF00771382 /* Professor Paul White.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EAD517986EEF00771382 /* Professor Paul White.txt */; };
+		C090EAD917986EEF00771382 /* Professor Rebecca Hughes.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EAD617986EEF00771382 /* Professor Rebecca Hughes.txt */; };
+		C090EADA17986EEF00771382 /* Professor Richard Jones.txt in Resources */ = {isa = PBXBuildFile; fileRef = C090EAD717986EEF00771382 /* Professor Richard Jones.txt */; };
 		C0B86794178D8628006E198F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86793178D8628006E198F /* UIKit.framework */; };
 		C0B86796178D8628006E198F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86795178D8628006E198F /* Foundation.framework */; };
 		C0B86798178D8628006E198F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86797178D8628006E198F /* CoreGraphics.framework */; };
@@ -46,6 +59,21 @@
 		C090EAB71797D1A400771382 /* ExpandableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableTableViewController.m; sourceTree = "<group>"; };
 		C090EAB91797D1FD00771382 /* ExpandableTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTableViewDelegate.h; sourceTree = "<group>"; };
 		C090EABC1797D27700771382 /* ExpandableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTableViewDataSource.h; sourceTree = "<group>"; };
+		C090EABF17984D7D00771382 /* NSUEBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUEBViewController.h; sourceTree = "<group>"; };
+		C090EAC017984D7D00771382 /* NSUEBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUEBViewController.m; sourceTree = "<group>"; };
+		C090EAC217984D9700771382 /* NSUEBDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUEBDetailViewController.h; sourceTree = "<group>"; };
+		C090EAC317984D9700771382 /* NSUEBDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUEBDetailViewController.m; sourceTree = "<group>"; };
+		C090EAC517986ED400771382 /* Mr Andrew Dodman.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Mr Andrew Dodman.txt"; sourceTree = "<group>"; };
+		C090EAC717986EE300771382 /* Professor Jacqueline Labbe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Jacqueline Labbe.txt"; sourceTree = "<group>"; };
+		C090EAC817986EE400771382 /* Professor Tony Weetman.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Tony Weetman.txt"; sourceTree = "<group>"; };
+		C090EAC917986EE400771382 /* Professor Mike Hounslow.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Mike Hounslow.txt"; sourceTree = "<group>"; };
+		C090EACA17986EE400771382 /* Professor Tony Ryan.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Tony Ryan.txt"; sourceTree = "<group>"; };
+		C090EACB17986EE400771382 /* Professor Gill Valentine.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Gill Valentine.txt"; sourceTree = "<group>"; };
+		C090EACC17986EE400771382 /* Dr Philip Harvey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Dr Philip Harvey.txt"; sourceTree = "<group>"; };
+		C090EACD17986EE400771382 /* Mr Robert Rabone.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Mr Robert Rabone.txt"; sourceTree = "<group>"; };
+		C090EAD517986EEF00771382 /* Professor Paul White.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Paul White.txt"; sourceTree = "<group>"; };
+		C090EAD617986EEF00771382 /* Professor Rebecca Hughes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Rebecca Hughes.txt"; sourceTree = "<group>"; };
+		C090EAD717986EEF00771382 /* Professor Richard Jones.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Professor Richard Jones.txt"; sourceTree = "<group>"; };
 		C0B86790178D8628006E198F /* New@Shef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New@Shef.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B86793178D8628006E198F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C0B86795178D8628006E198F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -164,7 +192,7 @@
 			children = (
 				C0B867E2178DE5A9006E198F /* Useful Link Details */,
 				C0B867E1178DE599006E198F /* Welcome Talk Details */,
-				C0B867E0178DE589006E198F /* Uni Structure Details */,
+				C0B867E0178DE589006E198F /* UEB Details */,
 				C0B867DF178DE578006E198F /* Contact Details */,
 				C0B8679B178D8628006E198F /* New@Shef-Info.plist */,
 				C0B8679C178D8628006E198F /* InfoPlist.strings */,
@@ -270,12 +298,23 @@
 			name = "Contact Details";
 			sourceTree = "<group>";
 		};
-		C0B867E0178DE589006E198F /* Uni Structure Details */ = {
+		C0B867E0178DE589006E198F /* UEB Details */ = {
 			isa = PBXGroup;
 			children = (
+				C090EAD517986EEF00771382 /* Professor Paul White.txt */,
+				C090EAD617986EEF00771382 /* Professor Rebecca Hughes.txt */,
+				C090EAD717986EEF00771382 /* Professor Richard Jones.txt */,
+				C090EAC717986EE300771382 /* Professor Jacqueline Labbe.txt */,
+				C090EAC817986EE400771382 /* Professor Tony Weetman.txt */,
+				C090EAC917986EE400771382 /* Professor Mike Hounslow.txt */,
+				C090EACA17986EE400771382 /* Professor Tony Ryan.txt */,
+				C090EACB17986EE400771382 /* Professor Gill Valentine.txt */,
+				C090EACC17986EE400771382 /* Dr Philip Harvey.txt */,
+				C090EACD17986EE400771382 /* Mr Robert Rabone.txt */,
+				C090EAC517986ED400771382 /* Mr Andrew Dodman.txt */,
 				C0C69C1417917961006514F0 /* pUEBDetails.plist */,
 			);
-			name = "Uni Structure Details";
+			name = "UEB Details";
 			sourceTree = "<group>";
 		};
 		C0B867E1178DE599006E198F /* Welcome Talk Details */ = {
@@ -295,6 +334,10 @@
 		C0B86829178F3277006E198F /* UEB */ = {
 			isa = PBXGroup;
 			children = (
+				C090EABF17984D7D00771382 /* NSUEBViewController.h */,
+				C090EAC017984D7D00771382 /* NSUEBViewController.m */,
+				C090EAC217984D9700771382 /* NSUEBDetailViewController.h */,
+				C090EAC317984D9700771382 /* NSUEBDetailViewController.m */,
 			);
 			name = UEB;
 			sourceTree = "<group>";
@@ -359,6 +402,17 @@
 				C0B867B0178D8628006E198F /* MainStoryboard_iPad.storyboard in Resources */,
 				C0B867F0178EA29F006E198F /* pContactsList.plist in Resources */,
 				C0C69C1517917961006514F0 /* pUEBDetails.plist in Resources */,
+				C090EAC617986ED400771382 /* Mr Andrew Dodman.txt in Resources */,
+				C090EACE17986EE400771382 /* Professor Jacqueline Labbe.txt in Resources */,
+				C090EACF17986EE400771382 /* Professor Tony Weetman.txt in Resources */,
+				C090EAD017986EE400771382 /* Professor Mike Hounslow.txt in Resources */,
+				C090EAD117986EE400771382 /* Professor Tony Ryan.txt in Resources */,
+				C090EAD217986EE400771382 /* Professor Gill Valentine.txt in Resources */,
+				C090EAD317986EE400771382 /* Dr Philip Harvey.txt in Resources */,
+				C090EAD417986EE400771382 /* Mr Robert Rabone.txt in Resources */,
+				C090EAD817986EEF00771382 /* Professor Paul White.txt in Resources */,
+				C090EAD917986EEF00771382 /* Professor Rebecca Hughes.txt in Resources */,
+				C090EADA17986EEF00771382 /* Professor Richard Jones.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +437,8 @@
 				C090EA431796D9F000771382 /* NSContactDetailViewController.m in Sources */,
 				C090EAB51797D13D00771382 /* ExpandableTableView.m in Sources */,
 				C090EAB81797D1A400771382 /* ExpandableTableViewController.m in Sources */,
+				C090EAC117984D7D00771382 /* NSUEBViewController.m in Sources */,
+				C090EAC417984D9700771382 /* NSUEBDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@
     self.webview.scalesPageToFit = YES;
     self.webview.frame=self.view.bounds;
     
-    NSLog(url);
+    //NSLog(url);
     
 }
 

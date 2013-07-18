@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Institutional Pro-Vice Chancellors</key>
+	<dict>
+		<key>Pro Vice-Chancellor Learning and Teaching</key>
+		<string>Professor Paul White</string>
+		<key>Pro Vice-Chancellor International</key>
+		<string>Professor Rebecca Hughes</string>
+		<key>Pro Vice-Chancellor Research and Innovation</key>
+		<string>Professor Richard Jones</string>
+	</dict>
+	<key>Faculty Pro-Vice Chancellors</key>
+	<dict>
+		<key>Pro Vice-Chancellor Faculty of Arts and Humanities </key>
+		<string>Professor Jacqueline Labbe</string>
+		<key>Pro Vice-Chancellor Faculty of Medicine, Dentistry and Health</key>
+		<string>Professor Tony Weetman</string>
+		<key>Pro Vice-Chancellor Faculty of Engineering</key>
+		<string>Professor Mike Hounslow</string>
+		<key>Pro Vice-Chancellor Faculty of Science</key>
+		<string>Professor Tony Ryan</string>
+		<key>Pro-Vice-Chancellor Faculty of Social Sciences</key>
+		<string>Professor Gill Valentine</string>
+	</dict>
+	<key>Other University Executive Board members</key>
+	<dict>
+		<key>Registrar and Secretary</key>
+		<string>Dr Philip Harvey</string>
+		<key>Chief Financial Officer</key>
+		<string>Mr Robert Rabone</string>
+		<key>Director of Human Resources</key>
+		<string>Mr Andrew Dodman</string>
+	</dict>
+</dict>
+</plist>

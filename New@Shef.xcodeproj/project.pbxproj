@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		C00832591791B2F500A5EFE2 /* NSContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C00832581791B2F500A5EFE2 /* NSContactsViewController.m */; };
+		C04429DF179AAF320022B0DE /* pNew_Starter_Checklist.plist in Resources */ = {isa = PBXBuildFile; fileRef = C04429DE179AAF320022B0DE /* pNew_Starter_Checklist.plist */; };
+		C04429E3179ABC460022B0DE /* NSChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04429E2179ABC460022B0DE /* NSChecklistViewController.m */; };
+		C04429E6179ABC5D0022B0DE /* NSToDosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04429E5179ABC5D0022B0DE /* NSToDosViewController.m */; };
+		C04429EC179ABC9B0022B0DE /* NSToDoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04429EB179ABC9B0022B0DE /* NSToDoDetailsViewController.m */; };
 		C090EA431796D9F000771382 /* NSContactDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EA421796D9F000771382 /* NSContactDetailViewController.m */; };
 		C090EAB51797D13D00771382 /* ExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAB41797D13D00771382 /* ExpandableTableView.m */; };
 		C090EAB81797D1A400771382 /* ExpandableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAB71797D1A400771382 /* ExpandableTableViewController.m */; };
@@ -51,6 +55,13 @@
 /* Begin PBXFileReference section */
 		C00832571791B2F500A5EFE2 /* NSContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSContactsViewController.h; sourceTree = "<group>"; };
 		C00832581791B2F500A5EFE2 /* NSContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSContactsViewController.m; sourceTree = "<group>"; };
+		C04429DE179AAF320022B0DE /* pNew_Starter_Checklist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pNew_Starter_Checklist.plist; sourceTree = "<group>"; };
+		C04429E1179ABC460022B0DE /* NSChecklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSChecklistViewController.h; sourceTree = "<group>"; };
+		C04429E2179ABC460022B0DE /* NSChecklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSChecklistViewController.m; sourceTree = "<group>"; };
+		C04429E4179ABC5D0022B0DE /* NSToDosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSToDosViewController.h; sourceTree = "<group>"; };
+		C04429E5179ABC5D0022B0DE /* NSToDosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSToDosViewController.m; sourceTree = "<group>"; };
+		C04429EA179ABC9B0022B0DE /* NSToDoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSToDoDetailsViewController.h; sourceTree = "<group>"; };
+		C04429EB179ABC9B0022B0DE /* NSToDoDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSToDoDetailsViewController.m; sourceTree = "<group>"; };
 		C090EA411796D9F000771382 /* NSContactDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSContactDetailViewController.h; sourceTree = "<group>"; };
 		C090EA421796D9F000771382 /* NSContactDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSContactDetailViewController.m; sourceTree = "<group>"; };
 		C090EAB31797D13D00771382 /* ExpandableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableTableView.h; sourceTree = "<group>"; };
@@ -125,6 +136,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C04429DD179AAEFA0022B0DE /* CheckLists */ = {
+			isa = PBXGroup;
+			children = (
+				C04429DE179AAF320022B0DE /* pNew_Starter_Checklist.plist */,
+			);
+			name = CheckLists;
+			sourceTree = "<group>";
+		};
+		C04429E0179ABC190022B0DE /* Checklist */ = {
+			isa = PBXGroup;
+			children = (
+				C04429E1179ABC460022B0DE /* NSChecklistViewController.h */,
+				C04429E2179ABC460022B0DE /* NSChecklistViewController.m */,
+				C04429E4179ABC5D0022B0DE /* NSToDosViewController.h */,
+				C04429E5179ABC5D0022B0DE /* NSToDosViewController.m */,
+				C04429EA179ABC9B0022B0DE /* NSToDoDetailsViewController.h */,
+				C04429EB179ABC9B0022B0DE /* NSToDoDetailsViewController.m */,
+			);
+			name = Checklist;
+			sourceTree = "<group>";
+		};
 		C090EAAE1797D05900771382 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +222,7 @@
 		C0B8679A178D8628006E198F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C04429DD179AAEFA0022B0DE /* CheckLists */,
 				C0B867E2178DE5A9006E198F /* Useful Link Details */,
 				C0B867E1178DE599006E198F /* Welcome Talk Details */,
 				C0B867E0178DE589006E198F /* UEB Details */,
@@ -209,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				C090EAAE1797D05900771382 /* Custom */,
+				C04429E0179ABC190022B0DE /* Checklist */,
 				C0B86829178F3277006E198F /* UEB */,
 				C0B867DE178DE2FE006E198F /* Contacts */,
 				C0B867DA178DC612006E198F /* UCard */,
@@ -413,6 +447,7 @@
 				C090EAD817986EEF00771382 /* Professor Paul White.txt in Resources */,
 				C090EAD917986EEF00771382 /* Professor Rebecca Hughes.txt in Resources */,
 				C090EADA17986EEF00771382 /* Professor Richard Jones.txt in Resources */,
+				C04429DF179AAF320022B0DE /* pNew_Starter_Checklist.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +474,9 @@
 				C090EAB81797D1A400771382 /* ExpandableTableViewController.m in Sources */,
 				C090EAC117984D7D00771382 /* NSUEBViewController.m in Sources */,
 				C090EAC417984D9700771382 /* NSUEBDetailViewController.m in Sources */,
+				C04429E3179ABC460022B0DE /* NSChecklistViewController.m in Sources */,
+				C04429E6179ABC5D0022B0DE /* NSToDosViewController.m in Sources */,
+				C04429EC179ABC9B0022B0DE /* NSToDoDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

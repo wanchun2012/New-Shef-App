@@ -13,6 +13,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    // icloud
+    NSURL *iCloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    if(iCloudURL != nil)
+    {
+        NSLog(@"iCloud enabled with URL:%@", iCloudURL);
+    }
+    else
+    {
+        NSLog(@"iCloud disabled");
+    }
+    
+    
     return YES;
 }
 							

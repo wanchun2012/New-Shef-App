@@ -34,6 +34,9 @@
     tvDescription.userInteractionEnabled = NO;
     tvDescription.text = [[[starterChecklist objectAtIndex:indexFirstTable] objectAtIndex:indexSecondTable+1] objectForKey:@"Details"];
     labelResponsiblePerson.text = [[[starterChecklist objectAtIndex:indexFirstTable] objectAtIndex:indexSecondTable+1] objectForKey:@"Responsible person"];
+    
+
+
  
 }
 

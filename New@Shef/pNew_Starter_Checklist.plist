@@ -16,7 +16,9 @@
 			<key>Activity</key>
 			<string>Ensure the appointee is aware of arrangements for their first day</string>
 			<key>Details</key>
-			<string>Contact the new starter to:advise where, when and who to report to on their arrival on their first dayprovide details of their induction programme</string>
+			<string>Contact the new starter to:
+advise where, when and who to report to on their arrival on their first day
+provide details of their induction programme</string>
 			<key>Responsible person</key>
 			<string>Induction Coordinator</string>
 		</dict>
@@ -30,7 +32,8 @@
 		</dict>
 		<dict>
 			<key>Activity</key>
-			<string>Assign a buddy*if relevant</string>
+			<string>Assign a buddy
+*if relevant</string>
 			<key>Details</key>
 			<string>Assign a buddy to the new starter </string>
 			<key>Responsible person</key>
@@ -51,9 +54,11 @@
 			<key>Activity</key>
 			<string>Meet with Payroll &amp; Pensions</string>
 			<key>Details</key>
-			<string>Payroll &amp; Pensions teams to ensure that they have made an appointment to meet with the new starter.The new starter will need to have completed their bank details form which is available on the staff induction webpages.</string>
+			<string>Payroll &amp; Pensions teams to ensure that they have made an appointment to meet with the new starter.
+
+The new starter will need to have completed their bank details form which is available on the staff induction webpages.</string>
 			<key>Responsible person</key>
-			<string>Payroll &amp; Pensions teamsNew starter </string>
+			<string>Payroll &amp; Pensions teams, New starter </string>
 		</dict>
 		<dict>
 			<key>Activity</key>
@@ -85,7 +90,8 @@
 			<key>Details</key>
 			<string>Arrange for the new starter to meet with their line manager to discuss their new role and key information about the department’s working practices and procedures.</string>
 			<key>Responsible person</key>
-			<string>Induction CoordinatorLine Manager</string>
+			<string>Induction Coordinator
+Line Manager</string>
 		</dict>
 	</array>
 	<array>
@@ -110,7 +116,8 @@
 			<key>Activity</key>
 			<string>Attend induction events (optional) </string>
 			<key>Details</key>
-			<string>All new staff are encouraged to attend the ‘Welcome to the University’ event hosted by the Vice-Chancellor as well as the new starter coffee mornings and campus tours.Visit http://www.sheffield.ac.uk/hr/sld/newstaff/welcomepack/indevents for further information.</string>
+			<string>All new staff are encouraged to attend the ‘Welcome to the University’ event hosted by the Vice-Chancellor as well as the new starter coffee mornings and campus tours.
+Visit http://www.sheffield.ac.uk/hr/sld/newstaff/welcomepack/indevents for further information.</string>
 			<key>Responsible person</key>
 			<string>New starter</string>
 		</dict>

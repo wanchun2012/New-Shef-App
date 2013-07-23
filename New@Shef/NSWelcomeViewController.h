@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface NSWelcomeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextView *tvWelcome;
+@property (weak, nonatomic) IBOutlet UIImageView *ivWelcomeImage;
+
 
 @end

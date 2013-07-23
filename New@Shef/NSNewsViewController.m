@@ -8,6 +8,8 @@
 
 #import "NSNewsViewController.h"
 #import "NSNewsContentViewController.h"
+#import <QuartzCore/QuartzCore.h>
+
 @interface NSNewsViewController () {
     NSXMLParser *parser;
     NSMutableArray *feeds;
@@ -33,6 +35,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Uni News";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleView.textColor = [UIColor blackColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+    
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     feeds = [[NSMutableArray alloc] init];
     NSURL *url = [NSURL URLWithString:@"http://www.sheffield.ac.uk/cmlink/1.178033"];
@@ -73,10 +89,30 @@
     }
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.textLabel.font = [UIFont systemFontOfSize:12.0];
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     cell.textLabel.text = [[feeds objectAtIndex:indexPath.row] objectForKey: @"title"];
     
     return cell;
+}
+
+-(CGFloat)getLabelHeightForText:(NSString *)text andWidth:(CGFloat)labelWidth
+{
+    
+    CGSize maximumSize = CGSizeMake(labelWidth, 10000);
+    
+    //provide appropriate font and font size
+    CGSize labelHeighSize = [text sizeWithFont: [UIFont fontWithName:@"Trebuchet MS" size:15.0f]
+                             constrainedToSize:maximumSize
+                                 lineBreakMode:UILineBreakModeWordWrap];
+    return labelHeighSize.height;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *string = [[feeds objectAtIndex:indexPath.row] objectForKey: @"link"];
+    
+    CGFloat textHeight = [self getLabelHeightForText:string andWidth:280];//give your label width
+    return textHeight+20;
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {

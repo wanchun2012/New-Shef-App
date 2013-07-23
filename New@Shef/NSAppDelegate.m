@@ -13,6 +13,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+        
+    // googlemap
+    [GMSServices provideAPIKey:@"AIzaSyB2hhE4lxFnz_v7qINVBCB2DTcq5yI3zNg"];
+    
     // icloud
     NSURL *iCloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
     if(iCloudURL != nil)

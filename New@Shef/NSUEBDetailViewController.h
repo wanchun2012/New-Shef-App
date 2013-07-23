@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface NSUEBDetailViewController : UIViewController
-@property (strong) NSString *text;
+@property (strong) NSString *txtName;
+@property (strong) NSString *txtRole;
+@property (weak, nonatomic) IBOutlet UILabel *labelName;
+@property (weak, nonatomic) IBOutlet UILabel *labelRole;
+@property (weak, nonatomic) IBOutlet UIImageView *ivPhoto;
 
 @property (weak, nonatomic) IBOutlet UITextView *tvDetails;
 @end

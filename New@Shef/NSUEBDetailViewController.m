@@ -14,7 +14,7 @@
 
 @implementation NSUEBDetailViewController
 
-@synthesize tvDetails, text;
+@synthesize labelName, labelRole,tvDetails, txtName, txtRole, ivPhoto;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,12 +37,22 @@
      
      [self.view addSubview:self.ivWelcome];
      */
+    labelName.text = txtName;
+    labelRole.text = txtRole;
+    [labelRole setFont: [UIFont fontWithName:@"Arial" size:13.0f]];
+    NSString *imageName = [NSString stringWithFormat:@"%@.jpg",txtName];
+    UIImage * myImage = [UIImage imageNamed: imageName];
+   
+    
+    [ivPhoto setImage:myImage];
+    
+    
     
     [self.tvDetails setEditable:NO];
     self.tvDetails.textAlignment = NSTextAlignmentJustified;
     
     NSError *error;
-    NSString* path = [[NSBundle mainBundle] pathForResource:text ofType:@"txt"];
+    NSString* path = [[NSBundle mainBundle] pathForResource:txtName ofType:@"txt"];
     NSString *fileContents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
     
     if (error) {

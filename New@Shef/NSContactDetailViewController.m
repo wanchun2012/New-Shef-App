@@ -28,8 +28,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     viewLabel.text = text;
+    emailLabel.numberOfLines = 0;
+    phoneLabel.numberOfLines = 0;
     emailLabel.text = emailtxt;
-    phoneLabel.text = phonetxt;
+    phoneLabel.text = phonetxt;//[NSString stringWithFormat:@"Phone number: \n  %@",phonetxt];
 }
 
 - (void)didReceiveMemoryWarning

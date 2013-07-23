@@ -18,6 +18,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+ 
+    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     NSString *url = @"https://www.facebook.com/theuniversityofsheffield";
     NSString *urlString = [url stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSURL *myURL = [NSURL URLWithString: [urlString stringByAddingPercentEscapesUsingEncoding:

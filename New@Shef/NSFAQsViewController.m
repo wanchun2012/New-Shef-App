@@ -26,6 +26,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"FAQs";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleView.textColor = [UIColor blackColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
 	// Do any additional setup after loading the view.
     [[self.emailbody layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.emailbody layer] setBorderWidth:2.3];
@@ -42,7 +51,7 @@
 {
     MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
     [mailController setMailComposeDelegate:self];
-    NSString *toEmail = @"decadentia0616@gmail.com";
+    NSString *toEmail = @"hr-enq@sheffield.ac.uk";
     NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
     NSString *message = self.emailbody.text;
     [mailController setMessageBody:message isHTML:NO];

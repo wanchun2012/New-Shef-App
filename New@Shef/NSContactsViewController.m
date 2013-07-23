@@ -37,6 +37,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Contacts";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleView.textColor = [UIColor blackColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+    
+    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     NSString *pFile = [[NSBundle mainBundle] pathForResource:@"pContactsList" ofType:@"plist"];
     contacts = [[NSDictionary alloc] initWithContentsOfFile:pFile];
     faculties = [[contacts allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
@@ -81,11 +95,11 @@
     static NSString *CellIdentifier = @"RowCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	
-	cell.textLabel.text = [[dataModel objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	cell.textLabel.font =[UIFont systemFontOfSize:15.0f];
+	cell.textLabel.text = [NSString stringWithFormat:@"     %@",[[dataModel objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
 	// just change the cells background color to indicate group separation
 	cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-	cell.backgroundView.backgroundColor = [UIColor colorWithRed:232.0/255.0 green:243.0/255.0 blue:1.0 alpha:1.0];
+	cell.backgroundView.backgroundColor = [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0];
 	
     return cell;
 }

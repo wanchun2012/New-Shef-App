@@ -26,6 +26,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"To Dos";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleView.textColor = [UIColor blackColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+    
+    
+   [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
 
     NSString *pFile = [[NSBundle mainBundle] pathForResource:@"pNew_Starter_Checklist" ofType:@"plist"];
     starterChecklist = [[NSArray alloc] initWithContentsOfFile:pFile];
@@ -45,14 +60,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+ 
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+ 
     // Return the number of rows in the section.
     int number = [[starterChecklist objectAtIndex:index] count];
     return number-1;
@@ -64,7 +79,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
 
     cell.textLabel.text = [[[starterChecklist objectAtIndex:index] objectAtIndex: indexPath.row+1] objectForKey:@"Activity"];
     // Configure the cell...

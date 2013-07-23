@@ -33,7 +33,9 @@
     tvDescription.textAlignment = NSTextAlignmentJustified;
     tvDescription.userInteractionEnabled = NO;
     tvDescription.text = [[[starterChecklist objectAtIndex:indexFirstTable] objectAtIndex:indexSecondTable+1] objectForKey:@"Details"];
-    labelResponsiblePerson.text = [[[starterChecklist objectAtIndex:indexFirstTable] objectAtIndex:indexSecondTable+1] objectForKey:@"Responsible person"];
+    labelResponsiblePerson.numberOfLines = 0;
+    labelResponsiblePerson.text =[NSString stringWithFormat:@"Responsible person: \n%@",
+        [[[starterChecklist objectAtIndex:indexFirstTable] objectAtIndex:indexSecondTable+1] objectForKey:@"Responsible person"]];
     
 
 
@@ -54,6 +56,7 @@
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     NSString *myDateString = [dateFormatter stringFromDate:myDate];
-    labelStatus.text = myDateString;
+    labelStatus.numberOfLines = 0;
+    labelStatus.text = [NSString stringWithFormat:@"Status: completed, \n at: %@",myDateString];
 }
 @end

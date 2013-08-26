@@ -1,9 +1,8 @@
 //
 //  ExpandableTableViewController.m
-//  New@Shef
+//  ExpandableTableView
 //
-//  Created by Wanchun Zhang on 18/07/2013.
-//  Copyright (c) 2013 Wanchun Zhang. All rights reserved.
+//  Created by Tom Fewster on 05/04/2012.
 //
 
 #import "ExpandableTableViewController.h"

@@ -27,7 +27,7 @@
     
     docsDir = [dirPaths objectAtIndex:0];
     
-    // Build the path to the database file
+    // Path to the database file
     databasePath = [[NSString alloc]initWithString:
                     [docsDir stringByAppendingPathComponent:NEWSHEF_DB]];
     

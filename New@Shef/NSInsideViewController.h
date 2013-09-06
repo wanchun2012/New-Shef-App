@@ -1,8 +1,8 @@
 //
-//  NSOverViewViewController.h
+//  NSInsideViewController.h
 //  New@Shef
 //
-//  Created by Wanchun Zhang on 28/07/2013.
+//  Created by Wanchun Zhang on 27/08/2013.
 //  Copyright (c) 2013 Wanchun Zhang. All rights reserved.
 //
 
@@ -14,11 +14,12 @@
 #define GETUrl @"http://newshef.co.uk/db/getGoogleMap.php"
 #define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
 
-@interface NSOverViewViewController : UIViewController
+@interface NSInsideViewController : UITableViewController
 {
     NSMutableArray *jsonGoogleMap;
     NSMutableArray *jsonVersion;
     NSMutableArray *collection;
+    NSMutableArray *insideCollection;
     VersionControl *modelVersionControl;
 }
 

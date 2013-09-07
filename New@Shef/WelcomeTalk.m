@@ -11,7 +11,7 @@
 #define NEWSHEF_DB @"NEWSHEF_DB.sql"
  
 @implementation WelcomeTalk
-@synthesize welcomeTalkID, welcomeText, welcomeImage, imageUrl;
+@synthesize welcomeTalkID, welcomeText, welcomeImage, imageUrl,contenttype;
 
 /*
  TABLE WELCOMETALK: ID, WELCOMETEXT, WELCOMEIMAGEURL
@@ -45,7 +45,7 @@
     }
 }
 
-- (void) updateData:(NSInteger)index welcometext:(NSString *)txt
+- (void) updateData:(NSInteger)index welcometext:(NSString *)txt conenttype:(NSString *)t
 {
     int idx = -1;
     sqlite3_stmt    *statement;
@@ -53,7 +53,7 @@
     
     if (sqlite3_open(dbpath, &db) == SQLITE_OK)
     {
-        NSString *updateSQL = @"UPDATE WELCOMETALK SET WELCOMETEXT =:WELCOMETEXT WHERE ID =:ID";
+        NSString *updateSQL = @"UPDATE WELCOMETALK SET WELCOMETEXT =:WELCOMETEXT, CONTENTTYPE =:CONTENTTYPE WHERE ID =:ID";
          
         
         const char *update_stmt = [updateSQL UTF8String];
@@ -61,6 +61,10 @@
         {
             idx = sqlite3_bind_parameter_index(statement, ":WELCOMETEXT");
             sqlite3_bind_text(statement, idx, [txt UTF8String], -1, SQLITE_STATIC );
+            
+            idx = sqlite3_bind_parameter_index(statement, ":CONTENTTYPE");
+            sqlite3_bind_text(statement, idx, [t UTF8String], -1, SQLITE_STATIC );
+
             
             idx = sqlite3_bind_parameter_index(statement, ":ID" );
             sqlite3_bind_int(statement, idx, index);
@@ -97,7 +101,7 @@
     
 }
 
-- (void) saveData:(NSInteger)index welcometext:(NSString *)txt
+- (void) saveData:(NSInteger)index welcometext:(NSString *)txt conenttype:(NSString *)t
 {
     sqlite3_stmt *statement;
     const char *dbpath = [databasePath UTF8String];
@@ -105,7 +109,7 @@
     if (sqlite3_open(dbpath, &db) == SQLITE_OK)
     {
         int idx = -1;
-        NSString *insertSQL = @"INSERT INTO WELCOMETALK (ID, WELCOMETEXT) VALUES  (:ID, :WELCOMETEXT)";
+        NSString *insertSQL = @"INSERT INTO WELCOMETALK (ID, WELCOMETEXT, CONTENTTYPE) VALUES  (:ID, :WELCOMETEXT, :CONTENTTYPE)";
         const char *insert_stmt = [insertSQL UTF8String];
         if(sqlite3_prepare_v2(db, insert_stmt,-1, &statement, NULL)== SQLITE_OK)
         {
@@ -113,7 +117,9 @@
             sqlite3_bind_int(statement, idx, index);
             idx = sqlite3_bind_parameter_index(statement, ":WELCOMETEXT" );
             sqlite3_bind_text(statement, idx, [txt UTF8String], -1, SQLITE_STATIC );
-            
+            idx = sqlite3_bind_parameter_index(statement, ":CONTENTTYPE" );
+            sqlite3_bind_text(statement, idx, [t UTF8String], -1, SQLITE_STATIC );
+
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
                 NSLog(@"Sqlite3: Success insert");
@@ -166,6 +172,9 @@
                 NSLog(@"Sqlite3: Success select");
                 char *cWelcomeText = (char*)sqlite3_column_text(statement, 1);
                 welcomeText = [[NSString alloc]initWithUTF8String:cWelcomeText];
+                char *ccontenttype = (char*)sqlite3_column_text(statement, 2);
+                contenttype = [[NSString alloc]initWithUTF8String:ccontenttype];
+                
             }
             else
             {

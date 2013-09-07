@@ -13,6 +13,7 @@
     NSInteger welcomeTalkID;
     NSString *welcomeText;
     UIImage *welcomeImage;
+    NSString *contenttype;
     NSString *imageUrl;
 
     NSString *databasePath;
@@ -23,10 +24,11 @@
 @property (nonatomic, retain) NSString *welcomeText; 
 @property (nonatomic, retain) UIImage *welcomeImage;
 @property (nonatomic, retain) NSString *imageUrl;
+@property (nonatomic, retain) NSString *contenttype;
 
 - (void) initDB;
-- (void) saveData:(NSInteger)index welcometext:(NSString *)txt;
-- (void) updateData:(NSInteger)index welcometext:(NSString *)txt;
+- (void) saveData:(NSInteger)index welcometext:(NSString *)txt conenttype:(NSString *)t;
+- (void) updateData:(NSInteger)index welcometext:(NSString *)txt conenttype:(NSString *)t;
 - (void) selectData;
  
 @end

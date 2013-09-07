@@ -15,19 +15,17 @@
     // Override point for customization after application launch.
         
     // googlemap
-    [GMSServices provideAPIKey:@"AIzaSyB2hhE4lxFnz_v7qINVBCB2DTcq5yI3zNg"];
+    [GMSServices provideAPIKey:@"AIzaSyAaVbbyUprkuokNz5_VrfTYCneh6DaFHZ8"];
     
     // icloud
-    NSURL *iCloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-    if(iCloudURL != nil)
-    {
-        NSLog(@"iCloud enabled with URL:%@", iCloudURL);
+    NSURL *ubiq = [[NSFileManager defaultManager]
+                   URLForUbiquityContainerIdentifier:nil];
+    if (ubiq) {
+        NSLog(@"iCloud access at %@", ubiq);
+        // TODO: Load document...
+    } else {
+        NSLog(@"No iCloud access");
     }
-    else
-    {
-        NSLog(@"iCloud disabled");
-    }
-    
     
     return YES;
 }
@@ -58,5 +56,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end

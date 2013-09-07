@@ -9,11 +9,23 @@
 
 #import <UIKit/UIKit.h>
 #import "ExpandableTableViewController.h"
+#import "VersionControl.h"
 
-@interface NSUEBViewController : ExpandableTableViewController <ExpandableTableViewDataSource, ExpandableTableViewDelegate>
+#define GETUEB @"http://newshef.co.uk/db/getUEB.php"
+#define GETSUBUEB @"http://newshef.co.uk/db/getUEBSub.php"
+#define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
+#define GETDescription @"http://newshef.co.uk/db/getUEBDescription.php?id=%d"
 
-@property (strong) NSMutableArray *dataModel;
-@property (nonatomic, strong) NSDictionary *ueb;
-@property (nonatomic, strong) NSArray *positions;
- 
+@interface NSUEBViewController : ExpandableTableViewController <ExpandableTableViewDataSource,
+                                        ExpandableTableViewDelegate>
+{     
+    NSMutableArray *jsonUEB;
+    NSMutableArray *jsonUEBSub;
+    NSMutableArray *jsonVersion;
+    NSMutableArray *collectionUEB;
+    NSMutableArray *collectionUEBSub;
+    VersionControl *modelVersionControl;
+    
+}
+
 @end

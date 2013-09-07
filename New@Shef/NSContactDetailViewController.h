@@ -12,7 +12,8 @@
 @property (strong) NSString *text;
 @property (strong) NSString *emailtxt;
 @property (strong) NSString *phonetxt;
+
+
 @property (weak) IBOutlet UILabel *viewLabel;
-@property (weak) IBOutlet UILabel *emailLabel;
-@property (weak) IBOutlet UILabel *phoneLabel;
+@property (nonatomic, retain) IBOutlet UITextView *details;
 @end

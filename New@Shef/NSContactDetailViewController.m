@@ -13,7 +13,7 @@
 @end
 
 @implementation NSContactDetailViewController
-@synthesize text, viewLabel, emailtxt, phonetxt, emailLabel, phoneLabel;
+@synthesize text, viewLabel, emailtxt, phonetxt, details;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,11 +27,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    viewLabel.text = text;
-    emailLabel.numberOfLines = 0;
-    phoneLabel.numberOfLines = 0;
-    emailLabel.text = emailtxt;
-    phoneLabel.text = phonetxt;//[NSString stringWithFormat:@"Phone number: \n  %@",phonetxt];
+    self.viewLabel.text = text;
+    self.details.text = [NSString stringWithFormat: @"Email: %@\n\nPhone: %@", emailtxt, phonetxt];
+    self.details.editable = NO;
+    self.details.dataDetectorTypes = UIDataDetectorTypeAll;
+    
+
 }
 
 - (void)didReceiveMemoryWarning

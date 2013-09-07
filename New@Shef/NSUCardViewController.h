@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+//#define UCardEmail @"hr-enq@sheffield.ac.uk"
+#define UCardEmail @"wanchun.zhang2012@gmail.com"
 
 @interface NSUCardViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationBarDelegate, MFMailComposeViewControllerDelegate>
 

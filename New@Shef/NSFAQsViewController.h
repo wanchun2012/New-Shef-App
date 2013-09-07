@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+//#define FAQEmail @"hr-enq@sheffield.ac.uk"
+#define FAQEmail @"wanchun.zhang2012@gmail.com"
 
 @interface NSFAQsViewController : UIViewController<MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *emailbody;

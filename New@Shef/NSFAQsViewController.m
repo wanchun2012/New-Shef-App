@@ -51,7 +51,7 @@
 {
     MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
     [mailController setMailComposeDelegate:self];
-    NSString *toEmail = @"hr-enq@sheffield.ac.uk";
+    NSString *toEmail = FAQEmail;
     NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
     NSString *message = self.emailbody.text;
     [mailController setMessageBody:message isHTML:NO];

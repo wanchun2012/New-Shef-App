@@ -50,7 +50,7 @@
 {
     MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
     [mailController setMailComposeDelegate:self];
-    NSString *toEmail = @"hr-enq@sheffield.ac.uk";
+    NSString *toEmail = UCardEmail;
     NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
     NSString *message = @"hello this is the photo for ucard";
     [mailController setMessageBody:message isHTML:NO];

@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyDocument.h"
+#define UBIQUITY_CONTAINER_URL @"R84A95845G.The-University-of-Sheffield.NewShef"
 
 @interface NSToDoDetailsViewController : UIViewController
-@property (nonatomic,assign) int indexFirstTable;
-@property (nonatomic, assign) int indexSecondTable;
+{
+    MyDocument *document;
+    NSURL *documentURL;
+    NSURL *ubiquityURL;
+    NSString *iCloudText;
+    NSMetadataQuery *metadataQuery;
+}
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnDone;
 @property (weak, nonatomic) IBOutlet UITextView *tvDescription;
 
@@ -18,8 +26,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelStatus;
 @property (weak, nonatomic) IBOutlet UILabel *labelResponsiblePerson;
 
+@property (strong) NSString *txtResponsiblePerson;
+@property (strong) NSString *txtDescription;
+@property (strong) NSString *txtId;
+@property (strong) NSString *txtStatus;
 
-@property (nonatomic, strong) NSArray *starterChecklist;
+-(IBAction)saveDocument;
 
--(IBAction)donePressed;
+@property (nonatomic, retain) NSString *iCloudText;
+@property (strong, nonatomic) NSURL *documentURL;
+@property (strong, nonatomic) MyDocument *document;
+@property (strong, nonatomic) NSURL *ubiquityURL;
+@property (strong, nonatomic) NSMetadataQuery *metadataQuery;
+
+ 
 @end

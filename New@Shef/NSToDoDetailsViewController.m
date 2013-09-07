@@ -13,7 +13,7 @@
 @end
 
 @implementation NSToDoDetailsViewController
-@synthesize indexFirstTable,indexSecondTable, starterChecklist, btnDone, tvDescription, labelStatus, labelResponsiblePerson;
+@synthesize btnDone, tvDescription, labelStatus, txtResponsiblePerson,txtDescription, labelResponsiblePerson, txtStatus,txtId, iCloudText,document,documentURL,ubiquityURL,metadataQuery;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,21 +25,58 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    NSString *pFile = [[NSBundle mainBundle] pathForResource:@"pNew_Starter_Checklist" ofType:@"plist"];
-    starterChecklist = [[NSArray alloc] initWithContentsOfFile:pFile];
+    // iCloud loading
+    NSLog(@"iCloud loading..........................");
+    [self iCloudIsAvailable];
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dataFile = [docsDir stringByAppendingPathComponent: @"newshef.txt"];
+    self.documentURL = [NSURL fileURLWithPath:dataFile];
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    ubiquityURL = [[filemgr URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL] URLByAppendingPathComponent:@"Documents"];
+    NSLog(@"iCloud path = %@", [ubiquityURL path]);
     
+    if ([filemgr fileExistsAtPath:[ubiquityURL path]] == NO)
+    {
+        NSLog(@"iCloud Documents directory does not exist");
+        [filemgr createDirectoryAtURL:ubiquityURL withIntermediateDirectories:YES attributes:nil error:nil];
+    } else {
+        NSLog(@"iCloud Documents directory exists");
+    }
+    
+    ubiquityURL = [ubiquityURL URLByAppendingPathComponent:@"newshef.txt"];
+    NSLog(@"Full ubiquity path = %@", [ubiquityURL path]);
+    
+    // Search for document in iCloud storage
+    metadataQuery = [[NSMetadataQuery alloc] init];
+    [metadataQuery setPredicate: [NSPredicate predicateWithFormat: @"%K like 'newshef.txt'",
+                                  NSMetadataItemFSNameKey]];
+    [metadataQuery setSearchScopes:[NSArray arrayWithObjects:NSMetadataQueryUbiquitousDocumentsScope,nil]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(metadataQueryDidFinishGathering:)
+                                                 name:NSMetadataQueryDidFinishGatheringNotification
+                                               object:metadataQuery];
+    NSLog(@"starting query");
+    [metadataQuery startQuery];
+    
+    
+    if([txtStatus isEqualToString:@"Incomplete"])
+    {
+        btnDone.enabled = YES;
+    }
+    else
+    {
+        btnDone.enabled = NO;
+    }
+    
+    
+    [super viewDidLoad];
+	     
     tvDescription.textAlignment = NSTextAlignmentJustified;
     tvDescription.userInteractionEnabled = NO;
-    tvDescription.text = [[[starterChecklist objectAtIndex:indexFirstTable] objectAtIndex:indexSecondTable+1] objectForKey:@"Details"];
+    tvDescription.text = self.txtDescription;
     labelResponsiblePerson.numberOfLines = 0;
-    labelResponsiblePerson.text =[NSString stringWithFormat:@"Responsible person: \n%@",
-        [[[starterChecklist objectAtIndex:indexFirstTable] objectAtIndex:indexSecondTable+1] objectForKey:@"Responsible person"]];
-    
-
-
- 
+    labelResponsiblePerson.text =[NSString stringWithFormat:@"Responsible person: \n%@", self.txtResponsiblePerson];
+    labelStatus.text = txtStatus;
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +85,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)donePressed
+- (void)saveDocument
 {
     
     NSDate *myDate = [NSDate date];
@@ -57,6 +94,88 @@
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     NSString *myDateString = [dateFormatter stringFromDate:myDate];
     labelStatus.numberOfLines = 0;
-    labelStatus.text = [NSString stringWithFormat:@"Status: completed, \n at: %@",myDateString];
+    labelStatus.text = [NSString stringWithFormat:@"Status:%@",myDateString];
+
+    NSLog(@"lets have a look at the txtId");
+    
+    NSLog(txtId);
+ 
+    NSString *iCloudStatus = [NSString stringWithFormat:@"%@(%@( end", txtId,labelStatus.text];
+  
+    NSString *test = [document.userText stringByAppendingString:iCloudStatus];
+    self.document.userText = test;
+    NSLog(@"test userText");
+    NSLog(iCloudStatus);
+    [self.document saveToURL:ubiquityURL forSaveOperation:UIDocumentSaveForOverwriting
+           completionHandler:^(BOOL success) {
+               if (success){
+                   NSLog(@"Saved to cloud for overwriting");
+                   
+               } else {
+                   NSLog(@"Not saved to cloud for overwriting");
+               }
+           }];
+
+    btnDone.enabled = NO;
+    
+    
+    
 }
+
+
+// iCloud setting
+- (void) iCloudIsAvailable
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *ubiquityURL = [fileManager
+                          URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL];
+    if(ubiquityURL)
+        NSLog(@"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+    else
+        NSLog(@"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+    
+}
+
+- (void)metadataQueryDidFinishGathering:(NSNotification *)notification
+{
+    NSMetadataQuery *query = [notification object];
+    [query disableUpdates];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:query];
+    [query stopQuery];
+    NSArray *results = [[NSArray alloc] initWithArray:[query results]];
+    
+    
+    if ([results count] == 1)
+    {
+        NSLog(@"File exists in cloud");
+        ubiquityURL = [[results objectAtIndex:0] valueForAttribute:NSMetadataItemURLKey];
+        self.document = [[MyDocument alloc] initWithFileURL:ubiquityURL];
+        //self.document.userText = @"";
+        [document openWithCompletionHandler:
+         ^(BOOL success) {
+             if (success){
+                 NSLog(@"Opened cloud doc");
+                 iCloudText = document.userText;
+             } else {
+                 NSLog(@"Not opened cloud doc");
+             }
+         }];
+    } else {
+        NSLog(@"File does not exist in cloud");
+        self.document = [[MyDocument alloc] initWithFileURL:ubiquityURL];
+        
+        [document saveToURL:ubiquityURL
+           forSaveOperation: UIDocumentSaveForCreating
+          completionHandler:^(BOOL success) {
+              if (success){
+                  NSLog(@"Saved to cloud");
+              }  else {
+                  NSLog(@"Failed to save to cloud");
+              }
+          }];
+    }
+}
+
+ 
+
 @end

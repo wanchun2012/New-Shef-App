@@ -7,19 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "sqlite3.h"
-#import "GoogleMap.h"
-#import "VersionControl.h"
-
-#define GETUrl @"http://newshef.co.uk/db/getGoogleMap.php"
-#define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
+ 
 
 @interface NSOverViewViewController : UIViewController
-{
-    NSMutableArray *jsonGoogleMap;
-    NSMutableArray *jsonVersion;
-    NSMutableArray *collection;
-    VersionControl *modelVersionControl;
-}
-
+@property (strong, nonatomic) NSString *lon;
+@property (strong, nonatomic) NSString *lat;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *snippet;
 @end

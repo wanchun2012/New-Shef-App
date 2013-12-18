@@ -13,11 +13,13 @@
 
 @interface NSUCardViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationBarDelegate, MFMailComposeViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendbutton;
 @property (strong, nonatomic) UIImagePickerController *picker1;
 @property (strong, nonatomic) UIImagePickerController *picker2;
 @property (strong, nonatomic) UIImage *image;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageCard;
 
 - (IBAction) TakePhoto;
 - (IBAction) ChoosePhoto;

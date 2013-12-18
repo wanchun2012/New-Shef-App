@@ -11,8 +11,8 @@
 #import "Link.h"
 #import "VersionControl.h"  
 
-#define GETUrl @"http://newshef.co.uk/db/getLink.php"
-#define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
+#define GETUrl @"http://54.213.22.84/getLink.php"
+#define GETVersion @"http://54.213.22.84/getVersionControl.php"
 
 @interface NSLinkViewController : UITableViewController
 {

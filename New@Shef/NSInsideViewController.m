@@ -28,6 +28,12 @@ NSString *serverVersion;
 
 - (void)viewDidLoad
 {
+    self.navigationController.navigationBar.translucent = NO;
+    if ([self connectedToNetwork] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+        
+    } else {
     [self getVersionWebService];
     modelVersionControl = [[VersionControl alloc] init];
     [modelVersionControl initDB];
@@ -97,9 +103,11 @@ NSString *serverVersion;
             [insideCollection addObject:object];
         }
     }
-
+    }
     [super viewDidLoad];
-
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -182,12 +190,13 @@ NSString *serverVersion;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     
     GoogleMap *marker = [[GoogleMap alloc]init];
     marker = [insideCollection objectAtIndex:indexPath.row];
     cell.textLabel.text = marker.title;
+    cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     return cell;
 }
 
@@ -263,5 +272,24 @@ NSString *serverVersion;
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //  exit(-1); // no
+    }
+    if(buttonIndex == 1)
+    {
+        exit(-1); // yes
+    }
+    
+}
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
+}
+
 
 @end

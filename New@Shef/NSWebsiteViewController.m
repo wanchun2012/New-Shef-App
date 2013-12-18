@@ -24,6 +24,7 @@
     [self.webview loadRequest:request];
     self.webview.scalesPageToFit = YES;
     self.webview.frame=self.view.bounds;
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
 }
 
 @end

@@ -41,6 +41,13 @@ NSString *statusImage;
 
 - (void)viewDidLoad
 {
+    self.navigationController.navigationBar.translucent = NO;
+    if ([self connectedToNetwork] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+        
+    }
+    else {
     
     [self getVersionWebService];
     modelVersionControl = [[VersionControl alloc] init];
@@ -146,13 +153,13 @@ NSString *statusImage;
 
         }
     }
-
+   }
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = @"UEB";
+    titleView.text = @"University Executive Board";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.font = [UIFont boldSystemFontOfSize:15.0];
     titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
     titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
     titleView.textColor = [UIColor blackColor]; // Your color here
@@ -161,7 +168,8 @@ NSString *statusImage;
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-     
+ 
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -250,7 +258,13 @@ NSString *statusImage;
 
 -(NSString *) getUEBDescription:(int)Id
 {
-    NSString *temp; 
+    NSString *temp=@"";
+    if ([self connectedToNetwork] == NO) {
+       // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+      //  [alert show];
+        
+    }
+    else {
     NSString *urlstr =[NSString stringWithFormat:GETDescription, Id];
     NSURL *url = [NSURL URLWithString: urlstr];
     NSData *data = [NSData dataWithContentsOfURL:url];
@@ -258,7 +272,7 @@ NSString *statusImage;
     NSMutableArray *jsonDescription = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     NSDictionary *info = [jsonDescription objectAtIndex:0];
     temp = [info objectForKey:@"uebDescription"];
- 
+    }
     return temp;
 }
 
@@ -292,7 +306,7 @@ NSString *statusImage;
 
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
  
     Position *ueb = [collectionUEB objectAtIndex:indexPath.section];
     SubPosition *sub = [ueb.subCollection objectAtIndex:indexPath.row];
@@ -311,7 +325,7 @@ NSString *statusImage;
         cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
         cell.userInteractionEnabled = true;
         //cell.imageView.image = [UIImage imageNamed:@"noimage.jpeg"];
-        
+        cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
         cell.textLabel.text = [NSString stringWithFormat:@"-%@",[sub.name stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"]];
          
     }
@@ -329,11 +343,11 @@ NSString *statusImage;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.textLabel.font = [UIFont systemFontOfSize:18];
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
  
     Position *ueb = [collectionUEB objectAtIndex:section];
     cell.textLabel.text = ueb.name;
-    
+    cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     if (ueb.subCollection.count==2)
     {
         cell.userInteractionEnabled = false;
@@ -428,8 +442,11 @@ NSString *statusImage;
     NSLog(@"load uebdescription from local server");
     sub.uebDescription = viewController.txtDescription;
     */
+ 
     viewController.txtName = sub.uebName;
+    viewController.txtName = [viewController.txtName stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     viewController.txtRole = sub.name;
+    viewController.txtRole = [viewController.txtRole stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     viewController.txtUrl = sub.imageUrl;
     viewController.txtStatus = statusImage;
     viewController.txtType = sub.contenttype;
@@ -493,6 +510,23 @@ NSString *statusImage;
     return result;
 }
 
- 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //  exit(-1); // no
+    }
+    if(buttonIndex == 1)
+    {
+        exit(-1); // yes
+    }
+    
+}
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
+}
+
 
 @end

@@ -31,7 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
 	// Do any additional setup after loading the view.
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,9 +55,9 @@
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.mapType = kGMSTypeNormal;
     mapView_.accessibilityElementsHidden = YES;
-    mapView_.myLocationEnabled = NO;
+    mapView_.myLocationEnabled = YES;
     mapView_.settings.compassButton = YES;
-    mapView_.settings.myLocationButton = NO;
+    mapView_.settings.myLocationButton =YES;
     mapView_.buildingsEnabled = YES;
     mapView_.indoorEnabled = YES;
     
@@ -65,7 +68,9 @@
     marker.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
     marker.position = CLLocationCoordinate2DMake([lat floatValue],[lon floatValue]);
     marker.title = title;
+    marker.title = [marker.title stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     marker.snippet = snippet;
+    marker.snippet = [marker.snippet stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     marker.map = mapView_;
     
     

@@ -25,6 +25,12 @@
 
 - (void)viewDidLoad
 {
+    self.navigationController.navigationBar.translucent = NO;
+    if ([self connectedToNetwork] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+        
+    } else {
     // iCloud loading
     NSLog(@"iCloud loading..........................");
     [self iCloudIsAvailable];
@@ -65,17 +71,20 @@
     }
     else
     {
+        
         btnDone.enabled = NO;
+        //btnDone.enabled = YES;
+    }
     }
     
-    
     [super viewDidLoad];
-	     
+    self.btnDone.tintColor = [UIColor blueColor]; 
     tvDescription.textAlignment = NSTextAlignmentJustified;
     tvDescription.userInteractionEnabled = NO;
     tvDescription.text = self.txtDescription;
     labelResponsiblePerson.numberOfLines = 0;
     labelResponsiblePerson.text =[NSString stringWithFormat:@"Responsible person: \n%@", self.txtResponsiblePerson];
+    labelResponsiblePerson.text = [labelResponsiblePerson.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     labelStatus.text = txtStatus;
 }
 
@@ -104,6 +113,7 @@
   
     NSString *test = [document.userText stringByAppendingString:iCloudStatus];
     self.document.userText = test;
+    //self.document.userText = @"";
     NSLog(@"test userText");
     NSLog(iCloudStatus);
     [self.document saveToURL:ubiquityURL forSaveOperation:UIDocumentSaveForOverwriting
@@ -118,8 +128,8 @@
 
     btnDone.enabled = NO;
     
-    
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadiCloud" object:nil];
+ 
 }
 
 
@@ -176,6 +186,22 @@
     }
 }
 
- 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //  exit(-1); // no
+    }
+    if(buttonIndex == 1)
+    {
+        exit(-1); // yes
+    }
+    
+}
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
+}
 
 @end

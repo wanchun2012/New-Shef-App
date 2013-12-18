@@ -10,10 +10,11 @@
 #import <UIKit/UIKit.h>
 #import "ExpandableTableViewController.h"
 #import "VersionControl.h"
+#import <MessageUI/MessageUI.h>
 
-#define GETFaculty @"http://newshef.co.uk/db/getFaculty.php"
-#define GETDepartment @"http://newshef.co.uk/db/getDepartment.php"
-#define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
+#define GETFaculty @"http://54.213.22.84/getFaculty.php"
+#define GETDepartment @"http://54.213.22.84/getDepartment.php"
+#define GETVersion @"http://54.213.22.84/getVersionControl.php"
 
 @interface NSContactsViewController : ExpandableTableViewController <ExpandableTableViewDataSource,                                  ExpandableTableViewDelegate>
 {

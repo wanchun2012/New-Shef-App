@@ -11,8 +11,8 @@
 #import "GoogleMap.h"
 #import "VersionControl.h"
 
-#define GETUrl @"http://newshef.co.uk/db/getGoogleMap.php"
-#define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
+#define GETUrl @"http://54.213.22.84/getGoogleMap.php"
+#define GETVersion @"http://54.213.22.84/getVersionControl.php"
 
 @interface NSInsideViewController : UITableViewController
 {

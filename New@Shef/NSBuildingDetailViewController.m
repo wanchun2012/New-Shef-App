@@ -5,6 +5,9 @@
 //  Created by Wanchun Zhang on 27/08/2013.
 //  Copyright (c) 2013 Wanchun Zhang. All rights reserved.
 //
+// Reference: 1. inside view
+//           http://jingjong404.blogspot.co.uk/2013/09/webviewgoogle.html
+//
 
 #import "NSBuildingDetailViewController.h"
 
@@ -27,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
 	// Do any additional setup after loading the view.
     NSString *htmlString = [NSString stringWithFormat:@"<html>\
                             <head>\
@@ -39,7 +43,8 @@
                             </html>",[lat floatValue], [lon floatValue]];
     
     [webview loadHTMLString:htmlString baseURL:nil];
-    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     
 }
 

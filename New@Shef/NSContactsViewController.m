@@ -10,11 +10,13 @@
 #import "NSContactDetailViewController.h"
 #import "Faculty.h"
 #import "Department.h"
-
+#import "UICustomizedButton.h"
 @implementation NSContactsViewController
 
  
 NSString *serverVersion;
+NSString *phoneNumber;
+NSString *emailAddress;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,6 +39,12 @@ NSString *serverVersion;
 
 - (void)viewDidLoad
 {
+    if ([self connectedToNetwork] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+        
+    }else {
+    
     [self getVersionWebService];
     modelVersionControl = [[VersionControl alloc] init];
     [modelVersionControl initDB];
@@ -136,9 +144,9 @@ NSString *serverVersion;
             [modelVersionControl updateData:@"versioncontact =:versioncontact" variable:@":versioncontact" data:serverVersion];
         }
     }
-
+    }
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"Contacts";
     titleView.backgroundColor = [UIColor clearColor];
@@ -258,6 +266,7 @@ NSString *serverVersion;
 
 - (UITableViewCell *)tableView:(ExpandableTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString *CellIdentifier = @"RowCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -265,6 +274,34 @@ NSString *serverVersion;
     
     Faculty *faculty = [collectionFaculty objectAtIndex:indexPath.section];
     Department *department = [faculty.deptCollection objectAtIndex:indexPath.row];
+    
+    
+    UIImage *imgPhone = [UIImage imageNamed:@"phone-icon.jpg"];
+    UIImage *imgEmail = [UIImage imageNamed:@"email-icon.jpg"];
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    UICustomizedButton *btnPhone = [UICustomizedButton buttonWithType:UIButtonTypeRoundedRect];
+    //set the position of the butto
+    btnPhone.frame = CGRectMake(cell.frame.origin.x+screenWidth-cell.frame.size.height/2, cell.frame.origin.y, cell.frame.size.height/2, cell.frame.size.height/2);
+    btnPhone.phone = department.phone;//[department.phone stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+    btnPhone.backgroundColor= [UIColor clearColor];
+    [cell.contentView addSubview:btnPhone];
+    [btnPhone setBackgroundImage:imgPhone forState:UIControlStateNormal];
+    
+    [btnPhone addTarget:self action:@selector(callPhone:)  forControlEvents:UIControlEventTouchUpInside];
+  
+    UICustomizedButton *btnEmail = [UICustomizedButton buttonWithType:UIButtonTypeRoundedRect];
+    //set the position of the button
+    btnEmail.frame = CGRectMake(btnPhone.frame.origin.x, cell.frame.origin.y+cell.frame.size.height/2, cell.frame.size.height/2, cell.frame.size.height/2);
+    
+    btnEmail.email = department.email;
+    btnEmail.backgroundColor= [UIColor clearColor];
+    [cell.contentView addSubview:btnEmail];
+    [btnEmail setBackgroundImage:imgEmail forState:UIControlStateNormal];
+    [btnEmail addTarget:self action:@selector(sendEmail:)  forControlEvents:UIControlEventTouchUpInside];
+    
+    
     if (department.name == NULL) {
         cell.userInteractionEnabled = false;
         cell.textLabel.text = @"";
@@ -275,16 +312,24 @@ NSString *serverVersion;
     }
     else
     {
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+        
         cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
         cell.userInteractionEnabled = true;
-        cell.textLabel.text = [NSString stringWithFormat:@"     %@",department.name];
+        cell.textLabel.text = [NSString stringWithFormat:@"-%@",department.name];
+        cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+        
     }
 	// just change the cells background color to indicate group separation
 	cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
 	cell.backgroundView.backgroundColor = [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0];
-	
+	cell.accessoryType=UITableViewCellAccessoryNone;
+    //cell.userInteractionEnabled = NO;
     return cell;
 }
+
 
 - (UITableViewCell *)tableView:(ExpandableTableView *)tableView cellForGroupInSection:(NSUInteger)section
 {
@@ -292,10 +337,13 @@ NSString *serverVersion;
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.textLabel.font = [UIFont fontWithName:@"CenturyGothic-Bold" size:12];
- 
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
+    
     Faculty *faculty = [collectionFaculty objectAtIndex:section];
     cell.textLabel.text = faculty.name;
- 
+    cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     if (faculty.deptCollection.count==2)
     {
         cell.userInteractionEnabled = false;
@@ -350,5 +398,73 @@ NSString *serverVersion;
     viewController.emailtxt = department.email;
     viewController.phonetxt = department.phone;
 }
- 
+
+
+
+-(void)callPhone:(UICustomizedButton *)sender
+{
+    NSString *s = [NSString stringWithFormat:@"tel:%@",sender.phone];
+    NSURL *tel = [NSURL URLWithString:s] ;
+    if([[UIApplication sharedApplication] canOpenURL:tel])
+    {
+        [[UIApplication sharedApplication] openURL:tel];
+       
+    }
+    else
+    {
+        
+        //show alert later
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Do you have enough credit on the phone?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+    }
+}
+
+-(void)sendEmail:(UICustomizedButton *)sender
+{
+    if ([MFMailComposeViewController canSendMail]) {
+        // device is configured to send mail
+        
+        MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
+        [mailController setMailComposeDelegate:self];
+        NSString *toEmail = @"wanchun.zhang2012@gmail.com";//sender.email;
+        NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
+        NSString *message = @"";//self.emailbody.text;
+        [mailController setMessageBody:message isHTML:NO];
+        [mailController setToRecipients:emailArray];
+        [mailController setSubject:@"New@Shef:questions"];
+        [self presentViewController:mailController animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Do you want to login one email account now?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+    }
+}
+
+
+-(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // after send email, clean the emailbody field.
+    // self.emailbody.text = @"";
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //  exit(-1); // no
+    }
+    if(buttonIndex == 1)
+    {
+        exit(-1); // yes
+    }
+    
+}
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
+}
+
 @end

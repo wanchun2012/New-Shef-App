@@ -15,9 +15,9 @@
 #import "Finished.h"
 
 #define UBIQUITY_CONTAINER_URL @"R84A95845G.The-University-of-Sheffield.NewShef"
-#define GETGroup @"http://newshef.co.uk/db/getGroup.php"
-#define GETActivity @"http://newshef.co.uk/db/getActivity.php"
-#define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
+#define GETGroup @"http://54.213.22.84/getGroup.php"
+#define GETActivity @"http://54.213.22.84/getActivity.php"
+#define GETVersion @"http://54.213.22.84/getVersionControl.php"
 
 @interface NSChecklistViewController : ExpandableTableViewController <ExpandableTableViewDataSource,                                  ExpandableTableViewDelegate>
 {

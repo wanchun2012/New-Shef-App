@@ -18,7 +18,7 @@
 @implementation NSChecklistViewController
 @synthesize iCloudText,document,documentURL,ubiquityURL,metadataQuery;
 NSString *serverVersion;
-
+NSIndexPath *selectedPath=0;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -40,40 +40,19 @@ NSString *serverVersion;
 
 - (void)viewDidLoad
 {
-     
-    // iCloud loading
-    NSLog(@"iCloud loading..........................");
-    [self iCloudIsAvailable];
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsDir = [dirPaths objectAtIndex:0];
-    NSString *dataFile = [docsDir stringByAppendingPathComponent: @"newshef.txt"];
-    self.documentURL = [NSURL fileURLWithPath:dataFile];
-    NSFileManager *filemgr = [NSFileManager defaultManager];
-    ubiquityURL = [[filemgr URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL] URLByAppendingPathComponent:@"Documents"];
-    NSLog(@"iCloud path = %@", [ubiquityURL path]);
+    self.navigationController.navigationBar.translucent = NO;
     
-    if ([filemgr fileExistsAtPath:[ubiquityURL path]] == NO)
-    {
-        NSLog(@"iCloud Documents directory does not exist");
-        [filemgr createDirectoryAtURL:ubiquityURL withIntermediateDirectories:YES attributes:nil error:nil];
+    if ([self connectedToNetwork] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+        
     } else {
-        NSLog(@"iCloud Documents directory exists");
-    }
-    
-    ubiquityURL = [ubiquityURL URLByAppendingPathComponent:@"newshef.txt"];
-    NSLog(@"Full ubiquity path = %@", [ubiquityURL path]);
-    
-    // Search for document in iCloud storage
-    metadataQuery = [[NSMetadataQuery alloc] init];
-    [metadataQuery setPredicate: [NSPredicate predicateWithFormat: @"%K like 'newshef.txt'",
-                                  NSMetadataItemFSNameKey]];
-    [metadataQuery setSearchScopes:[NSArray arrayWithObjects:NSMetadataQueryUbiquitousDocumentsScope,nil]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(metadataQueryDidFinishGathering:)
-                                                 name:NSMetadataQueryDidFinishGatheringNotification
-                                               object:metadataQuery];
-    NSLog(@"starting query");
-    [metadataQuery startQuery];
-  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLoad) name:@"loadiCloud" object:nil];
+
+      
+        
+    // iCloud loading
+        [self loadiCloud];
     
     // web database or internal database
     [self getVersionWebService];
@@ -144,9 +123,9 @@ NSString *serverVersion;
             [object.activityCollection addObject:d2];
         }
     }
-    
+    }
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"Checklist";
     titleView.backgroundColor = [UIColor clearColor];
@@ -299,13 +278,14 @@ NSString *serverVersion;
             }
         }
         
-        
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-
-  
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
         cell.userInteractionEnabled = true;
         cell.textLabel.text = [NSString stringWithFormat:@"-%@",activity.name];
+ 
+        cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+        
     }
 	// just change the cells background color to indicate group separation
 	cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -321,11 +301,12 @@ NSString *serverVersion;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.textLabel.font = [UIFont fontWithName:@"CenturyGothic-Bold" size:12];
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
 
     Group *group = [collectionGroup objectAtIndex:section];
-    cell.textLabel.text = group.name;
     
+    cell.textLabel.text = group.name;
+    cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     if (group.activityCollection.count==2)
     {
         cell.userInteractionEnabled = false;
@@ -371,8 +352,8 @@ NSString *serverVersion;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSToDoDetailsViewController *viewController = segue.destinationViewController;
  
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];;
-    
+	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    selectedPath = indexPath;
     Group *group = [collectionGroup objectAtIndex:indexPath.section];
     Activity *activity = [group.activityCollection objectAtIndex:indexPath.row-1];
 	//viewController.text = activity.name;
@@ -399,7 +380,41 @@ NSString *serverVersion;
  
 }
 
+- (void) loadiCloud
+{
+    NSLog(@"iCloud loading..........................");
+    [self iCloudIsAvailable];
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *dataFile = [docsDir stringByAppendingPathComponent: @"newshef.txt"];
+    self.documentURL = [NSURL fileURLWithPath:dataFile];
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    ubiquityURL = [[filemgr URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL] URLByAppendingPathComponent:@"Documents"];
+    NSLog(@"iCloud path = %@", [ubiquityURL path]);
+    
+    if ([filemgr fileExistsAtPath:[ubiquityURL path]] == NO)
+    {
+        NSLog(@"iCloud Documents directory does not exist");
+        [filemgr createDirectoryAtURL:ubiquityURL withIntermediateDirectories:YES attributes:nil error:nil];
+    } else {
+        NSLog(@"iCloud Documents directory exists");
+    }
+    
+    ubiquityURL = [ubiquityURL URLByAppendingPathComponent:@"newshef.txt"];
+    NSLog(@"Full ubiquity path = %@", [ubiquityURL path]);
+    
+    // Search for document in iCloud storage
+    metadataQuery = [[NSMetadataQuery alloc] init];
+    [metadataQuery setPredicate: [NSPredicate predicateWithFormat: @"%K like 'newshef.txt'",
+                                  NSMetadataItemFSNameKey]];
+    [metadataQuery setSearchScopes:[NSArray arrayWithObjects:NSMetadataQueryUbiquitousDocumentsScope,nil]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(metadataQueryDidFinishGathering:)
+                                                 name:NSMetadataQueryDidFinishGatheringNotification
+                                               object:metadataQuery];
+    NSLog(@"starting query");
+    [metadataQuery startQuery];
 
+}
 // iCloud setting
 - (void) iCloudIsAvailable
 {
@@ -456,6 +471,34 @@ NSString *serverVersion;
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+ 
+    [self.tableView reloadData];
+    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+   
+    [self.tableView reloadSectionCellsAtIndexes:sections withRowAnimation:UITableViewRowAnimationNone];
+    NSLog(@"I have no idea about go back stuff and something else");
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //  exit(-1); // no
+    }
+    if(buttonIndex == 1)
+    {
+        exit(-1); // yes
+    }
+    
+}
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
+}
 
 
 @end

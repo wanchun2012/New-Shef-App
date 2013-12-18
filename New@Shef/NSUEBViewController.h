@@ -11,10 +11,10 @@
 #import "ExpandableTableViewController.h"
 #import "VersionControl.h"
 
-#define GETUEB @"http://newshef.co.uk/db/getUEB.php"
-#define GETSUBUEB @"http://newshef.co.uk/db/getUEBSub.php"
-#define GETVersion @"http://newshef.co.uk/db/getVersionControl.php"
-#define GETDescription @"http://newshef.co.uk/db/getUEBDescription.php?id=%d"
+#define GETUEB @"http://54.213.22.84/getUEB.php"
+#define GETSUBUEB @"http://54.213.22.84/getUEBSub.php"
+#define GETVersion @"http://54.213.22.84/getVersionControl.php"
+#define GETDescription @"http://54.213.22.84/getUEBDescription.php?id=%d"
 
 @interface NSUEBViewController : ExpandableTableViewController <ExpandableTableViewDataSource,
                                         ExpandableTableViewDelegate>

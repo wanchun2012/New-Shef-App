@@ -31,16 +31,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = @"GoogleMap";
+    titleView.text = @"Map";
     titleView.backgroundColor = [UIColor clearColor];
     titleView.font = [UIFont boldSystemFontOfSize:20.0];
     titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
     titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor redColor]; // Your color here
+    titleView.textColor = [UIColor blackColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     
     NSString *urlAddress = @"http://maps.google.com/maps?q=The+University+of+Sheffield";
     NSURL *url = [NSURL URLWithString:urlAddress];

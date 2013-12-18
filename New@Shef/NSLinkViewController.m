@@ -27,6 +27,12 @@ NSString *serverVersion;
 
 - (void)viewDidLoad
 {
+    if ([self connectedToNetwork] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+        
+    } else {
+    
     [self getVersionWebService];
     modelVersionControl = [[VersionControl alloc] init];
     [modelVersionControl initDB];
@@ -88,9 +94,9 @@ NSString *serverVersion;
             [modelVersionControl updateData:@"versionlink =:versionlink" variable:@":versionlink" data:serverVersion];
         }
     }
- 
+    }
     [super viewDidLoad];
-
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -172,12 +178,13 @@ NSString *serverVersion;
         
     }
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     
     Link *link = [[Link alloc]init];
     link = [collection objectAtIndex:indexPath.row];
     cell.textLabel.text = link.description;
+    cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     return cell;
 }
 
@@ -249,5 +256,26 @@ NSString *serverVersion;
         
     }
 }
- 
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //  exit(-1); // no
+    }
+    if(buttonIndex == 1)
+    {
+        exit(-1); // yes
+    }
+    
+}
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
+}
+
+
+
 @end

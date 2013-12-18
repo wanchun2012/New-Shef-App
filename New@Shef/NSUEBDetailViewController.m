@@ -33,16 +33,36 @@
 
 - (void)viewDidLoad
 {
+    self.navigationController.navigationBar.translucent = NO;
     //prepare for label
     [super viewDidLoad];
-    labelName.numberOfLines = 0;
-    labelName.lineBreakMode = UILineBreakModeWordWrap;
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    if ([self connectedToNetwork] == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+        
+    }
+    else
+    {
+ 
     labelRole.numberOfLines = 0;
-    labelRole.lineBreakMode = UILineBreakModeWordWrap;
-    labelName.text = [txtName stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-    labelRole.text = [txtRole stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    labelRole.lineBreakMode = NSLineBreakByWordWrapping;
+ 
+    labelRole.text = [txtName stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     [labelRole setFont: [UIFont systemFontOfSize:14]];
     
+        
+        
+        UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.text = [txtRole stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];;
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont boldSystemFontOfSize:16.0];
+        titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+        titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        titleView.textColor = [UIColor blackColor]; // Your color here
+        self.navigationItem.titleView = titleView;
+        [titleView sizeToFit];
+
     
     // prepare for image
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -83,17 +103,10 @@
         
     self.tvDetails.text = @"";
     // first, separate by new line
-    NSString* someString;
-    NSArray* allLinedStrings =
-    [txtDescription componentsSeparatedByCharactersInSet:
-    [NSCharacterSet newlineCharacterSet]];
-    for(int i=0;i<[allLinedStrings count];i++)
-    {
-        someString = [allLinedStrings objectAtIndex:i];
-        someString = [someString stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-        self.tvDetails.text = [NSString stringWithFormat:@"%@%@", self.tvDetails.text, someString];
+  
+    self.tvDetails.text = txtDescription;
+  
     }
-        
 }
 
 - (void)didReceiveMemoryWarning
@@ -157,6 +170,24 @@
         result = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@", directoryPath, fileName, @"jpg"]];
     }
     return result;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //  exit(-1); // no
+    }
+    if(buttonIndex == 1)
+    {
+        exit(-1); // yes
+    }
+    
+}
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
 }
 
  

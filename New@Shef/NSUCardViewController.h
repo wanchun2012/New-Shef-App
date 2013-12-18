@@ -11,7 +11,7 @@
 //#define UCardEmail @"hr-enq@sheffield.ac.uk"
 #define UCardEmail @"wanchun.zhang2012@gmail.com"
 
-@interface NSUCardViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationBarDelegate, MFMailComposeViewControllerDelegate>
+@interface NSUCardViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationBarDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendbutton;
 @property (strong, nonatomic) UIImagePickerController *picker1;

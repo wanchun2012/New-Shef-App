@@ -11,7 +11,7 @@
 #define NEWSHEF_DB @"NEWSHEF_DB.sql"
 
 @implementation Faculty
-@synthesize facultyId, name;
+@synthesize facultyId, name, deptCollection;
 
 - (id)initWithId:(int)Id
      name:(NSString *)n

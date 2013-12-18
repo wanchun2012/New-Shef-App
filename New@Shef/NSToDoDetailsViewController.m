@@ -81,7 +81,7 @@
     self.btnDone.tintColor = [UIColor blueColor]; 
     tvDescription.textAlignment = NSTextAlignmentJustified;
     tvDescription.userInteractionEnabled = NO;
-    tvDescription.text = self.txtDescription;
+    tvDescription.text = [self.txtDescription stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     labelResponsiblePerson.numberOfLines = 0;
     labelResponsiblePerson.text =[NSString stringWithFormat:@"Responsible person: \n%@", self.txtResponsiblePerson];
     labelResponsiblePerson.text = [labelResponsiblePerson.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
@@ -107,7 +107,7 @@
 
     NSLog(@"lets have a look at the txtId");
     
-    NSLog(txtId);
+    
  
     NSString *iCloudStatus = [NSString stringWithFormat:@"%@(%@( end", txtId,labelStatus.text];
   
@@ -115,7 +115,7 @@
     self.document.userText = test;
     //self.document.userText = @"";
     NSLog(@"test userText");
-    NSLog(iCloudStatus);
+    
     [self.document saveToURL:ubiquityURL forSaveOperation:UIDocumentSaveForOverwriting
            completionHandler:^(BOOL success) {
                if (success){
@@ -139,10 +139,12 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *ubiquityURL = [fileManager
                           URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL];
+    /*
     if(ubiquityURL)
         NSLog(@"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
     else
         NSLog(@"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+     */
     
 }
 

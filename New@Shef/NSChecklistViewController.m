@@ -362,16 +362,16 @@ NSIndexPath *selectedPath=0;
     viewController.txtResponsiblePerson = activity.responsiblePerson;
     viewController.txtId = [NSString stringWithFormat:@"%d",activity.activityId];
     NSLog(@"sfsdfsdgfgbathroom");
-    NSLog(viewController.txtId);
+    
     viewController.txtStatus = @"Incomplete";
    
     for (Finished* object in collectionFinished)
     {
-        NSLog(object.finishedTime);
+        
         if(object.activityId == activity.activityId)
         {
             viewController.txtStatus = object.finishedTime;
-            NSLog(object.finishedTime);
+             
             break;
         }
         
@@ -421,11 +421,12 @@ NSIndexPath *selectedPath=0;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *ubiquityURL = [fileManager
                           URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL];
+    /*
     if(ubiquityURL)
         NSLog(@"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
     else
         NSLog(@"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
-    
+    */
 }
 
 - (void)metadataQueryDidFinishGathering:(NSNotification *)notification
@@ -449,7 +450,7 @@ NSIndexPath *selectedPath=0;
                  NSLog(@"Opened cloud doc");
                  self.iCloudText = document.userText;
                  Finished *finished = [[Finished alloc]init];
-                 NSLog(document.userText);
+                 
                  collectionFinished = [finished getFinishedActivityCollection:document.userText];
              } else {
                  NSLog(@"Not opened cloud doc");

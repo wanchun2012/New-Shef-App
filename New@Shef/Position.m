@@ -10,7 +10,7 @@
 #define NEWSHEF_DB @"NEWSHEF_DB.sql"
 
 @implementation Position
-@synthesize positionId, name;
+@synthesize positionId, name, subCollection;
 
 - (id)initWithId:(int)Id
             name:(NSString *)n

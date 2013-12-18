@@ -26,7 +26,7 @@
 - (NSArray *) getFinishedActivityCollection:(NSString *)iCloudText
 {
     NSLog(@"sdfssdfsdfsdfsdf");
-    NSLog(iCloudText);
+    
     NSMutableArray *collection = [[NSMutableArray alloc] init];
     if (iCloudText.length != 0) {
         NSArray *words = [iCloudText componentsSeparatedByString:@"end"];
@@ -44,20 +44,20 @@
  
             if ([str1 hasPrefix:@"Status:"]) {
                 Finished *record = [[Finished alloc] initWithId:[str2 integerValue] finishedTime:str1];
-                    NSLog(str2);
+                
                 [collection addObject:record];
             }
             else
             {
                 Finished *record = [[Finished alloc] initWithId:[str1 integerValue] finishedTime:str2];
-                  NSLog(str1);
+                
                 [collection addObject:record];
             }
             
             x++;
         }
         
-        NSLog( [NSString stringWithFormat:@"dont know%d",collection.count]);
+        
     }
   
 

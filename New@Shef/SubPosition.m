@@ -10,7 +10,7 @@
 #define NEWSHEF_DB @"NEWSHEF_DB.sql"
 
 @implementation SubPosition
-@synthesize subId, name, uebName, uebDescription, foreignkey, uebImage, imageUrl;
+@synthesize subId, name, uebName, uebDescription, foreignkey, uebImage, imageUrl,contenttype;
 
 - (id)initWithId:(int)Id
             name:(NSString *)n uebName:(NSString *)un contenttype:(NSString *)t imageURL:(NSString *)url foreignkey:(int)fk 

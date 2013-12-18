@@ -17,6 +17,7 @@
     NSString *vLink;
     NSString *vUEB;
     NSString *vWelcomeTalk;
+    NSString *vFAQ;
     
     NSString *databasePath;
     sqlite3 *db;
@@ -28,6 +29,7 @@
 @property (nonatomic, retain) NSString *vLink;
 @property (nonatomic, retain) NSString *vUEB;
 @property (nonatomic, retain) NSString *vWelcomeTalk;
+@property (nonatomic, retain) NSString *vFAQ;
 
 - (void) initDB;
 - (void) updateData:(NSString *)col variable:(NSString *)v data:(NSString *)d;

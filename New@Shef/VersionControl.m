@@ -124,6 +124,9 @@
                 vUEB = [[NSString alloc]initWithUTF8String:cUEB];
                 char *cWelcomeTalk = (char*)sqlite3_column_text(statement, 6);
                 vWelcomeTalk = [[NSString alloc]initWithUTF8String:cWelcomeTalk];
+                char *cFAQ = (char*)sqlite3_column_text(statement, 7);
+                vFAQ = [[NSString alloc]initWithUTF8String:cFAQ];
+                
             }
             else
             {

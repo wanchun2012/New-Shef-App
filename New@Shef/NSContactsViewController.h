@@ -16,7 +16,7 @@
 #define GETDepartment @"http://54.213.22.84/getDepartment.php"
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
 
-@interface NSContactsViewController : ExpandableTableViewController <ExpandableTableViewDataSource,                                  ExpandableTableViewDelegate>
+@interface NSContactsViewController : ExpandableTableViewController <ExpandableTableViewDataSource,                                  ExpandableTableViewDelegate, MFMailComposeViewControllerDelegate>
 {
     NSMutableArray *jsonDepartment;
     NSMutableArray *jsonFaculty;

@@ -10,7 +10,7 @@
 #define NEWSHEF_DB @"NEWSHEF_DB.sql"
 
 @implementation VersionControl
-@synthesize vChecklist, vContact, vGoogleMap, vLink, vUEB, vWelcomeTalk;
+@synthesize vChecklist, vContact, vGoogleMap, vLink, vUEB, vWelcomeTalk,vFAQ;
 
 -(void)initDB
 {

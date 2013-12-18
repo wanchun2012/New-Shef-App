@@ -1,10 +1,12 @@
 //
-//  ExpandableTableView.m
+//  ExpandableTableViewController.h
 //  ExpandableTableView
 //
 //  Created by Tom Fewster on 02/04/2012.
 //
-
+//  Reference: 1. ExpandableTableView
+//  https://github.com/wannabegeek/ExpandableTableView
+//
 
 #import "ExpandableTableView.h"
 
@@ -320,7 +322,7 @@
 	}
 	return sections;
 }
-/*
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (([_expandedSectionIndexes containsIndex:indexPath.section] && indexPath.row != 0) || (indexPath.row == 0 && _ungroupSingleElement && [self numberOfRowsInSection:indexPath.section] == 1)) {
 		if ([_expandableDataSource respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)]) {
@@ -342,7 +344,7 @@
 	}
 	return NO;
 }
-*/
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	if ([_expandableDataSource respondsToSelector:@selector(tableView:titleForFooterInSection:)]) {

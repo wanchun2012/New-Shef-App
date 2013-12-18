@@ -1,8 +1,11 @@
 //
-//  ExpandableTableViewDataSource.h
+//  ExpandableTableViewController.h
 //  ExpandableTableView
 //
-//  Created by Tom Fewster on 05/04/2012.
+//  Created by Tom Fewster on 02/04/2012.
+//
+//  Reference: 1. ExpandableTableView
+//  https://github.com/wannabegeek/ExpandableTableView
 //
 
 #import <Foundation/Foundation.h>

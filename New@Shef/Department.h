@@ -35,4 +35,5 @@
 - (void) clearData;
 - (NSArray *) selectData;
 - (NSArray *) selectDataById:(int)fk;
+
 @end

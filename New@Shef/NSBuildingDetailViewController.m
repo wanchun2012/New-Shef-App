@@ -54,6 +54,7 @@
     [webview loadHTMLString:htmlString baseURL:nil];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    sleep(1);
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
     NSLog(@"NSBuildingDetailViewController: %s","backgroundThread finishing...");
 }

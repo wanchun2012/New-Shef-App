@@ -59,6 +59,7 @@
     NSURL *url = [NSURL URLWithString:urlAddress];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [webview loadRequest:requestObj];
+    sleep(1);
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
     NSLog(@"NSMapViewController: %s","backgroundThread finishing...");
 }

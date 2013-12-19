@@ -16,7 +16,6 @@
     
     NSString *databasePath;
     sqlite3 *db;
-
 }
 
 @property (nonatomic, assign) int faqId;

@@ -26,6 +26,7 @@
     NSMutableArray *collectionUEBSub;
     VersionControl *modelVersionControl;
     
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @end

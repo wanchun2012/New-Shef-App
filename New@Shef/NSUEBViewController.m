@@ -42,90 +42,49 @@ NSString *statusImage;
 - (void)viewDidLoad
 {
     self.navigationController.navigationBar.translucent = NO;
-    if ([self connectedToNetwork] == NO) {
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"University Executive Board";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:15.0];
+    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleView.textColor = [UIColor blackColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+    
+    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+ 
+    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    [super viewDidLoad];
+}
+
+-(void)backgroundThread
+{
+    NSLog(@"NSUEBViewController: %s","backgroundThread starting...");
+    [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
+    
+    if ([self connectedToNetwork] == NO)
+    {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
-        
-    }
-    else {
-    
-    [self getVersionWebService];
-    modelVersionControl = [[VersionControl alloc] init];
-    [modelVersionControl initDB];
-    [modelVersionControl selectData];
-    
-    collectionUEB = [[NSMutableArray alloc] init];
-    collectionUEBSub = [[NSMutableArray alloc] init];
-    
-    if ([modelVersionControl.vUEB isEqualToString: @"0"])
-    {
-        // initialize welcometalk
-        NSLog(@"NSUEBViewController: %s","initialize UEB");
-        [self loadDataFromWebService];
-        Position *p = [[Position alloc]init];
-        SubPosition *s = [[SubPosition alloc] init];
-        
-        [s initDB];
-        [s clearData];
-        
-        [p initDB];
-        [p clearData];
-        
-        for (Position * object in collectionUEB)
-        {
-            [object initDB];
-            [object saveData:object.positionId name:object.name];
-        }
-         
-        
-        for (SubPosition * object in collectionUEBSub)
-        {
-            [object initDB];
-            [object saveData:object.subId name:object.name uebName:object.uebName contenttype:object.contenttype imageURL:object.imageUrl foreignkey:object.foreignkey];
-      
-        }
-        [modelVersionControl initDB];
-        [modelVersionControl updateData:@"versionueb =:versionueb" variable:@":versionueb" data:serverVersion];
-        statusImage = @"download";
     }
     else
     {
-        if ([modelVersionControl.vUEB isEqualToString: serverVersion])
+        [self getVersionWebService];
+        modelVersionControl = [[VersionControl alloc] init];
+        [modelVersionControl initDB];
+        [modelVersionControl selectData];
+        
+        collectionUEB = [[NSMutableArray alloc] init];
+        collectionUEBSub = [[NSMutableArray alloc] init];
+        
+        if ([modelVersionControl.vUEB isEqualToString: @"0"])
         {
-            // sqlite db version is equal to mysql db version
-            // get data from sqlite database
-            NSLog(@"NSUEBViewController: %s","fetch from UEB(sqlite)");
-            SubPosition *subueb = [[SubPosition alloc] init];
-            [subueb initDB];
-            collectionUEBSub = [[subueb selectData] mutableCopy];
-            
-            Position *ueb = [[Position alloc] init];
-            [ueb initDB];
-            collectionUEB = [[ueb selectData] mutableCopy];
-            
-            for (Position * object in collectionUEB)
-            {
-                for (SubPosition * obj in collectionUEBSub)
-                {
-                    if(obj.foreignkey == object.positionId)
-                    {
-                        [object.subCollection addObject:obj];
-                    }
-                }
-              
-                SubPosition *s1 = [[SubPosition alloc] init];
-                [object.subCollection addObject:s1];
-                SubPosition *s2 = [[SubPosition alloc] init];
-                [object.subCollection addObject:s2];
-            }
-        }
-        else
-        {
-            // load data from mysql database
-            // update data in sqlite database
-            NSLog(@"NSUEBViewController: %s","fetch from UEB(Web database)");
+            // initialize welcometalk
+            NSLog(@"NSUEBViewController: %s","initialize UEB");
             [self loadDataFromWebService];
-            
             Position *p = [[Position alloc]init];
             SubPosition *s = [[SubPosition alloc] init];
             
@@ -145,31 +104,98 @@ NSString *statusImage;
             {
                 [object initDB];
                 [object saveData:object.subId name:object.name uebName:object.uebName contenttype:object.contenttype imageURL:object.imageUrl foreignkey:object.foreignkey];
+                
             }
             
             [modelVersionControl initDB];
             [modelVersionControl updateData:@"versionueb =:versionueb" variable:@":versionueb" data:serverVersion];
             statusImage = @"download";
-
+        }
+        else
+        {
+            if ([modelVersionControl.vUEB isEqualToString: serverVersion])
+            {
+                // sqlite db version is equal to mysql db version
+                // get data from sqlite database
+                NSLog(@"NSUEBViewController: %s","fetch from UEB(sqlite)");
+                SubPosition *subueb = [[SubPosition alloc] init];
+                [subueb initDB];
+                collectionUEBSub = [[subueb selectData] mutableCopy];
+                
+                Position *ueb = [[Position alloc] init];
+                [ueb initDB];
+                collectionUEB = [[ueb selectData] mutableCopy];
+                
+                for (Position * object in collectionUEB)
+                {
+                    for (SubPosition * obj in collectionUEBSub)
+                    {
+                        if(obj.foreignkey == object.positionId)
+                        {
+                            [object.subCollection addObject:obj];
+                        }
+                    }
+                    
+                    SubPosition *s1 = [[SubPosition alloc] init];
+                    [object.subCollection addObject:s1];
+                    SubPosition *s2 = [[SubPosition alloc] init];
+                    [object.subCollection addObject:s2];
+                }
+            }
+            else
+            {
+                // load data from mysql database
+                // update data in sqlite database
+                NSLog(@"NSUEBViewController: %s","fetch from UEB(Web database)");
+                [self loadDataFromWebService];
+                
+                Position *p = [[Position alloc]init];
+                SubPosition *s = [[SubPosition alloc] init];
+                
+                [s initDB];
+                [s clearData];
+                
+                [p initDB];
+                [p clearData];
+                
+                for (Position * object in collectionUEB)
+                {
+                    [object initDB];
+                    [object saveData:object.positionId name:object.name];
+                }
+                
+                for (SubPosition * object in collectionUEBSub)
+                {
+                    [object initDB];
+                    [object saveData:object.subId name:object.name uebName:object.uebName contenttype:object.contenttype imageURL:object.imageUrl foreignkey:object.foreignkey];
+                }
+                
+                [modelVersionControl initDB];
+                [modelVersionControl updateData:@"versionueb =:versionueb" variable:@":versionueb" data:serverVersion];
+                statusImage = @"download";
+                
+            }
         }
     }
-   }
-    [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = @"University Executive Board";
-    titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:15.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
-    self.navigationItem.titleView = titleView;
-    [titleView sizeToFit];
     
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
- 
-    
+    [self.tableView reloadData];
+    [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSUEBViewController: %s","backgroundThread finishing...");
+}
+
+-(void)mainThreadStarting
+{
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
+}
+
+-(void)mainThreadFinishing
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

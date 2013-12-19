@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 
-@interface WelcomeTalk : NSObject {
+@interface WelcomeTalk : NSObject
+{
     NSInteger welcomeTalkID;
     NSString *welcomeText;
     UIImage *welcomeImage;

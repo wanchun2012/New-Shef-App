@@ -20,7 +20,8 @@ NSString *serverVersion;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -29,90 +30,13 @@ NSString *serverVersion;
 - (void)viewDidLoad
 {
     self.navigationController.navigationBar.translucent = NO;
-    if ([self connectedToNetwork] == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
-        
-    } else {
-    [self getVersionWebService];
-    modelVersionControl = [[VersionControl alloc] init];
-    [modelVersionControl initDB];
-    [modelVersionControl selectData];
-    
-    collection = [[NSMutableArray alloc] init];
-    insideCollection = [[NSMutableArray alloc] init];
-    
-    if ([modelVersionControl.vGoogleMap isEqualToString: @"0"])
-    {
-        // initialize welcometalk
-        NSLog(@"NSOverViewViewController: %s","initialize GOOGLEMAP");
-        [self loadDataFromWebService];
-        int first = 0;
-        for (GoogleMap * object in collection)
-        {
-            [object initDB];
-            if(first == 0)
-            {
-                [object clearData];
-                first = 1;
-            }
-            
-            [object saveData:object.googleMapId insideview:object.insideview latitude:object.latitude longitude:object.longitude title:object.title snippet:object.snippet];
-        }
-        [modelVersionControl initDB];
-        [modelVersionControl updateData:@"versiongooglemap =:versiongooglemap" variable:@":versiongooglemap" data:serverVersion];
-    }
-    else
-    {
-        if ([modelVersionControl.vGoogleMap isEqualToString: serverVersion])
-        {
-            // sqlite db version is equal to mysql db version
-            // get data from sqlite database
-            NSLog(@"NSOverViewViewController: %s","fetch from GOOGLEMAP(sqlite)");
-            GoogleMap *googleMap = [[GoogleMap alloc] init];
-            [googleMap initDB];
-            collection = [[googleMap selectData] mutableCopy];
-        }
-        else
-        {
-            // load data from mysql database
-            // update data in sqlite database
-            NSLog(@"NSOverViewViewController: %s","fetch from GOOGLEMAP(Web database)");
-            [self loadDataFromWebService];
-            
-            int first = 0;
-            for (GoogleMap * object in collection) {
-                [object initDB];
-                if(first == 0)
-                {
-                    [object clearData];
-                    first = 1;
-                }
-                [object saveData:object.googleMapId insideview:object.insideview latitude:object.latitude longitude:object.longitude title:object.title snippet:object.snippet];
-            }
-            
-            [modelVersionControl initDB];
-            [modelVersionControl updateData:@"versiongooglemap =:versiongooglemap" variable:@":versiongooglemap" data:serverVersion];
-        }
-    }
-    
-    for (GoogleMap * object in collection)
-    {
-        if (object.insideview == 1)
-        {
-            [insideCollection addObject:object];
-        }
-    }
-    }
-    [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    
+    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    [super viewDidLoad];
+    
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,6 +44,109 @@ NSString *serverVersion;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)backgroundThread
+{
+    NSLog(@"NSInsideViewController: %s","backgroundThread starting...");
+    [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
+    if ([self connectedToNetwork] == NO)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert show];
+    }
+    else
+    {
+        [self getVersionWebService];
+        modelVersionControl = [[VersionControl alloc] init];
+        [modelVersionControl initDB];
+        [modelVersionControl selectData];
+        
+        collection = [[NSMutableArray alloc] init];
+        insideCollection = [[NSMutableArray alloc] init];
+        
+        if ([modelVersionControl.vGoogleMap isEqualToString: @"0"])
+        {
+            // initialize welcometalk
+            NSLog(@"NSInsideViewController: %s","initialize GOOGLEMAP");
+            [self loadDataFromWebService];
+            int first = 0;
+            for (GoogleMap * object in collection)
+            {
+                [object initDB];
+                if(first == 0)
+                {
+                    [object clearData];
+                    first = 1;
+                }
+                
+                [object saveData:object.googleMapId insideview:object.insideview latitude:object.latitude longitude:object.longitude title:object.title snippet:object.snippet];
+            }
+            [modelVersionControl initDB];
+            [modelVersionControl updateData:@"versiongooglemap =:versiongooglemap" variable:@":versiongooglemap" data:serverVersion];
+        }
+        else
+        {
+            if ([modelVersionControl.vGoogleMap isEqualToString: serverVersion])
+            {
+                // sqlite db version is equal to mysql db version
+                // get data from sqlite database
+                NSLog(@"NSInsideViewController: %s","fetch from GOOGLEMAP(sqlite)");
+                GoogleMap *googleMap = [[GoogleMap alloc] init];
+                [googleMap initDB];
+                collection = [[googleMap selectData] mutableCopy];
+            }
+            else
+            {
+                // load data from mysql database
+                // update data in sqlite database
+                NSLog(@"NSInsideViewController: %s","fetch from GOOGLEMAP(Web database)");
+                [self loadDataFromWebService];
+                
+                int first = 0;
+                for (GoogleMap * object in collection)
+                {
+                    [object initDB];
+                    if(first == 0)
+                    {
+                        [object clearData];
+                        first = 1;
+                    }
+                    [object saveData:object.googleMapId insideview:object.insideview latitude:object.latitude longitude:object.longitude title:object.title snippet:object.snippet];
+                }
+                
+                [modelVersionControl initDB];
+                [modelVersionControl updateData:@"versiongooglemap =:versiongooglemap" variable:@":versiongooglemap" data:serverVersion];
+            }
+        }
+        
+        for (GoogleMap * object in collection)
+        {
+            if (object.insideview == 1)
+            {
+                [insideCollection addObject:object];
+            }
+        }
+    }
+    [self.tableView reloadData];
+    [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSInsideViewController: %s","backgroundThread finishing...");
+}
+
+-(void)mainThreadStarting
+{
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
+}
+
+-(void)mainThreadFinishing
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
+}
+
 
 -(void) getDataFromJson:(NSData *) data
 {
@@ -145,7 +172,6 @@ NSString *serverVersion;
                              latitude:lat longitude:lon title:t snippet:s];
         [collection addObject:record];
     }
-    
 }
 
 -(void) loadDataFromWebService
@@ -167,20 +193,16 @@ NSString *serverVersion;
     serverVersion = [info objectForKey:@"versionGoogleMap"];
 }
 
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
- 
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
- 
     // Return the number of rows in the section.
     return insideCollection.count;
 }
@@ -197,14 +219,14 @@ NSString *serverVersion;
     marker = [insideCollection objectAtIndex:indexPath.row];
     cell.textLabel.text = marker.title;
     cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+  
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showBuilding"]) {
-        
-        
-        
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showBuilding"])
+    {
         NSBuildingDetailViewController *viewController = segue.destinationViewController;
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];;
@@ -215,62 +237,7 @@ NSString *serverVersion;
      
         viewController.lon = lon;
         viewController.lat = lat;
-        
     }
-    
-}
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -283,13 +250,12 @@ NSString *serverVersion;
     {
         exit(-1); // yes
     }
-    
 }
+
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
     return (connect!=NULL)?YES:NO;
 }
-
 
 @end

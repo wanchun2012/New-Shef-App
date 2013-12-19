@@ -21,7 +21,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -29,9 +30,17 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-	// Do any additional setup after loading the view.
+    
+    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    [super viewDidLoad];
+}
+
+-(void)backgroundThread
+{
+    NSLog(@"NSBuildingDetailViewController: %s","backgroundThread starting...");
+    [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
+    // Do any additional setup after loading the view.
     NSString *htmlString = [NSString stringWithFormat:@"<html>\
                             <head>\
                             <meta id=\"viewport\" name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\">\
@@ -45,7 +54,23 @@
     [webview loadHTMLString:htmlString baseURL:nil];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    
+    [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSBuildingDetailViewController: %s","backgroundThread finishing...");
+}
+
+-(void)mainThreadStarting
+{
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
+}
+
+-(void)mainThreadFinishing
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning

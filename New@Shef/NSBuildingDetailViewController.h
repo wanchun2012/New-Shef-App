@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface NSBuildingDetailViewController : UIViewController
+{
+     UIActivityIndicatorView *activityIndicator;
+}
 
 @property (strong, nonatomic) NSString *lon;
 @property (strong, nonatomic) NSString *lat;
-
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
 
 @end

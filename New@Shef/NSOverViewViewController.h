@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
- 
 
 @interface NSOverViewViewController : UIViewController
+
 @property (strong, nonatomic) NSString *lon;
 @property (strong, nonatomic) NSString *lat;
 @property (strong, nonatomic) NSString *title;

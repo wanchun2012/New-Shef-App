@@ -13,7 +13,8 @@
 
 @end
 
-@implementation NSMapViewController {
+@implementation NSMapViewController
+{
     GMSMapView *mapView_;
     GMSPanoramaView *panoView_;
 }
@@ -22,7 +23,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -30,7 +32,6 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -42,7 +43,15 @@
     titleView.textColor = [UIColor blackColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
-    
+
+    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    [super viewDidLoad];
+}
+
+-(void)backgroundThread
+{
+    NSLog(@"NSMapViewController: %s","backgroundThread starting...");
+    [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -50,6 +59,23 @@
     NSURL *url = [NSURL URLWithString:urlAddress];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [webview loadRequest:requestObj];
+    [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSMapViewController: %s","backgroundThread finishing...");
+}
+
+-(void)mainThreadStarting
+{
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
+}
+
+-(void)mainThreadFinishing
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning

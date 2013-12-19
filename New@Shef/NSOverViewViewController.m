@@ -9,7 +9,7 @@
 #import "NSOverViewViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface NSOverViewViewController ()
+@interface NSOverViewViewController()
 {
     GMSMapView *mapView_;
 }
@@ -22,7 +22,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -43,8 +44,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
 - (void)loadView
 {
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:53.381309
@@ -63,7 +62,6 @@
     
     self.view = mapView_;
     
-    
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
     marker.position = CLLocationCoordinate2DMake([lat floatValue],[lon floatValue]);
@@ -72,8 +70,6 @@
     marker.snippet = snippet;
     marker.snippet = [marker.snippet stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     marker.map = mapView_;
-    
-    
 }
 
 @end

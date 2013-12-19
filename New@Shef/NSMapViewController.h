@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface NSMapViewController : UIViewController
+{
+     UIActivityIndicatorView *activityIndicator;
+}
+
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 
 @end

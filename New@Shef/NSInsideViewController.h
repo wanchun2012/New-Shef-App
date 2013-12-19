@@ -21,6 +21,8 @@
     NSMutableArray *collection;
     NSMutableArray *insideCollection;
     VersionControl *modelVersionControl;
+    
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @end

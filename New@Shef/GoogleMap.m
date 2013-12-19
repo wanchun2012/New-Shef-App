@@ -16,7 +16,8 @@
 latitude:(NSString *)lat longitude:(NSString *)lon
 title:(NSString *)t snippet:(NSString *)s
 {
-    if ((self = [super init])) {
+    if ((self = [super init]))
+    {
         self.googleMapId = Id;
         self.insideview = inside;
         self.latitude = lat;
@@ -26,7 +27,6 @@ title:(NSString *)t snippet:(NSString *)s
     }
     return self;
 }
-
 
 -(void)initDB
 {
@@ -48,13 +48,14 @@ title:(NSString *)t snippet:(NSString *)s
     {
         NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: NEWSHEF_DB];
         [filemgr copyItemAtPath:databasePathFromApp toPath:databasePath error:nil];
-        NSLog(@"Sqlite3: create one database in document directory");
+        NSLog(@"DB:GoogleMap: Sqlite3: create one database in document directory");
     }
     else
     {
-        NSLog(@"Sqlite3: exist one database in document directory");
+        NSLog(@"DB:GoogleMap: Sqlite3: exist one database in document directory");
     }
 }
+
 - (void) clearData
 {
     //DELETE FROM tablename
@@ -72,7 +73,7 @@ title:(NSString *)t snippet:(NSString *)s
         }
         else
         {
-            NSLog(@"Sqlite3: Fail delete, qlite3_prepare_v2()");
+            NSLog(@"DB:GoogleMap: Sqlite3: Fail delete, qlite3_prepare_v2()");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
@@ -83,13 +84,12 @@ title:(NSString *)t snippet:(NSString *)s
     }
     else
     {
-        NSLog(@"Sqlite3: Fail insert, fail open db");
+        NSLog(@"DB:GoogleMap: Sqlite3: Fail insert, fail open db");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
     }
 
 }
-
 
 - (NSArray *) selectData
 {
@@ -106,7 +106,7 @@ title:(NSString *)t snippet:(NSString *)s
         {
             while (sqlite3_step(statement) == SQLITE_ROW) 
             {
-                NSLog(@"Sqlite3: Success select");
+                NSLog(@"DB:GoogleMap: Sqlite3: Success select");
                 int Id = sqlite3_column_int(statement, 0);
                 int inside = sqlite3_column_int(statement, 1);
                 
@@ -126,7 +126,7 @@ title:(NSString *)t snippet:(NSString *)s
         }
         else
         {
-            NSLog(@"Sqlite3: Fail select, qlite3_prepare_v2()");
+            NSLog(@"DB:GoogleMap: Sqlite3: Fail select, qlite3_prepare_v2()");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
@@ -135,12 +135,10 @@ title:(NSString *)t snippet:(NSString *)s
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
         sqlite3_close(db);
-        
-        
     }
     else
     {
-        NSLog(@"Sqlite3: Fail insert, fail open db");
+        NSLog(@"DB:GoogleMap: Sqlite3: Fail insert, fail open db");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
     }
@@ -176,19 +174,19 @@ title:(NSString *)t snippet:(NSString *)s
             
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
-                NSLog(@"Sqlite3: Success insert");
+                NSLog(@"DB:GoogleMap: Sqlite3: Success insert");
                 
             }
             else
             {
-                NSLog(@"Sqlite3: Fail insert, sqlite3_step()");
+                NSLog(@"DB:GoogleMap: Sqlite3: Fail insert, sqlite3_step()");
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
                 [alert show];
             }
         }
         else
         {
-            NSLog(@"Sqlite3: Fail insert, qlite3_prepare_v2()");
+            NSLog(@"DB:GoogleMap: Sqlite3: Fail insert, qlite3_prepare_v2()");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
@@ -199,7 +197,7 @@ title:(NSString *)t snippet:(NSString *)s
     }
     else
     {
-        NSLog(@"Sqlite3: Fail insert, fail open db");
+        NSLog(@"DB:GoogleMap: Sqlite3: Fail insert, fail open db");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
     }

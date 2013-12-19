@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface NSUCardDetailViewController : UIViewController
+{
+    UIActivityIndicatorView *activityIndicator;
+}
+
 @property (weak, nonatomic) IBOutlet UIWebView *website;
 
 @end

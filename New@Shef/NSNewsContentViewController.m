@@ -45,6 +45,7 @@
                                           NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
     [self.webview loadRequest:request];
+    sleep(1);
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
     NSLog(@"NSNewsContentViewController: %s","backgroundThread finishing...");
 }

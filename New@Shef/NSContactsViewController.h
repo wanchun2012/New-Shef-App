@@ -15,7 +15,7 @@
 #define GETFaculty @"http://54.213.22.84/getFaculty.php"
 #define GETDepartment @"http://54.213.22.84/getDepartment.php"
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
-
+ 
 @interface NSContactsViewController : ExpandableTableViewController <ExpandableTableViewDataSource,                                  ExpandableTableViewDelegate, MFMailComposeViewControllerDelegate>
 {
     NSMutableArray *jsonDepartment;
@@ -25,12 +25,7 @@
     NSMutableArray *collectionFaculty;
     VersionControl *modelVersionControl;
  
+    UIActivityIndicatorView *activityIndicator;
 }
 
-
-/*
-@property (strong) NSMutableArray *dataModel; // department collection
-@property (nonatomic, strong) NSDictionary *contacts;
-@property (nonatomic, strong) NSArray *faculties; // faculty
-*/
 @end

@@ -7,13 +7,11 @@
 //
 
 #import "NSContactsViewController.h"
-#import "NSContactDetailViewController.h"
 #import "Faculty.h"
 #import "Department.h"
 #import "UICustomizedButton.h"
 @implementation NSContactsViewController
 
- 
 NSString *serverVersion;
 NSString *phoneNumber;
 NSString *emailAddress;
@@ -39,86 +37,48 @@ NSString *emailAddress;
 
 - (void)viewDidLoad
 {
-    if ([self connectedToNetwork] == NO) {
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Contacts";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleView.textColor = [UIColor blackColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+    
+    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    [super viewDidLoad];
+}
+
+-(void)backgroundThread
+{
+    NSLog(@"NSContactsViewController: %s","backgroundThread starting...");
+    [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
+    if ([self connectedToNetwork] == NO)
+    {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
-        
-    }else {
-    
-    [self getVersionWebService];
-    modelVersionControl = [[VersionControl alloc] init];
-    [modelVersionControl initDB];
-    [modelVersionControl selectData];
-    
-    collectionFaculty = [[NSMutableArray alloc] init];
-    collectionDepartment = [[NSMutableArray alloc] init];
-    
-    if ([modelVersionControl.vContact isEqualToString: @"0"])
-    {
-        // initialize welcometalk
-        NSLog(@"NSContactsViewController: %s","initialize CONTACT");
-        [self loadDataFromWebService];
-        Faculty *f = [[Faculty alloc]init];
-        Department *d = [[Department alloc] init];
-        
-        [d initDB];
-        [d clearData];
-        
-        [f initDB];
-        [f clearData];
-     
-        for (Faculty * object in collectionFaculty)
-        {
-            [object initDB];
-            [object saveData:object.facultyId name:object.name];
-        }
-        
-        for (Department * object in collectionDepartment)
-        {
-            [object initDB];
-            [object saveData:object.departmentId name:object.name email:object.email phone:object.phone foreignkey:object.foreignkey];
-        }
-        [modelVersionControl initDB];
-        [modelVersionControl updateData:@"versioncontact =:versioncontact" variable:@":versioncontact" data:serverVersion];
     }
     else
     {
-        if ([modelVersionControl.vContact isEqualToString: serverVersion])
+        [self getVersionWebService];
+        modelVersionControl = [[VersionControl alloc] init];
+        [modelVersionControl initDB];
+        [modelVersionControl selectData];
+        
+        collectionFaculty = [[NSMutableArray alloc] init];
+        collectionDepartment = [[NSMutableArray alloc] init];
+        
+        if ([modelVersionControl.vContact isEqualToString: @"0"])
         {
-            // sqlite db version is equal to mysql db version
-            // get data from sqlite database
-            NSLog(@"NSContactsViewController: %s","fetch from Contact(sqlite)");
-            Department *department = [[Department alloc] init];
-            [department initDB];
-            collectionDepartment = [[department selectData] mutableCopy];
-            
-            Faculty *faculty = [[Faculty alloc] init];
-            [faculty initDB];
-            collectionFaculty = [[faculty selectData] mutableCopy];
-            
-            for (Faculty * object in collectionFaculty)
-            {
-                for (Department * obj in collectionDepartment)
-                {
-                    if(obj.foreignkey == object.facultyId)
-                    {
-                        [object.deptCollection addObject:obj];
-                    }
-                }
-          
-                Department *d1 = [[Department alloc] init];
-                [object.deptCollection addObject:d1];
-                Department *d2 = [[Department alloc] init];
-                [object.deptCollection addObject:d2];
-            }
-        }
-        else
-        {
-            // load data from mysql database
-            // update data in sqlite database
-            NSLog(@"NSContactsViewController: %s","fetch from Contact(Web database)");
+            // initialize welcometalk
+            NSLog(@"NSContactsViewController: %s","initialize CONTACT");
             [self loadDataFromWebService];
-            
             Faculty *f = [[Faculty alloc]init];
             Department *d = [[Department alloc] init];
             
@@ -139,27 +99,91 @@ NSString *emailAddress;
                 [object initDB];
                 [object saveData:object.departmentId name:object.name email:object.email phone:object.phone foreignkey:object.foreignkey];
             }
-            
             [modelVersionControl initDB];
             [modelVersionControl updateData:@"versioncontact =:versioncontact" variable:@":versioncontact" data:serverVersion];
         }
+        else
+        {
+            if ([modelVersionControl.vContact isEqualToString: serverVersion])
+            {
+                // sqlite db version is equal to mysql db version
+                // get data from sqlite database
+                NSLog(@"NSContactsViewController: %s","fetch from Contact(sqlite)");
+                Department *department = [[Department alloc] init];
+                [department initDB];
+                collectionDepartment = [[department selectData] mutableCopy];
+                
+                Faculty *faculty = [[Faculty alloc] init];
+                [faculty initDB];
+                collectionFaculty = [[faculty selectData] mutableCopy];
+                
+                for (Faculty * object in collectionFaculty)
+                {
+                    for (Department * obj in collectionDepartment)
+                    {
+                        if(obj.foreignkey == object.facultyId)
+                        {
+                            [object.deptCollection addObject:obj];
+                        }
+                    }
+                    
+                    Department *d1 = [[Department alloc] init];
+                    [object.deptCollection addObject:d1];
+                    Department *d2 = [[Department alloc] init];
+                    [object.deptCollection addObject:d2];
+                }
+            }
+            else
+            {
+                // load data from mysql database
+                // update data in sqlite database
+                NSLog(@"NSContactsViewController: %s","fetch from Contact(Web database)");
+                [self loadDataFromWebService];
+                
+                Faculty *f = [[Faculty alloc]init];
+                Department *d = [[Department alloc] init];
+                
+                [d initDB];
+                [d clearData];
+                
+                [f initDB];
+                [f clearData];
+                
+                for (Faculty * object in collectionFaculty)
+                {
+                    [object initDB];
+                    [object saveData:object.facultyId name:object.name];
+                }
+                
+                for (Department * object in collectionDepartment)
+                {
+                    [object initDB];
+                    [object saveData:object.departmentId name:object.name email:object.email phone:object.phone foreignkey:object.foreignkey];
+                }
+                
+                [modelVersionControl initDB];
+                [modelVersionControl updateData:@"versioncontact =:versioncontact" variable:@":versioncontact" data:serverVersion];
+            }
+        }
     }
-    }
-    [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = @"Contacts";
-    titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
-    self.navigationItem.titleView = titleView;
-    [titleView sizeToFit];
-    
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
+    [self.tableView reloadData];
+    [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSContactsViewController: %s","backgroundThread finishing...");
+}
+
+-(void)mainThreadStarting
+{
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
+}
+
+-(void)mainThreadFinishing
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -256,7 +280,8 @@ NSString *emailAddress;
 
 - (NSInteger)tableView:(ExpandableTableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if ([collectionFaculty count] == 0) {
+	if ([collectionFaculty count] == 0)
+    {
 		return 0;
 	}
     // Return the number of rows in the section.
@@ -330,7 +355,6 @@ NSString *emailAddress;
     return cell;
 }
 
-
 - (UITableViewCell *)tableView:(ExpandableTableView *)tableView cellForGroupInSection:(NSUInteger)section
 {
     static NSString *CellIdentifier = @"GroupCell";
@@ -355,9 +379,12 @@ NSString *emailAddress;
 	// We add a custom accessory view to indicate expanded and colapsed sections
 	cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ExpandableAccessoryView"] highlightedImage:[UIImage imageNamed:@"ExpandableAccessoryView"]];
 	UIView *accessoryView = cell.accessoryView;
-	if ([[tableView indexesForExpandedSections] containsIndex:section]) {
+	if ([[tableView indexesForExpandedSections] containsIndex:section])
+    {
 		accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
-	} else {
+	}
+    else
+    {
 		accessoryView.transform = CGAffineTransformMakeRotation(0);
 	}
     return cell;
@@ -365,14 +392,16 @@ NSString *emailAddress;
 
 // The next two methods are used to rotate the accessory view indicating whjether the
 // group is expanded or now
-- (void)tableView:(ExpandableTableView *)tableView willExpandSection:(NSUInteger)section {
+- (void)tableView:(ExpandableTableView *)tableView willExpandSection:(NSUInteger)section
+{
 	UITableViewCell *headerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 	[UIView animateWithDuration:0.3f animations:^{
 		headerCell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI - 0.00001); // we need this little hack to subtract a small amount to make sure we rotate in the correct direction
 	}];
 }
 
-- (void)tableView:(ExpandableTableView *)tableView willContractSection:(NSUInteger)section {
+- (void)tableView:(ExpandableTableView *)tableView willContractSection:(NSUInteger)section
+{
 	UITableViewCell *headerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 	[UIView animateWithDuration:0.3f animations:^{
 		headerCell.accessoryView.transform = CGAffineTransformMakeRotation(0);
@@ -385,21 +414,6 @@ NSString *emailAddress;
 {
 	//[self performSegueWithIdentifier:@"showContactDetails" sender:indexPath];
 }
- 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSContactDetailViewController *viewController = segue.destinationViewController;
-	
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];;
- 
-    Faculty *faculty = [collectionFaculty objectAtIndex:indexPath.section];
-    Department *department = [faculty.deptCollection objectAtIndex:indexPath.row-1];
-	viewController.text = department.name;
- 
-    viewController.emailtxt = department.email;
-    viewController.phonetxt = department.phone;
-}
-
-
 
 -(void)callPhone:(UICustomizedButton *)sender
 {
@@ -412,7 +426,6 @@ NSString *emailAddress;
     }
     else
     {
-        
         //show alert later
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Do you have enough credit on the phone?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
@@ -421,12 +434,12 @@ NSString *emailAddress;
 
 -(void)sendEmail:(UICustomizedButton *)sender
 {
-    if ([MFMailComposeViewController canSendMail]) {
+    if ([MFMailComposeViewController canSendMail])
+    {
         // device is configured to send mail
-        
         MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
         [mailController setMailComposeDelegate:self];
-        NSString *toEmail = @"wanchun.zhang2012@gmail.com";//sender.email;
+        NSString *toEmail = sender.email;
         NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
         NSString *message = @"";//self.emailbody.text;
         [mailController setMessageBody:message isHTML:NO];
@@ -440,7 +453,6 @@ NSString *emailAddress;
         [alert show];
     }
 }
-
 
 -(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
@@ -459,8 +471,8 @@ NSString *emailAddress;
     {
         exit(-1); // yes
     }
-    
 }
+
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];

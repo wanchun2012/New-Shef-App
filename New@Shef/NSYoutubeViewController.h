@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface NSYoutubeViewController : UIViewController
+{
+    UIActivityIndicatorView *activityIndicator;
+}
+
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
+
 @end

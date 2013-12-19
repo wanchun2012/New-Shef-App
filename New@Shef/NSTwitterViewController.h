@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface NSTwitterViewController : UIViewController
+{
+    UIActivityIndicatorView *activityIndicator;
+}
+
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
+
 @end

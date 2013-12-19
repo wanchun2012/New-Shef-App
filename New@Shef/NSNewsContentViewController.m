@@ -33,7 +33,6 @@
     self.webview.frame=self.view.bounds;
     
     [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
-    
     [super viewDidLoad];
 }
 

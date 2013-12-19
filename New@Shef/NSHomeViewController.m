@@ -9,7 +9,6 @@
 #import "NSHomeViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 @interface NSHomeViewController ()
 
 @end
@@ -41,14 +40,11 @@
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
     
-    
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     UIImage *img = [UIImage imageNamed:@"background.jpg"];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:img];
-   // self.navigationItem.backBarButtonItem.tintColor = [UIColor redColor];
-	// Do any additional setup after loading the view.
     
     self.btnChecklist.layer.cornerRadius = 10;
     self.btnChecklist.clipsToBounds = YES;
@@ -88,11 +84,11 @@
     if ([[segue identifier] isEqualToString:@"segueNews"]
         ||[[segue identifier] isEqualToString:@"segueMap"]
         ||[[segue identifier] isEqualToString:@"segueSocial"]
-      //  ||[[segue identifier] isEqualToString:@"segueUEB"]
-      //  ||[[segue identifier] isEqualToString:@"segueChecklist"]
+    //  ||[[segue identifier] isEqualToString:@"segueUEB"]
+    //  ||[[segue identifier] isEqualToString:@"segueChecklist"]
         ||[[segue identifier] isEqualToString:@"segueUCard"]
-     //   ||[[segue identifier] isEqualToString:@"segueContacts"]
-     //   ||[[segue identifier] isEqualToString:@"segueLinks"]
+   //   ||[[segue identifier] isEqualToString:@"segueContacts"]
+   //   ||[[segue identifier] isEqualToString:@"segueLinks"]
         ||[[segue identifier] isEqualToString:@"segueFAQ"]) {
         
         if ([self connectedToNetwork] == NO) {
@@ -100,9 +96,7 @@
             [alert show];
 
         }
-               
     }
-    
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @interface NSHomeViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIButton *btnNews;
 @property (weak, nonatomic) IBOutlet UIButton *btnMap;
 @property (weak, nonatomic) IBOutlet UIButton *btnSocial;

@@ -13,7 +13,8 @@
 #import "NSNewsContentViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface NSNewsViewController () {
+@interface NSNewsViewController()
+{
     NSXMLParser *parser;
     NSMutableArray *feeds;
     NSMutableDictionary *item;
@@ -29,7 +30,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -37,7 +39,6 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -50,22 +51,44 @@
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
     
-    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    feeds = [[NSMutableArray alloc] init];
-    NSURL *url = [NSURL URLWithString:@"http://www.sheffield.ac.uk/cmlink/1.178033"];
-    parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
- 
-    [parser setDelegate:self];
-    [parser setShouldResolveExternalEntities:NO];
-    [parser parse];
+    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    [super viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)backgroundThread
+{
+    [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
+    feeds = [[NSMutableArray alloc] init];
+    NSURL *url = [NSURL URLWithString:UniRSS];
+    parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+    
+    [parser setDelegate:self];
+    [parser setShouldResolveExternalEntities:NO];
+    [parser parse];
+    [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+}
+
+-(void)mainThreadStarting
+{
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
+}
+
+-(void)mainThreadFinishing
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
 
 #pragma mark - Table view data source
@@ -80,8 +103,8 @@
     return feeds.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier];
@@ -95,14 +118,11 @@
     cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     cell.textLabel.text = [[feeds objectAtIndex:indexPath.row] objectForKey: @"title"];
     
-  
-    
     return cell;
 }
 
 -(CGFloat)getLabelHeightForText:(NSString *)text andWidth:(CGFloat)labelWidth
 {
-    
     NSAttributedString *attributedText = [[NSAttributedString alloc]initWithString:text
                                                 attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Trebuchet MS" size:15.0f]}];
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){labelWidth, 10000}
@@ -113,77 +133,68 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
     NSString *string = [[feeds objectAtIndex:indexPath.row] objectForKey: @"link"];
-    
     CGFloat textHeight = [self getLabelHeightForText:string andWidth:280];//give your label width
     
-    if (textHeight > 70.f) {
+    if (textHeight > 70.f)
+    {
         return textHeight + 10.f;
     }
     else
+    {
         return 70.f;
+    }
 }
- 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
+{
     element = elementName;
-    if ([element isEqualToString:@"item"]) {
+    if ([element isEqualToString:@"item"])
+    {
         item = [[NSMutableDictionary alloc] init];
         title = [[NSMutableString alloc] init];
         link = [[NSMutableString alloc] init];
-        
     }
 }
  
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {    
-    if ([element isEqualToString:@"title"]) {
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    if ([element isEqualToString:@"title"])
+    {
         [title appendString:string];
-    } else if ([element isEqualToString:@"link"]) {
+    }
+    else if ([element isEqualToString:@"link"])
+    {
         [link appendString:string];
     }
 }
- 
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {    
-    if ([elementName isEqualToString:@"item"]) {
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{
+    if ([elementName isEqualToString:@"item"])
+    {
         [feeds addObject:[item copy]];
-    } else {
+    }
+    else
+    {
         [item setObject:title forKey:@"title"];
         [item setObject:link forKey:@"link"];
-     
     }
 }
  
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
-    
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
    [self.tableView reloadData];
-    
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showNewsContent"]) {
-        
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showNewsContent"])
+    {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSString *string = [[feeds objectAtIndex:indexPath.row] objectForKey: @"link"];
         [[segue destinationViewController] setUrl:string];
-     
     }
-    
 }
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
- 
 
 @end

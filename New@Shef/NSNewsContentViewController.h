@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface NSNewsContentViewController : UIViewController
+{
+    UIActivityIndicatorView *activityIndicator;
+}
 
 @property (strong, nonatomic) NSString *url;
 @property (strong, nonatomic) IBOutlet UIWebView *webview;

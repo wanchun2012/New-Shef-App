@@ -65,6 +65,7 @@
 
 -(void)backgroundThread
 {
+    NSLog(@"NSNewsViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     feeds = [[NSMutableArray alloc] init];
     NSURL *url = [NSURL URLWithString:UniRSS];
@@ -73,7 +74,9 @@
     [parser setDelegate:self];
     [parser setShouldResolveExternalEntities:NO];
     [parser parse];
+    [self.tableView reloadData];
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSNewsViewController: %s","backgroundThread starting...");
 }
 
 -(void)mainThreadStarting

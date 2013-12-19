@@ -39,6 +39,7 @@
 
 -(void)backgroundThread
 {
+    NSLog(@"NSNewsContentViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     NSString *urlString = [self.url stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSURL *myURL = [NSURL URLWithString: [urlString stringByAddingPercentEscapesUsingEncoding:
@@ -46,6 +47,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
     [self.webview loadRequest:request];
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSNewsContentViewController: %s","backgroundThread starting...");
 }
 
 -(void)mainThreadStarting

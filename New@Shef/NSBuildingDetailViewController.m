@@ -41,15 +41,18 @@
     NSLog(@"NSBuildingDetailViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     // Do any additional setup after loading the view.
+    float height = self.view.frame.size.height;
+    float width = self.view.frame.size.width;
+    
     NSString *htmlString = [NSString stringWithFormat:@"<html>\
                             <head>\
                             <meta id=\"viewport\" name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\">\
                             <script src='http://maps.google.com/maps/api/js?sensor=false' type='text/javascript'></script>\
                             </head>\
                             <body onload=\"new google.maps.StreetViewPanorama(document.getElementById('p'),{position:new google.maps.LatLng(%f, %f)});\" style='padding:0px;margin:0px;'>\
-                            <div id='p' style='height:460;width:320;'></div>\
+                            <div id='p' style='height:%f;width:%f;'></div>\
                             </body>\
-                            </html>",[lat floatValue], [lon floatValue]];
+                            </html>",[lat floatValue], [lon floatValue],height,width];
     
     [webview loadHTMLString:htmlString baseURL:nil];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])

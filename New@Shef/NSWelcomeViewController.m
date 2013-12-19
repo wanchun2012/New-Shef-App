@@ -150,7 +150,7 @@ NSString *imagetype;
     [self.tvWelcome setFont:[UIFont systemFontOfSize:12]];
     [self.tvWelcome setFrame:CGRectMake(screenSize.width/8,screenSize.height/8,
                                         screenSize.width/4*3, screenSize.height/8*5)];
-    
+    self.btnenter.enabled = NO;
     [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
     [super viewDidLoad];
 }
@@ -241,6 +241,7 @@ NSString *imagetype;
         
         // prepare for welcome text
         self.tvWelcome.text = modelWelcomeTalk.welcomeText;
+        self.btnenter.enabled = YES;
     }
    
     self.loadingIndicator.hidden = YES;

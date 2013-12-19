@@ -17,27 +17,24 @@
     NSURL *ubiquityURL;
     NSString *iCloudText;
     NSMetadataQuery *metadataQuery;
+    
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnDone;
 @property (weak, nonatomic) IBOutlet UITextView *tvDescription;
-
-
 @property (weak, nonatomic) IBOutlet UILabel *labelStatus;
 @property (weak, nonatomic) IBOutlet UILabel *labelResponsiblePerson;
-
 @property (strong) NSString *txtResponsiblePerson;
 @property (strong) NSString *txtDescription;
 @property (strong) NSString *txtId;
 @property (strong) NSString *txtStatus;
-
--(IBAction)saveDocument;
-
 @property (nonatomic, retain) NSString *iCloudText;
 @property (strong, nonatomic) NSURL *documentURL;
 @property (strong, nonatomic) MyDocument *document;
 @property (strong, nonatomic) NSURL *ubiquityURL;
 @property (strong, nonatomic) NSMetadataQuery *metadataQuery;
 
+-(IBAction)saveDocument;
  
 @end

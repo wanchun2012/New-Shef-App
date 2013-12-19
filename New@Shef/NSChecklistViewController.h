@@ -29,13 +29,14 @@
     NSArray *collectionFinished;
     VersionControl *modelVersionControl;
     
-    
     //iCloud setting
     MyDocument *document;
     NSURL *documentURL;
     NSURL *ubiquityURL;
     NSString *iCloudText;
     NSMetadataQuery *metadataQuery;
+    
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @property (nonatomic, retain) NSString *iCloudText;

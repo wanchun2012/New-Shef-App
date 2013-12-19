@@ -19,6 +19,7 @@
 @synthesize iCloudText,document,documentURL,ubiquityURL,metadataQuery;
 NSString *serverVersion;
 NSIndexPath *selectedPath=0;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -41,18 +42,44 @@ NSIndexPath *selectedPath=0;
 - (void)viewDidLoad
 {
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Checklist";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    titleView.textColor = [UIColor blackColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
     
-    if ([self connectedToNetwork] == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    if ([self iCloudIsAvailable])
+    {
+        if ([self connectedToNetwork] == NO)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            [alert show];
         
-    } else {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLoad) name:@"loadiCloud" object:nil];
+        }
+        else
+        {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLoad) name:@"loadiCloud" object:nil];
 
-      
-        
-    // iCloud loading
-        [self loadiCloud];
+            // iCloud loading
+            [self loadiCloud];
+            [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+       }
+    }
+    [super viewDidLoad];
+}
+
+-(void)backgroundThread
+{
+    NSLog(@"NSChecklistViewController: %s","backgroundThread starting...");
+    [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     
     // web database or internal database
     [self getVersionWebService];
@@ -68,20 +95,17 @@ NSIndexPath *selectedPath=0;
         // initialize checklist
         NSLog(@"NSChecklistViewController: %s","initialize CHECKLIST");
         [self loadDataFromWebService];
-              
+        
         Group *g = [[Group alloc]init];
         Activity *a = [[Activity alloc] init];
         
         [a initDB];
         [g initDB];
-       
         
         for (Group * object in collectionGroup)
         {
             [object initDB];
             [object saveData:object.groupId name:object.name];
-            
-      
         }
         
         for (Activity * object in collectionActivity)
@@ -91,22 +115,21 @@ NSIndexPath *selectedPath=0;
         }
         [modelVersionControl initDB];
         [modelVersionControl updateData:@"versionchecklist =:versionchecklist" variable:@":versionchecklist" data:serverVersion];
-       
+        
     }
     else
     {
-     
         // sqlite db version is equal to mysql db version
         // get data from sqlite database
         NSLog(@"NSChecklistViewController: %s","fetch from Checklist(sqlite)");
         Activity *activity = [[Activity alloc] init];
         [activity initDB];
         collectionActivity = [[activity selectData] mutableCopy];
-            
+        
         Group *group = [[Group alloc] init];
         [group initDB];
         collectionGroup = [[group selectData] mutableCopy];
-            
+        
         for (Group * object in collectionGroup)
         {
             for (Activity * obj in collectionActivity)
@@ -116,29 +139,36 @@ NSIndexPath *selectedPath=0;
                     [object.activityCollection addObject:obj];
                 }
             }
-                
+            
             Activity *d1 = [[Activity alloc] init];
             [object.activityCollection addObject:d1];
             Activity *d2 = [[Activity alloc] init];
             [object.activityCollection addObject:d2];
         }
     }
-    }
-    [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = @"Checklist";
-    titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
-    self.navigationItem.titleView = titleView;
-    [titleView sizeToFit];
     
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.tableView reloadData];
+    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.tableView reloadSectionCellsAtIndexes:sections withRowAnimation:UITableViewRowAnimationNone];
     
+    [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+    NSLog(@"NSChecklistViewController: %s","backgroundThread finishing...");
+}
+
+-(void)mainThreadStarting
+{
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
+}
+
+-(void)mainThreadFinishing
+{
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -196,7 +226,6 @@ NSIndexPath *selectedPath=0;
         [collectionGroup addObject:record];
         
     }
-    
 }
 
 -(void) loadDataFromWebService
@@ -237,7 +266,8 @@ NSIndexPath *selectedPath=0;
 
 - (NSInteger)tableView:(ExpandableTableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if ([collectionGroup count] == 0) {
+	if ([collectionGroup count] == 0)
+    {
 		return 0;
 	}
     // Return the number of rows in the section.
@@ -254,17 +284,16 @@ NSIndexPath *selectedPath=0;
     
     Group *group = [collectionGroup objectAtIndex:indexPath.section];
     Activity *activity = [group.activityCollection objectAtIndex:indexPath.row];
-    if (activity.name == NULL) {
+    if (activity.name == NULL)
+    {
         cell.userInteractionEnabled = false;
         cell.textLabel.text = @"";
         //cell.accessoryType = UITableViewCellAccessoryCheckmark;
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.hidden = true;
-        
     }
     else
     {
-        
         for (Finished* object in collectionFinished)
         {
             if(object.activityId == activity.activityId)
@@ -318,9 +347,12 @@ NSIndexPath *selectedPath=0;
 	// We add a custom accessory view to indicate expanded and colapsed sections
 	cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ExpandableAccessoryView"] highlightedImage:[UIImage imageNamed:@"ExpandableAccessoryView"]];
 	UIView *accessoryView = cell.accessoryView;
-	if ([[tableView indexesForExpandedSections] containsIndex:section]) {
+	if ([[tableView indexesForExpandedSections] containsIndex:section])
+    {
 		accessoryView.transform = CGAffineTransformMakeRotation(M_PI);
-	} else {
+	}
+    else
+    {
 		accessoryView.transform = CGAffineTransformMakeRotation(0);
 	}
     return cell;
@@ -328,14 +360,16 @@ NSIndexPath *selectedPath=0;
 
 // The next two methods are used to rotate the accessory view indicating whjether the
 // group is expanded or now
-- (void)tableView:(ExpandableTableView *)tableView willExpandSection:(NSUInteger)section {
+- (void)tableView:(ExpandableTableView *)tableView willExpandSection:(NSUInteger)section
+{
 	UITableViewCell *headerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 	[UIView animateWithDuration:0.3f animations:^{
 		headerCell.accessoryView.transform = CGAffineTransformMakeRotation(M_PI - 0.00001); // we need this little hack to subtract a small amount to make sure we rotate in the correct direction
 	}];
 }
 
-- (void)tableView:(ExpandableTableView *)tableView willContractSection:(NSUInteger)section {
+- (void)tableView:(ExpandableTableView *)tableView willContractSection:(NSUInteger)section
+{
 	UITableViewCell *headerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 	[UIView animateWithDuration:0.3f animations:^{
 		headerCell.accessoryView.transform = CGAffineTransformMakeRotation(0);
@@ -349,7 +383,8 @@ NSIndexPath *selectedPath=0;
 	//[self performSegueWithIdentifier:@"showContactDetails" sender:indexPath];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     NSToDoDetailsViewController *viewController = segue.destinationViewController;
  
 	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -361,29 +396,24 @@ NSIndexPath *selectedPath=0;
     viewController.txtDescription = activity.detail;
     viewController.txtResponsiblePerson = activity.responsiblePerson;
     viewController.txtId = [NSString stringWithFormat:@"%d",activity.activityId];
-    NSLog(@"sfsdfsdgfgbathroom");
     
     viewController.txtStatus = @"Incomplete";
-   
+ 
     for (Finished* object in collectionFinished)
     {
-        
         if(object.activityId == activity.activityId)
         {
             viewController.txtStatus = object.finishedTime;
-             
             break;
         }
-        
+            
     }
-    
- 
 }
 
 - (void) loadiCloud
 {
     NSLog(@"iCloud loading..........................");
-    [self iCloudIsAvailable];
+ 
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
     NSString *dataFile = [docsDir stringByAppendingPathComponent: @"newshef.txt"];
@@ -391,42 +421,51 @@ NSIndexPath *selectedPath=0;
     NSFileManager *filemgr = [NSFileManager defaultManager];
     ubiquityURL = [[filemgr URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL] URLByAppendingPathComponent:@"Documents"];
     NSLog(@"iCloud path = %@", [ubiquityURL path]);
-    
+        
     if ([filemgr fileExistsAtPath:[ubiquityURL path]] == NO)
     {
         NSLog(@"iCloud Documents directory does not exist");
         [filemgr createDirectoryAtURL:ubiquityURL withIntermediateDirectories:YES attributes:nil error:nil];
-    } else {
+    }
+    else
+    {
         NSLog(@"iCloud Documents directory exists");
     }
-    
+        
     ubiquityURL = [ubiquityURL URLByAppendingPathComponent:@"newshef.txt"];
     NSLog(@"Full ubiquity path = %@", [ubiquityURL path]);
-    
+        
     // Search for document in iCloud storage
     metadataQuery = [[NSMetadataQuery alloc] init];
     [metadataQuery setPredicate: [NSPredicate predicateWithFormat: @"%K like 'newshef.txt'",
-                                  NSMetadataItemFSNameKey]];
+                                      NSMetadataItemFSNameKey]];
     [metadataQuery setSearchScopes:[NSArray arrayWithObjects:NSMetadataQueryUbiquitousDocumentsScope,nil]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(metadataQueryDidFinishGathering:)
-                                                 name:NSMetadataQueryDidFinishGatheringNotification
-                                               object:metadataQuery];
+                                                     name:NSMetadataQueryDidFinishGatheringNotification
+                                                   object:metadataQuery];
     NSLog(@"starting query");
     [metadataQuery startQuery];
-
 }
+
 // iCloud setting
-- (void) iCloudIsAvailable
+- (BOOL) iCloudIsAvailable
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *ubiquityURL = [fileManager
+    ubiquityURL = [fileManager
                           URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL];
-    /*
-    if(ubiquityURL)
-        NSLog(@"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-    else
-        NSLog(@"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
-    */
+ 
+    if ([fileManager fileExistsAtPath:[ubiquityURL path]] == NO)
+    {
+       
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ROFL"
+                                                        message:@"Dee dee doo doo."
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)metadataQueryDidFinishGathering:(NSNotification *)notification
@@ -437,7 +476,6 @@ NSIndexPath *selectedPath=0;
     [query stopQuery];
     NSArray *results = [[NSArray alloc] initWithArray:[query results]];
     
-    
     if ([results count] == 1)
     {
         NSLog(@"File exists in cloud");
@@ -446,17 +484,22 @@ NSIndexPath *selectedPath=0;
         //self.document.userText = @"";
         [document openWithCompletionHandler:
          ^(BOOL success) {
-             if (success){
+             if (success)
+             {
                  NSLog(@"Opened cloud doc");
                  self.iCloudText = document.userText;
                  Finished *finished = [[Finished alloc]init];
                  
                  collectionFinished = [finished getFinishedActivityCollection:document.userText];
-             } else {
+             }
+             else
+             {
                  NSLog(@"Not opened cloud doc");
              }
          }];
-    } else {
+    }
+    else
+    {
         NSLog(@"File does not exist in cloud");
         self.document = [[MyDocument alloc] initWithFileURL:ubiquityURL];
         
@@ -472,15 +515,14 @@ NSIndexPath *selectedPath=0;
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
- 
     [self.tableView reloadData];
     NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
     NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
-   
+        
     [self.tableView reloadSectionCellsAtIndexes:sections withRowAnimation:UITableViewRowAnimationNone];
-    NSLog(@"I have no idea about go back stuff and something else");
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -493,13 +535,12 @@ NSIndexPath *selectedPath=0;
     {
         exit(-1); // yes
     }
-    
 }
+
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
     return (connect!=NULL)?YES:NO;
 }
-
 
 @end

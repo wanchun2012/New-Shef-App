@@ -101,6 +101,8 @@
 - (IBAction)saveDocument
 {
     self.navigationItem.backBarButtonItem.enabled = NO;
+    btnDone.enabled = NO;
+    [[UIBarButtonItem appearance] setTintColor:[UIColor grayColor]];
     [NSThread detachNewThreadSelector:@selector(activityIndicatorThreadStarting) toTarget:self withObject:nil];
     NSDate *myDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -123,8 +125,6 @@
                    NSLog(@"Not saved to cloud for overwriting");
                }
            }];
-    
-    btnDone.enabled = NO;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loadiCloud" object:nil];
     [self activityThreadFinishing];

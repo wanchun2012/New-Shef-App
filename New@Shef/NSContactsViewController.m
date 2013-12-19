@@ -427,7 +427,11 @@ NSString *emailAddress;
     else
     {
         //show alert later
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Do you have enough credit on the phone?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        NSMutableString *msg = [[NSMutableString alloc] initWithString:@"Cant make call on ipad and do you have enough credit on the phone? Try this number:"];
+        s = [s stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+        [msg appendString:s];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
 }

@@ -20,6 +20,8 @@
     NSMutableArray *jsonVersion;
     NSMutableArray *collection;
     VersionControl *modelVersionControl;
+    
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @end

@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface NSWebsiteViewController : UIViewController
+{
+    UIActivityIndicatorView *activityIndicator;
+}
 
 @property (strong, nonatomic) NSString *url;
-
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
 
 @end

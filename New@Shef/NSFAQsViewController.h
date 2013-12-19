@@ -22,6 +22,8 @@
     NSMutableArray *jsonVersion;
     NSMutableArray *collection;
     VersionControl *modelVersionControl;
+    
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendbutton;

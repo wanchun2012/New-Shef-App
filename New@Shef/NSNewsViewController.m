@@ -76,7 +76,7 @@
     [parser parse];
     [self.tableView reloadData];
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
-    NSLog(@"NSNewsViewController: %s","backgroundThread starting...");
+    NSLog(@"NSNewsViewController: %s","backgroundThread finishing...");
 }
 
 -(void)mainThreadStarting

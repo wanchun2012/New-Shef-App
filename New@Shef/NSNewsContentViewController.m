@@ -47,7 +47,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
     [self.webview loadRequest:request];
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
-    NSLog(@"NSNewsContentViewController: %s","backgroundThread starting...");
+    NSLog(@"NSNewsContentViewController: %s","backgroundThread finishing...");
 }
 
 -(void)mainThreadStarting

@@ -44,13 +44,14 @@
     {
         NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: NEWSHEF_DB];
         [filemgr copyItemAtPath:databasePathFromApp toPath:databasePath error:nil];
-        NSLog(@"Sqlite3: create one database in document directory");
+        NSLog(@"DB:Activity: Sqlite3: create one database in document directory");
     }
     else
     {
-        NSLog(@"Sqlite3: exist one database in document directory");
+        NSLog(@"DB:Activity: Sqlite3: exist one database in document directory");
     }
 }
+
 - (NSArray *) selectData
 {
     NSMutableArray *collection = [[NSMutableArray alloc] init];
@@ -67,7 +68,7 @@
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 // departmentId, name, phone, email, foreignkey;
-                NSLog(@"Sqlite3: Success select");
+                NSLog(@"DB:Activity: Sqlite3: Success select");
                 int Id = sqlite3_column_int(statement, 0);
                 char *cName = (char *) sqlite3_column_text(statement, 1);
                 char *cDetail = (char *) sqlite3_column_text(statement, 2);
@@ -85,7 +86,7 @@
         }
         else
         {
-            NSLog(@"Sqlite3: Fail select, qlite3_prepare_v2()");
+            NSLog(@"DB:Activity: Sqlite3: Fail select, qlite3_prepare_v2()");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
@@ -94,12 +95,10 @@
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
         sqlite3_close(db);
-        
-        
     }
     else
     {
-        NSLog(@"Sqlite3: Fail insert, fail open db");
+        NSLog(@"DB:Activity: Sqlite3: Fail insert, fail open db");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
     }
@@ -124,7 +123,7 @@
             
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
-                NSLog(@"Sqlite3: Success select");
+                NSLog(@"DB:Activity: Sqlite3: Success select");
                 int Id = sqlite3_column_int(statement, 0);
                 char *cName = (char *) sqlite3_column_text(statement, 1);
                 char *cDetail = (char *) sqlite3_column_text(statement, 2);
@@ -140,11 +139,10 @@
                 [collection addObject:record];
 
             }
-            
         }
         else
         {
-            NSLog(@"Sqlite3: Fail select, qlite3_prepare_v2()");
+            NSLog(@"DB:Activity: Sqlite3: Fail select, qlite3_prepare_v2()");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
@@ -157,7 +155,7 @@
     }
     else
     {
-        NSLog(@"Sqlite3: Fail insert, fail open db");
+        NSLog(@"DB:Activity: Sqlite3: Fail insert, fail open db");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
     }
@@ -178,7 +176,7 @@
         const char *insert_stmt = [insertSQL UTF8String];
         if(sqlite3_prepare_v2(db, insert_stmt,-1, &statement, NULL)== SQLITE_OK)
         {
-            NSLog(@"db wash bathroom");
+           
             idx = sqlite3_bind_parameter_index(statement, ":ID");
             sqlite3_bind_int(statement, idx, Id);
             idx = sqlite3_bind_parameter_index(statement, ":NAME");
@@ -192,19 +190,18 @@
             
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
-                NSLog(@"Sqlite3: Success insert");
-                
+                NSLog(@"DB:Activity: Sqlite3: Success insert");
             }
             else
             {
-                NSLog(@"Sqlite3: Fail insert, sqlite3_step()");
+                NSLog(@"DB:Activity: Sqlite3: Fail insert, sqlite3_step()");
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
                 [alert show];
             }
         }
         else
         {
-            NSLog(@"Sqlite3: Fail insert, qlite3_prepare_v2()");
+            NSLog(@"DB:Activity: Sqlite3: Fail insert, qlite3_prepare_v2()");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
@@ -215,7 +212,7 @@
     }
     else
     {
-        NSLog(@"Sqlite3: Fail insert, fail open db");
+        NSLog(@"DB:Activity: Sqlite3: Fail insert, fail open db");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Fail load data, Exit app?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
         [alert show];
     }
@@ -233,7 +230,5 @@
     }
     
 }
-
-
 
 @end

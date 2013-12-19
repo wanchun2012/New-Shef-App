@@ -21,6 +21,7 @@
     NSString *databasePath;
     sqlite3 *db;
 }
+
 @property (nonatomic, assign) int activityId;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *detail;

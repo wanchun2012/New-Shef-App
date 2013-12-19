@@ -30,5 +30,4 @@
              name:(NSString *)n;
 - (NSArray *) selectData;
 
-
 @end

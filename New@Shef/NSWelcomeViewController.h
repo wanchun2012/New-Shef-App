@@ -22,6 +22,7 @@
     VersionControl *modelVersionControl;
 }
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (weak, nonatomic) IBOutlet UITextView *tvWelcome;
 @property (weak, nonatomic) IBOutlet UIImageView *ivWelcomeImage;
 @property (weak, nonatomic) IBOutlet UIButton *btnenter;

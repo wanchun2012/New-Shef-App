@@ -13,7 +13,7 @@
 @end
 
 @implementation NSToDoDetailsViewController
-@synthesize btnDone, tvDescription, labelStatus, txtResponsiblePerson,txtDescription, labelResponsiblePerson, txtStatus,txtId, iCloudText,document,documentURL,ubiquityURL,metadataQuery;
+@synthesize btnDone, tvDescription, labelStatus, txtResponsiblePerson,txtDescription, txtStatus,txtId, iCloudText,document,documentURL,ubiquityURL,metadataQuery;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,10 +83,16 @@
     self.btnDone.tintColor = [UIColor blueColor];
     tvDescription.textAlignment = NSTextAlignmentJustified;
     tvDescription.userInteractionEnabled = NO;
-    tvDescription.text = [self.txtDescription stringByReplacingOccurrencesOfString :@"+" withString:@" "];
-    labelResponsiblePerson.numberOfLines = 0;
-    labelResponsiblePerson.text =[NSString stringWithFormat:@"Responsible person: \n%@", self.txtResponsiblePerson];
-    labelResponsiblePerson.text = [labelResponsiblePerson.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+    tvDescription.text = [tvDescription.text stringByAppendingString:
+                          [NSString stringWithFormat:@"Responsible person: \n%@",
+                           [self.txtResponsiblePerson stringByReplacingOccurrencesOfString :@"+" withString:@" "]]];
+    tvDescription.text = [tvDescription.text stringByAppendingString:@"\n \n"];
+
+    tvDescription.text = [tvDescription.text stringByAppendingString:
+     [NSString stringWithFormat:@"Description: \n%@",
+      [self.txtDescription stringByReplacingOccurrencesOfString :@"+" withString:@" "]]];
+    
+ 
     labelStatus.text = txtStatus;
  
     [super viewDidLoad];
@@ -132,10 +138,6 @@
 
 -(void)activityIndicatorThreadStarting
 {
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.view addSubview:activityIndicator];
-    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-    [activityIndicator startAnimating];
 }
 
 -(void)activityThreadFinishing
@@ -143,9 +145,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved" message:@"Time and Status saved to iCloud" delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
 
-    activityIndicator.hidden = YES;
-    [activityIndicator stopAnimating];
-    [activityIndicator removeFromSuperview];
+
    
     self.navigationItem.backBarButtonItem.enabled = YES;
 }

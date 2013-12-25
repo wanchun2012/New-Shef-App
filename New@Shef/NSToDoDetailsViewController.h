@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnDone;
 @property (weak, nonatomic) IBOutlet UITextView *tvDescription;
 @property (weak, nonatomic) IBOutlet UILabel *labelStatus;
-@property (weak, nonatomic) IBOutlet UILabel *labelResponsiblePerson;
+ 
 @property (strong) NSString *txtResponsiblePerson;
 @property (strong) NSString *txtDescription;
 @property (strong) NSString *txtId;

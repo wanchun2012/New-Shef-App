@@ -7,8 +7,12 @@
 //
 
 #import "NSAppDelegate.h"
+#import "NSiPadRootViewController.h"
+#import "NSiPadWelcomeViewController.h"
 
 @implementation NSAppDelegate
+@synthesize   splitViewController, detailViewController, rootViewController,window;
+@synthesize rootPopoverButtonItem;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -25,6 +29,36 @@
         // TODO: Load document...
     } else {
         NSLog(@"No iCloud access");
+    }
+    
+    BOOL iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+    if (iPad)
+    {
+        NSLog(@"Now, time to do some crazy stuff on iPad, lets wash bathroom T.T");
+        // Override point for customization after app launch.
+        self.splitViewController =[[UISplitViewController alloc]init];
+        self.rootViewController=[[NSiPadRootViewController alloc]init];
+        self.detailViewController=[[NSiPadWelcomeViewController alloc]init];
+        
+        UINavigationController *rootNav=[[UINavigationController alloc]initWithRootViewController:rootViewController];
+        UINavigationController *detailNav=[[UINavigationController alloc]initWithRootViewController:detailViewController];
+        
+        
+        self.splitViewController.viewControllers=[NSArray arrayWithObjects:rootNav,detailNav,nil];
+        self.splitViewController.delegate=(id)self.detailViewController;
+        
+        // Add the split view controller's view to the window and display.
+        [window addSubview:self.splitViewController.view];
+        [window makeKeyAndVisible];
+        
+        self.splitViewController.view.transform = CGAffineTransformMakeRotation(M_PI/2);
+        CGRect screenBound = [[UIScreen mainScreen] bounds];
+        CGSize screenSize = screenBound.size;
+        CGFloat screenWidth = screenSize.width;
+        CGFloat screenHeight = screenSize.height;
+        CGRect frame = CGRectMake(0, 0, screenWidth,screenHeight);
+        self.splitViewController.view.frame = frame;
+        NSLog(@"Lets wash bathroom again on Monday");
     }
     
     return YES;

@@ -9,9 +9,25 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 
+@class NSiPadRootViewController;
+@class NSiPadWelcomeViewController;
 
 @interface NSAppDelegate : UIResponder <UIApplicationDelegate>
+{
+    UIWindow *window;
+    
+    UISplitViewController *splitViewController;
+    
+    NSiPadRootViewController *rootViewController;
+    NSiPadWelcomeViewController *detailViewController;
+    
+  
+}
 
-@property (strong, nonatomic) UIWindow *window;
- 
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain)  UISplitViewController *splitViewController;
+@property (nonatomic, retain)  NSiPadRootViewController *rootViewController;
+@property (nonatomic, retain)  NSiPadWelcomeViewController *detailViewController;
+@property (unsafe_unretained) UIBarButtonItem *rootPopoverButtonItem;
+
 @end

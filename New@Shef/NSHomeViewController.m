@@ -42,9 +42,9 @@
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    UIImage *img = [UIImage imageNamed:@"background.jpg"];
+    //UIImage *img = [UIImage imageNamed:@"background.jpg"];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:img];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:img];
     
     self.btnChecklist.layer.cornerRadius = 10;
     self.btnChecklist.clipsToBounds = YES;

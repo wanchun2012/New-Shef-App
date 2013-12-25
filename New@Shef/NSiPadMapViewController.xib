@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSiPadMapViewController">
+            <connections>
+                <outlet property="btnInside" destination="wvE-Vh-tHE" id="Eyf-SN-otv"/>
+                <outlet property="btnOverview" destination="CcU-Wn-qxG" id="c5y-rE-fgz"/>
+                <outlet property="btnSearch" destination="RCq-1i-ZWd" id="Geu-e1-bTH"/>
+                <outlet property="view" destination="2" id="3"/>
+                <outlet property="webview" destination="kMs-IG-9TX" id="Qbe-bo-UwR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMs-IG-9TX">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="954"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </webView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvE-Vh-tHE">
+                    <rect key="frame" x="345" y="969" width="78" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Inside View">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectInside" destination="-1" eventType="touchUpInside" id="xJJ-Ga-geU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCq-1i-ZWd">
+                    <rect key="frame" x="162" y="969" width="133" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="GoogleMap Search">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CcU-Wn-qxG">
+                    <rect key="frame" x="473" y="969" width="65" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="OverView">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectOverview" destination="-1" eventType="touchUpInside" id="LKc-Iw-Q82"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="kMs-IG-9TX" firstAttribute="top" secondItem="2" secondAttribute="top" id="52x-eD-sRt"/>
+                <constraint firstAttribute="bottom" secondItem="RCq-1i-ZWd" secondAttribute="bottom" constant="5" id="M5f-WV-i1X"/>
+                <constraint firstItem="CcU-Wn-qxG" firstAttribute="leading" secondItem="wvE-Vh-tHE" secondAttribute="trailing" constant="50" id="PJa-TZ-ATj"/>
+                <constraint firstAttribute="bottom" secondItem="CcU-Wn-qxG" secondAttribute="bottom" constant="5" id="Qp0-av-Yc4"/>
+                <constraint firstItem="kMs-IG-9TX" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="Tgs-Hf-Xu1"/>
+                <constraint firstAttribute="bottom" secondItem="kMs-IG-9TX" secondAttribute="bottom" constant="50" id="Ug3-zV-nfg"/>
+                <constraint firstAttribute="trailing" secondItem="kMs-IG-9TX" secondAttribute="trailing" id="haz-xB-iPM"/>
+                <constraint firstItem="wvE-Vh-tHE" firstAttribute="leading" secondItem="RCq-1i-ZWd" secondAttribute="trailing" constant="50" id="jIe-CM-HU1"/>
+                <constraint firstAttribute="bottom" secondItem="wvE-Vh-tHE" secondAttribute="bottom" constant="5" id="xwM-FI-Ihd"/>
+                <constraint firstAttribute="centerX" secondItem="wvE-Vh-tHE" secondAttribute="centerX" id="y6x-W3-gYZ"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+        </view>
+    </objects>
+</document>

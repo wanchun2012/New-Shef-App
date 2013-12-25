@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSiPadFacebookViewController">
+            <connections>
+                <outlet property="btnTwitter" destination="evO-rb-fC2" id="eO0-AS-Gkk"/>
+                <outlet property="btnYoutube" destination="v6g-fH-WnE" id="GTx-gV-eQ3"/>
+                <outlet property="view" destination="2" id="hhU-Q4-bOb"/>
+                <outlet property="webview" destination="Yd3-Gu-Z5S" id="Mgt-X6-r5v"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yd3-Gu-Z5S">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="954"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </webView>
+                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3PK-w6-aJX">
+                    <rect key="frame" x="0.0" y="954" width="768" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="roK-TD-wbf"/>
+                    </constraints>
+                    <items/>
+                </tabBar>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uY3-mS-jAg">
+                    <rect key="frame" x="243" y="969" width="68" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Facebook">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evO-rb-fC2">
+                    <rect key="frame" x="361" y="969" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Twitter">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectTwitter" destination="-1" eventType="touchUpInside" id="3dH-tO-ePb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6g-fH-WnE">
+                    <rect key="frame" x="457" y="969" width="57" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Youtube">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectYoutube" destination="-1" eventType="touchUpInside" id="Yih-ZH-F6y"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="3PK-w6-aJX" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="1Ni-hY-vFF"/>
+                <constraint firstItem="Yd3-Gu-Z5S" firstAttribute="top" secondItem="2" secondAttribute="top" id="5L5-cj-8S6"/>
+                <constraint firstAttribute="bottom" secondItem="3PK-w6-aJX" secondAttribute="bottom" id="8tm-Td-xaH"/>
+                <constraint firstAttribute="centerX" secondItem="evO-rb-fC2" secondAttribute="centerX" id="A9F-e1-kkn"/>
+                <constraint firstAttribute="trailing" secondItem="3PK-w6-aJX" secondAttribute="trailing" id="BuW-CU-xsT"/>
+                <constraint firstAttribute="bottom" secondItem="Yd3-Gu-Z5S" secondAttribute="bottom" constant="50" id="S3I-Dy-lcD"/>
+                <constraint firstAttribute="trailing" secondItem="Yd3-Gu-Z5S" secondAttribute="trailing" id="cP3-Vl-sYc"/>
+                <constraint firstAttribute="bottom" secondItem="uY3-mS-jAg" secondAttribute="bottom" constant="5" id="ebb-Qi-N1e"/>
+                <constraint firstItem="evO-rb-fC2" firstAttribute="leading" secondItem="uY3-mS-jAg" secondAttribute="trailing" constant="50" id="ij6-uE-q09"/>
+                <constraint firstItem="Yd3-Gu-Z5S" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="j3B-8H-9U8"/>
+                <constraint firstAttribute="bottom" secondItem="evO-rb-fC2" secondAttribute="bottom" constant="5" id="qrx-5z-Zc8"/>
+                <constraint firstItem="v6g-fH-WnE" firstAttribute="leading" secondItem="evO-rb-fC2" secondAttribute="trailing" constant="50" id="tff-q2-9ZK"/>
+                <constraint firstAttribute="bottom" secondItem="v6g-fH-WnE" secondAttribute="bottom" constant="5" id="uns-2M-dId"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+        </view>
+    </objects>
+</document>

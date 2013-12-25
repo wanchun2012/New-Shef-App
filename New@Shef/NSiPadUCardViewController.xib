@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSiPadUCardViewController">
+            <connections>
+                <outlet property="imageCard" destination="xnF-mO-4AD" id="rze-xv-GQv"/>
+                <outlet property="imageView" destination="UJ8-fl-VzD" id="DxX-68-pRB"/>
+                <outlet property="view" destination="2" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8l4-Uz-Dke">
+                    <rect key="frame" x="50" y="73" width="99" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Take a photo">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="TakePhoto" destination="-1" eventType="touchUpInside" id="TOd-u6-Z3x"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and send us an Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qe-bY-8U3">
+                    <rect key="frame" x="154" y="78" width="165" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="staff.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="xnF-mO-4AD">
+                    <rect key="frame" x="50" y="145" width="300" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="anonymous_person.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="UJ8-fl-VzD">
+                    <rect key="frame" x="250" y="157" width="85" height="105"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="85" id="2R1-7y-QfJ"/>
+                        <constraint firstAttribute="height" constant="105" id="WQ1-EV-S2X"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click this" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kt-A3-Hcv">
+                    <rect key="frame" x="50" y="50" width="71" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbC-9R-tCh">
+                    <rect key="frame" x="126" y="44" width="30" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="link">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ucardInfo" destination="-1" eventType="touchUpInside" id="2PX-9u-VkX"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to know about stuff UCard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Oj-hK-uIF">
+                    <rect key="frame" x="161" y="50" width="203" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="WbC-9R-tCh" firstAttribute="leading" secondItem="6Kt-A3-Hcv" secondAttribute="trailing" constant="5" id="EOV-P0-IVc"/>
+                <constraint firstItem="1Oj-hK-uIF" firstAttribute="leading" secondItem="WbC-9R-tCh" secondAttribute="trailing" constant="5" id="G5L-pH-RoU"/>
+                <constraint firstItem="6Kt-A3-Hcv" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="50" id="M8P-7Z-gEG"/>
+                <constraint firstItem="UJ8-fl-VzD" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="250" id="QV3-yh-JJD"/>
+                <constraint firstItem="8l4-Uz-Dke" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="50" id="SQN-n3-IeD"/>
+                <constraint firstItem="6Kt-A3-Hcv" firstAttribute="top" secondItem="2" secondAttribute="top" constant="50" id="atP-fb-w6l"/>
+                <constraint firstItem="4Qe-bY-8U3" firstAttribute="leading" secondItem="8l4-Uz-Dke" secondAttribute="trailing" constant="5" id="bdB-o1-kE7"/>
+                <constraint firstItem="8l4-Uz-Dke" firstAttribute="top" secondItem="2" secondAttribute="top" constant="73" id="cNF-WM-auG"/>
+                <constraint firstItem="4Qe-bY-8U3" firstAttribute="top" secondItem="2" secondAttribute="top" constant="78" id="f2f-99-bCM"/>
+                <constraint firstItem="WbC-9R-tCh" firstAttribute="top" secondItem="2" secondAttribute="top" constant="44" id="kBw-2m-i4o"/>
+                <constraint firstItem="1Oj-hK-uIF" firstAttribute="top" secondItem="2" secondAttribute="top" constant="50" id="myx-sh-Drn"/>
+                <constraint firstItem="UJ8-fl-VzD" firstAttribute="top" secondItem="2" secondAttribute="top" constant="157" id="xgY-Lt-l8A"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="anonymous_person.jpg" width="219.78947448730469" height="151.57894897460938"/>
+        <image name="staff.jpg" width="225" height="144"/>
+    </resources>
+</document>

@@ -26,25 +26,16 @@
 
 - (void)viewDidLoad
 {
+    UIColor *blue = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-
+    self.navigationController.navigationBar.barTintColor = blue;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"New@Shef";
     titleView.backgroundColor = [UIColor clearColor];
     titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
-    
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    //UIImage *img = [UIImage imageNamed:@"background.jpg"];
-    
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:img];
     
     self.btnChecklist.layer.cornerRadius = 10;
     self.btnChecklist.clipsToBounds = YES;
@@ -72,6 +63,8 @@
     
     self.btnUEB.layer.cornerRadius = 10;
     self.btnUEB.clipsToBounds = YES;
+    
+    [super viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning

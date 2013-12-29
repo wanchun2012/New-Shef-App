@@ -189,6 +189,7 @@
                 [mailController setMessageBody:message isHTML:NO];
                 [mailController setToRecipients:emailArray];
                 [mailController setSubject:UCARDEMAILSUBJECT];
+                mailController.navigationBar.tintColor = [UIColor blackColor];
                 NSData *imageData = UIImagePNGRepresentation(self.image);
                 [mailController addAttachmentData:imageData mimeType:@"image/png" fileName:@"Name"];
                 [self presentViewController:mailController animated:YES completion:nil];

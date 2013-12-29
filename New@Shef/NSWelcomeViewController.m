@@ -9,14 +9,14 @@
 //             http://stackoverflow.com/questions/9941292/objective-c-failed-to-write-image-to-documents-directory
 //             2. delete image:
 //             http://stackoverflow.com/questions/9415221/delete-image-from-app-directory-in-iphone
-
+#import <QuartzCore/QuartzCore.h>
 #import "NSWelcomeViewController.h"
 
 @interface NSWelcomeViewController ()
 @end
 
 @implementation NSWelcomeViewController
-@synthesize tvWelcome, ivWelcomeImage, btnenter,loadingIndicator;
+@synthesize scrollView;
 
 NSString *serverVersion;
 NSString *imagetype;
@@ -141,18 +141,11 @@ NSString *imagetype;
 
 - (void)viewDidLoad
 {
-    ivWelcomeImage.frame = CGRectMake(ivWelcomeImage.frame.origin.x,ivWelcomeImage.frame.origin.y,75,100);
+ 
     // prepare for welcome text
-    [self.tvWelcome setEditable:NO];
-    self.tvWelcome.textAlignment = NSTextAlignmentJustified;
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = screenBound.size;
-    [self.tvWelcome setFont:[UIFont systemFontOfSize:12]];
-    [self.tvWelcome setFrame:CGRectMake(screenSize.width/8,screenSize.height/8,
-                                        screenSize.width/4*3, screenSize.height/8*5)];
-    self.btnenter.enabled = NO;
     [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
     [super viewDidLoad];
+    
 }
 
 -(void)backgroundThread
@@ -162,9 +155,8 @@ NSString *imagetype;
     UIImage *image;
     if ([self connectedToNetwork] == NO)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        NSLog(@"NSWelcomeViewController: %s","There is no network...");
     }
     else
     {
@@ -229,23 +221,57 @@ NSString *imagetype;
 
 -(void)mainThreadStarting
 {
-    [self.loadingIndicator startAnimating];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
 }
 
 -(void)mainThreadFinishing:(UIImage *)image
 {
-    if ([self connectedToNetwork])
+    if ([self connectedToNetwork]==YES)
     {
-        // prepare for welcome image
-        [ivWelcomeImage setImage:image];
+        UILabel *labelTitle = [[UILabel alloc]initWithFrame:CGRectMake(0,20,self.view.frame.size.width, 20)];
+        labelTitle.text = @"Welcome to the University of Sheffield";
+        labelTitle.textAlignment = NSTextAlignmentCenter;
+       
+        labelTitle.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+        [self.scrollView addSubview:labelTitle];
         
-        // prepare for welcome text
-        self.tvWelcome.text = modelWelcomeTalk.welcomeText;
-        self.btnenter.enabled = YES;
+        UITextView * mainContent = [[UITextView alloc]initWithFrame:CGRectMake(15,45, self.view.frame.size.width-30.f-80.f, 0)];
+        mainContent.text = modelWelcomeTalk.welcomeText;
+        mainContent.textAlignment = NSTextAlignmentJustified;
+        mainContent.textColor = [UIColor blackColor];
+        mainContent.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+        [mainContent sizeToFit];
+        mainContent.scrollEnabled = NO;
+        mainContent.editable = NO;
+        [self.scrollView addSubview: mainContent];
+        UIImageView *ivWelcome = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 90.f, 50.f, 75.f, 100.f)];
+        [ivWelcome setImage:image];
+        [self.scrollView addSubview:ivWelcome];
+        
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [button addTarget:self  action:@selector(enterPage:) forControlEvents:UIControlEventTouchDown];
+        [button setTitle:@"Enter" forState:UIControlStateNormal];
+        button.frame = CGRectMake(self.view.frame.size.width-80.f, mainContent.frame.size.height+15.f, 50.0, 30.0);
+        [self.scrollView addSubview:button];
+        
+        [self.scrollView setScrollEnabled:YES];
+        [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, mainContent.frame.size.height+45.f+15.f)];
+ 
+        activityIndicator.hidden = YES;
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+    
     }
+}
+
+-(void)enterPage:(id)sender
+{
    
-    self.loadingIndicator.hidden = YES;
-    [self.loadingIndicator stopAnimating];
+    [self performSegueWithIdentifier:@"Associate" sender:sender];
 }
 
 - (void)didReceiveMemoryWarning
@@ -258,12 +284,9 @@ NSString *imagetype;
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+          exit(-1);
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+ 
 }
 
 - (BOOL) connectedToNetwork

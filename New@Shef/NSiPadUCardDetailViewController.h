@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "NSAppDelegate.h"
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @class NSiPadUCardViewController;
 
 @interface NSiPadUCardDetailViewController : UIViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate>

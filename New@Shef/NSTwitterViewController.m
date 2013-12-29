@@ -17,16 +17,20 @@
  
 - (void)viewDidLoad
 {
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-
+ 
     self.webview.scalesPageToFit = YES;
     self.webview.frame=self.view.bounds;
-    
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    if ([self connectedToNetwork] == NO)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
 }
 
@@ -42,7 +46,9 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
     [self.webview loadRequest:request];
     sleep(1);
+ 
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
+  
     NSLog(@"NSTwitterViewController: %s","backgroundThread finishing...");
 }
 
@@ -60,5 +66,22 @@
     [activityIndicator stopAnimating];
     [activityIndicator removeFromSuperview];
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        exit(-1); 
+    }
+ 
+    
+}
+
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
+}
+
 
 @end

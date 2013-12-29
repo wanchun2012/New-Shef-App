@@ -36,6 +36,7 @@ NSString *serverVersion;
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -45,6 +46,7 @@ NSString *serverVersion;
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -68,33 +70,24 @@ NSString *serverVersion;
     self.popoverController = nil;
     
     [super viewWillAppear:animated];
-
-    
-	self.title=@"Checklist";
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+	UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"Checklist";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    if ([self iCloudIsAvailable])
+    if ([self iCloudIsAvailable]==YES)
     {
-        if ([self connectedToNetwork] == NO)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-            [alert show];
-            
-        }
-        else
+        if ([self connectedToNetwork] == YES)
         {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLoad) name:@"loadiCloud" object:nil];
             
@@ -314,7 +307,7 @@ NSString *serverVersion;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.font =[UIFont systemFontOfSize:15.0f];
+    cell.textLabel.font =[UIFont fontWithName:@"AppleGothic" size:15.0f];
     
     Group *group = [collectionGroup objectAtIndex:indexPath.section];
     Activity *activity = [group.activityCollection objectAtIndex:indexPath.row];
@@ -328,6 +321,7 @@ NSString *serverVersion;
     }
     else
     {
+
         for (Finished* object in collectionFinished)
         {
            
@@ -342,6 +336,10 @@ NSString *serverVersion;
             }
         }
         
+        if (collectionFinished.count == 0) {
+            cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         
@@ -353,7 +351,7 @@ NSString *serverVersion;
     }
 	// just change the cells background color to indicate group separation
 	cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-	cell.backgroundView.backgroundColor = [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0];
+	cell.backgroundView.backgroundColor = [UIColor whiteColor];
 	
     return cell;
 
@@ -380,7 +378,7 @@ NSString *serverVersion;
     Group *group = [collectionGroup objectAtIndex:indexPath.section];
     Activity *activity = [group.activityCollection objectAtIndex:indexPath.row];
 	//viewController.text = activity.name;
-    
+    self.toDoVC.txtActivityName = activity.name;
     self.toDoVC.txtDescription = activity.detail;
     self.toDoVC.txtResponsiblePerson = activity.responsiblePerson;
     self.toDoVC.txtId = [NSString stringWithFormat:@"%d",activity.activityId];
@@ -451,11 +449,11 @@ NSString *serverVersion;
     if ([fileManager fileExistsAtPath:[ubiquityURL path]] == NO)
     {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ROFL"
-                                                        message:@"Dee dee doo doo."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOICLOUDTITLE
+                                                        message:NOICLOUDMSG
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+                                              otherButtonTitles:@"Wait later", nil];
         [alert show];
         return NO;
     }
@@ -518,19 +516,21 @@ NSString *serverVersion;
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+        exit(-1);
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+    
 }
 
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
     return (connect!=NULL)?YES:NO;
 }
-
 
 @end

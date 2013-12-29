@@ -14,7 +14,7 @@
 
 @implementation NSiPadFAQsViewController
 @synthesize popoverController,appDelegate;
-@synthesize tvContent;
+@synthesize scrollView;
 
 
 NSString *serverVersion;
@@ -32,6 +32,7 @@ NSString *serverVersion;
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -41,6 +42,7 @@ NSString *serverVersion;
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -62,38 +64,36 @@ NSString *serverVersion;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.title=@"FAQ";
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 - (void)viewDidLoad
 {
     self.popoverController = nil;
     
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+	UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-   
-    
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"FAQs";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
-    tvContent.editable = NO;
     
     UIBarButtonItem *btnEmail = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Send Email"
+                                   initWithTitle:@"Email"
                                    style:UIBarButtonItemStyleBordered
                                    target:self
                                    action:@selector(sendEmail)];
+    btnEmail.tintColor = [UIColor blueColor];
     self.navigationItem.rightBarButtonItem = btnEmail;
   
-    
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
-
+    if ([self connectedToNetwork]==YES)
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
@@ -108,25 +108,52 @@ NSString *serverVersion;
 {
     NSLog(@"NSFAQsViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
-    if ([self connectedToNetwork] == NO)
+ 
+    [self getVersionWebService];
+    modelVersionControl = [[VersionControl alloc] init];
+    [modelVersionControl initDB];
+    [modelVersionControl selectData];
+    
+    collection = [[NSMutableArray alloc] init];
+    
+    if ([modelVersionControl.vLink isEqualToString: @"0"])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+        // initialize welcometalk
+        NSLog(@"NSFAQViewController: %s","initialize FAQ");
+        [self loadDataFromWebService];
+        int first = 0;
+        for (FAQ * object in collection)
+        {
+            [object initDB];
+            if(first == 0)
+            {
+                [object clearData];
+                first = 1;
+            }
+            
+            [object saveData:object.faqId question:object.question answer:object.answer];
+        }
+        [modelVersionControl initDB];
+        [modelVersionControl updateData:@"versionfaq =:versionfaq" variable:@":versionfaq" data:serverVersion];
     }
     else
     {
-        [self getVersionWebService];
-        modelVersionControl = [[VersionControl alloc] init];
-        [modelVersionControl initDB];
-        [modelVersionControl selectData];
-        
-        collection = [[NSMutableArray alloc] init];
-        
-        if ([modelVersionControl.vLink isEqualToString: @"0"])
+        if ([modelVersionControl.vLink isEqualToString: serverVersion])
         {
-            // initialize welcometalk
-            NSLog(@"NSFAQViewController: %s","initialize FAQ");
+            // sqlite db version is equal to mysql db version
+            // get data from sqlite database
+            NSLog(@"NSFAQViewController: %s","fetch from FAQ(sqlite)");
+            FAQ *faq = [[FAQ alloc] init];
+            [faq initDB];
+            collection = [[faq selectData] mutableCopy];
+        }
+        else
+        {
+            // load data from mysql database
+            // update data in sqlite database
+            NSLog(@"NSFAQViewController: %s","fetch from FAQ(Web database)");
             [self loadDataFromWebService];
+            
             int first = 0;
             for (FAQ * object in collection)
             {
@@ -136,45 +163,11 @@ NSString *serverVersion;
                     [object clearData];
                     first = 1;
                 }
-                
                 [object saveData:object.faqId question:object.question answer:object.answer];
             }
+            
             [modelVersionControl initDB];
             [modelVersionControl updateData:@"versionfaq =:versionfaq" variable:@":versionfaq" data:serverVersion];
-        }
-        else
-        {
-            if ([modelVersionControl.vLink isEqualToString: serverVersion])
-            {
-                // sqlite db version is equal to mysql db version
-                // get data from sqlite database
-                NSLog(@"NSFAQViewController: %s","fetch from FAQ(sqlite)");
-                FAQ *faq = [[FAQ alloc] init];
-                [faq initDB];
-                collection = [[faq selectData] mutableCopy];
-            }
-            else
-            {
-                // load data from mysql database
-                // update data in sqlite database
-                NSLog(@"NSFAQViewController: %s","fetch from FAQ(Web database)");
-                [self loadDataFromWebService];
-                
-                int first = 0;
-                for (FAQ * object in collection)
-                {
-                    [object initDB];
-                    if(first == 0)
-                    {
-                        [object clearData];
-                        first = 1;
-                    }
-                    [object saveData:object.faqId question:object.question answer:object.answer];
-                }
-                
-                [modelVersionControl initDB];
-                [modelVersionControl updateData:@"versionfaq =:versionfaq" variable:@":versionfaq" data:serverVersion];
-            }
         }
     }
     
@@ -192,21 +185,41 @@ NSString *serverVersion;
 
 -(void)mainThreadFinishing
 {
-    tvContent.text = [tvContent.text stringByAppendingString:@"\n"];
+    UITextView *mainContent = [[UITextView alloc]initWithFrame:CGRectMake(50,50, self.view.frame.size.width-100.f,0)];
+    mainContent.text = @"This is frequently answered question by new employees and you can use the top right button to send us an email of your own question.";
+    mainContent.text = [mainContent.text stringByAppendingString:@"\n"];
     for(FAQ * faq in collection)
     {
-        tvContent.text = [tvContent.text stringByAppendingString:@"\n"];
-        tvContent.text = [tvContent.text stringByAppendingString:@"Q: "];
-        tvContent.text = [tvContent.text stringByAppendingString:faq.question];
-        tvContent.text = [tvContent.text stringByAppendingString:@"\n"];
-        tvContent.text = [tvContent.text stringByAppendingString:@"A: "];
-        tvContent.text = [tvContent.text stringByAppendingString:faq.answer];
-        tvContent.text = [tvContent.text stringByAppendingString:@"\n"];
+        mainContent.text = [mainContent.text stringByAppendingString:@"\n"];
+        mainContent.text = [mainContent.text stringByAppendingString:@"Q: "];
+        mainContent.text = [mainContent.text stringByAppendingString:faq.question];
+        mainContent.text = [mainContent.text stringByAppendingString:@"\n"];
+        mainContent.text = [mainContent.text stringByAppendingString:@"A: "];
+        mainContent.text = [mainContent.text stringByAppendingString:faq.answer];
+        mainContent.text = [mainContent.text stringByAppendingString:@"\n"];
     }
+    
+    mainContent.textAlignment = NSTextAlignmentJustified;
+    mainContent.textColor = [UIColor blackColor];
+    mainContent.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    mainContent.scrollEnabled = NO;
+    mainContent.editable = NO;
+    /*
+     mainContent.layer.borderWidth =1.0;
+     mainContent.layer.cornerRadius =5.0;
+     mainContent.layer.borderColor = [UIColor grayColor].CGColor;
+     */
+    [mainContent sizeToFit];
+    
+    [self.scrollView addSubview: mainContent];
+    
+    [self.scrollView setScrollEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, mainContent.frame.size.height+50.f+50.f)];
     
     activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
     [activityIndicator removeFromSuperview];
+
 }
 
 -(void) getDataFromJson:(NSData *) data
@@ -234,7 +247,7 @@ NSString *serverVersion;
 
 -(void) loadDataFromWebService
 {
-    NSURL *url = [NSURL URLWithString:GETUrl];
+    NSURL *url = [NSURL URLWithString:GETFAQ];
     NSData *data = [NSData dataWithContentsOfURL:url];
     [self getDataFromJson:data];
     [self prepareForWebService];
@@ -251,26 +264,30 @@ NSString *serverVersion;
     serverVersion = [info objectForKey:@"versionFAQ"];
 }
 
--(IBAction)sendEmail
+-(void)sendEmail
 {
-    if ([MFMailComposeViewController canSendMail])
+    if ([self connectedToNetwork]==YES)
     {
-        // device is configured to send mail
-        
-        MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
-        [mailController setMailComposeDelegate:self];
-        NSString *toEmail = FAQEmail;
-        NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
-        NSString *message = @"";//self.emailbody.text;
-        [mailController setMessageBody:message isHTML:NO];
-        [mailController setToRecipients:emailArray];
-        [mailController setSubject:@"New@Shef:questions"];
-        [self presentViewController:mailController animated:YES completion:nil];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Do you want to login one email account now?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+        if ([MFMailComposeViewController canSendMail])
+        {
+            // device is configured to send mail
+            
+            MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
+            [mailController setMailComposeDelegate:self];
+            NSString *toEmail = FAQEmail;
+            NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
+            NSString *message = @"";//self.emailbody.text;
+            [mailController setMessageBody:message isHTML:NO];
+            [mailController setToRecipients:emailArray];
+            [mailController setSubject:FAQSUBJECT];
+            mailController.navigationBar.tintColor = [UIColor blackColor];
+            [self presentViewController:mailController animated:YES completion:nil];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOEMAILTITLE message:NOEMAILMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Wait later", nil];
+            [alert show];
+        }
     }
 }
 
@@ -283,11 +300,7 @@ NSString *serverVersion;
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
-    }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
+        exit(-1);
     }
     
 }
@@ -295,6 +308,12 @@ NSString *serverVersion;
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
     return (connect!=NULL)?YES:NO;
 }
 

@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSiPadFAQsViewController">
             <connections>
-                <outlet property="tvContent" destination="1eI-Kq-88L" id="yVg-Iy-qKk"/>
+                <outlet property="scrollView" destination="Vyc-Xl-xyE" id="wrJ-o4-JRw"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -15,21 +15,17 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eI-Kq-88L">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vyc-Xl-xyE">
                     <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <string key="text">This is frequently answered question by new employee and you can use the top button on the right to drop us an email of your own question.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="1eI-Kq-88L" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="d8P-4j-bS0"/>
-                <constraint firstItem="1eI-Kq-88L" firstAttribute="top" secondItem="2" secondAttribute="top" id="liX-WJ-Xym"/>
-                <constraint firstAttribute="trailing" secondItem="1eI-Kq-88L" secondAttribute="trailing" id="lp0-El-ZYP"/>
-                <constraint firstAttribute="bottom" secondItem="1eI-Kq-88L" secondAttribute="bottom" id="yCt-cd-h7o"/>
+                <constraint firstItem="Vyc-Xl-xyE" firstAttribute="top" secondItem="2" secondAttribute="top" id="8SX-Ys-vEx"/>
+                <constraint firstAttribute="trailing" secondItem="Vyc-Xl-xyE" secondAttribute="trailing" id="BVY-nw-Ul4"/>
+                <constraint firstItem="Vyc-Xl-xyE" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="IaS-kF-B6q"/>
+                <constraint firstAttribute="bottom" secondItem="Vyc-Xl-xyE" secondAttribute="bottom" id="qi9-mV-eQO"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
         </view>

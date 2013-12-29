@@ -19,5 +19,7 @@
 @property (nonatomic, assign) NSAppDelegate *appDelegate;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 
+ 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

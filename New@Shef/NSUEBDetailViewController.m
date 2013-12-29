@@ -10,6 +10,7 @@
 //             2. delete image:
 //             http://stackoverflow.com/questions/9415221/delete-image-from-app-directory-in-iphone
 
+#import <QuartzCore/QuartzCore.h>
 #import "NSUEBDetailViewController.h"
 
 @interface NSUEBDetailViewController ()
@@ -18,7 +19,7 @@
 
 @implementation NSUEBDetailViewController
 
-@synthesize labelRole,tvDetails, txtName, txtRole, txtDescription, ivPhoto, txtStatus, uebId, txtUrl, txtType ;
+@synthesize  txtName, txtRole, txtDescription, txtStatus, uebId, txtUrl, txtType, scrollView ;
  
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,28 +32,27 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
+    UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-
-    [self.tvDetails setEditable:NO];
-    self.tvDetails.textAlignment = NSTextAlignmentJustified;
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = screenBound.size;
-    [self.tvDetails setFont:[UIFont systemFontOfSize:14]];
-    [self.tvDetails setFrame:CGRectMake(screenSize.width/8,
-                                        screenSize.height/8,
-                                        screenSize.width/4*3,
-                                        screenSize.height/8*5)];
-    //prepare for label
-    labelRole.numberOfLines = 0;
-    labelRole.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    labelRole.text = [txtName stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-    [labelRole setFont: [UIFont systemFontOfSize:14]];
-
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = txtRole;
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+    if ([self connectedToNetwork] == NO)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
 }
 
@@ -61,37 +61,31 @@
     NSLog(@"NSUEBDetailViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     UIImage * myImage;
-    if ([self connectedToNetwork] == NO)
+ 
+    // prepare for image
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *name = [NSString stringWithFormat:@"ueb_%@", uebId];
+    NSString *dirpath = [path objectAtIndex:0];
+    
+    if([txtStatus isEqualToString:@"download"])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+        myImage = [self getImageFromURL:txtUrl];
+        [self saveImage:myImage withFileName:name ofType:txtType inDirectory:dirpath];
+        NSLog(@"download from webservice, due to web server updating....");
+        
     }
     else
     {
-        // prepare for image
-        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *name = [NSString stringWithFormat:@"ueb_%@", uebId];
-        NSString *dirpath = [path objectAtIndex:0];
+        myImage = [self loadImage:name ofType:txtType inDirectory:dirpath];
         
-        if([txtStatus isEqualToString:@"download"])
+        if(myImage==NULL)
         {
             myImage = [self getImageFromURL:txtUrl];
             [self saveImage:myImage withFileName:name ofType:txtType inDirectory:dirpath];
-            NSLog(@"download from webservice, due to web server updating....");
-            
-        }
-        else
-        {
-            myImage = [self loadImage:name ofType:txtType inDirectory:dirpath];
-            
-            if(myImage==NULL)
-            {
-                myImage = [self getImageFromURL:txtUrl];
-                [self saveImage:myImage withFileName:name ofType:txtType inDirectory:dirpath];
-                NSLog(@"download from webservice, first download");
-            }
+            NSLog(@"download from webservice, first download");
         }
     }
+ 
     [self performSelectorOnMainThread:@selector(mainThreadFinishing:) withObject:myImage waitUntilDone:NO];
     NSLog(@"NSUEBDetailViewController: %s","backgroundThread finishing...");
 }
@@ -106,26 +100,49 @@
 
 -(void)mainThreadFinishing:(UIImage *) myImage
 {
-    [ivPhoto setImage:myImage];
-    
     // prepare for description
-    self.tvDetails.text = @"";
-    // first, separate by new line
-    self.tvDetails.text = txtDescription;
+
     
-    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = [txtRole stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-    titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:16.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
-    self.navigationItem.titleView = titleView;
-    [titleView sizeToFit];
+    UILabel *labelTitle = [[UILabel alloc]initWithFrame:CGRectMake(15,20,self.view.frame.size.width, 20)];
+    labelTitle.text = txtName;
+    labelTitle.textAlignment = NSTextAlignmentLeft;
+    labelTitle.numberOfLines = 0;
+    labelTitle.lineBreakMode = NSLineBreakByWordWrapping;
+    labelTitle.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    [self.scrollView addSubview:labelTitle];
+     /*
+    NSString *text = txtDescription;
+   
+    NSAttributedString *attributedText = [[NSAttributedString alloc]initWithString:text
+                                                                        attributes:@{NSFontAttributeName: [UIFont fontWithName:@"AppleGothic" size:15.0f]}];
+    
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width-30.f, 9999}
+                                               options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    */
+    UITextView * mainContent = [[UITextView alloc]initWithFrame:CGRectMake(15,120, self.view.frame.size.width-30.f, 0)];
+    mainContent.text = txtDescription;
+    mainContent.textAlignment = NSTextAlignmentJustified;
+    mainContent.textColor = [UIColor blackColor];
+    mainContent.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    mainContent.scrollEnabled = NO;
+    mainContent.editable = NO;
+    mainContent.layer.borderWidth =1.0;
+    mainContent.layer.cornerRadius =5.0;
+    mainContent.layer.borderColor = [UIColor grayColor].CGColor;
+    [mainContent sizeToFit];
+    [self.scrollView addSubview: mainContent];
+    
+    UIImageView *ivUEB= [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 75.f, 20.f, 60.f, 80.f)];
+    [ivUEB setImage:myImage];
+    [self.scrollView addSubview:ivUEB];
+    
+    [self.scrollView setScrollEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, mainContent.frame.size.height+15.f+120.f)];
     
     activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
     [activityIndicator removeFromSuperview];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -215,12 +232,9 @@
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+         exit(-1);
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+ 
 }
 
 - (BOOL) connectedToNetwork

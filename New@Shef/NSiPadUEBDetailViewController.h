@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NSAppDelegate.h"
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @class NSiPadUEBViewController;
 
 @interface NSiPadUEBDetailViewController : UIViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate>
@@ -16,6 +18,7 @@
     UIPopoverController *popoverController;
     UIActivityIndicatorView *activityIndicator;
     NSiPadUEBViewController *uebVC;
+
 }
 
 @property (nonatomic, assign) NSAppDelegate *appDelegate;
@@ -27,10 +30,9 @@
 @property (strong) NSString *txtStatus;
 @property (strong) NSString *txtType;
 @property (strong) NSString *uebId;
-@property (weak, nonatomic) IBOutlet UILabel *labelRole;
-@property (weak, nonatomic) IBOutlet UIImageView *ivPhoto;
-@property (weak, nonatomic) IBOutlet UITextView *tvDetails;
+ 
 @property (nonatomic, retain) NSiPadUEBViewController *uebVC;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end

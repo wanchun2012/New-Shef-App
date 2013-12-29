@@ -14,7 +14,8 @@
 #define GETSUBUEB @"http://54.213.22.84/getUEBSub.php"
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
 #define GETDescription @"http://54.213.22.84/getUEBDescription.php?id=%d"
-
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @class NSiPadUEBDetailViewController;
 @interface NSiPadUEBViewController : UITableViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate>
 {

@@ -13,6 +13,8 @@
 
 #define GETUrl @"http://54.213.22.84/getLink.php"
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 
 @interface NSLinkViewController : UITableViewController
 {

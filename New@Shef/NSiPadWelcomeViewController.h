@@ -14,7 +14,8 @@
 
 #define GETUrl @"http://54.213.22.84/getWelcomeTalk.php"
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
-
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 
 @interface NSiPadWelcomeViewController : UIViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate>
 {
@@ -24,14 +25,13 @@
     NSMutableArray *jsonVersion;
     WelcomeTalk *modelWelcomeTalk;
     VersionControl *modelVersionControl;
+    
+    UIActivityIndicatorView *activityIndicator;
  
 }
 
 @property (nonatomic, assign) NSAppDelegate *appDelegate;
 @property (nonatomic, retain) UIPopoverController *popoverController;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
-@property (weak, nonatomic) IBOutlet UITextView *tvWelcome;
-@property (weak, nonatomic) IBOutlet UIImageView *ivWelcomeImage;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
  
-
 @end

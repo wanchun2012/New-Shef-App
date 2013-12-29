@@ -35,6 +35,7 @@ NSString *statusImage;
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -44,6 +45,7 @@ NSString *statusImage;
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -66,28 +68,28 @@ NSString *statusImage;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	self.title=@"University Executive Board";
- 
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.popoverController = nil;
+	UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"University Executive Board";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:15.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
-    
+
     [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    if ([self connectedToNetwork]==YES)
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
     
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
-    
-
+    }
 }
 
 -(void)backgroundThread
@@ -96,26 +98,84 @@ NSString *statusImage;
     NSLog(@"NSUEBViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     
-    if ([self connectedToNetwork] == NO)
+ 
+    [self getVersionWebService];
+    modelVersionControl = [[VersionControl alloc] init];
+    [modelVersionControl initDB];
+    [modelVersionControl selectData];
+    
+    collectionUEB = [[NSMutableArray alloc] init];
+    collectionUEBSub = [[NSMutableArray alloc] init];
+    
+    if ([modelVersionControl.vUEB isEqualToString: @"0"])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+        // initialize welcometalk
+        NSLog(@"NSUEBViewController: %s","initialize UEB");
+        [self loadDataFromWebService];
+        Position *p = [[Position alloc]init];
+        SubPosition *s = [[SubPosition alloc] init];
+        
+        [s initDB];
+        [s clearData];
+        
+        [p initDB];
+        [p clearData];
+        
+        for (Position * object in collectionUEB)
+        {
+            [object initDB];
+            [object saveData:object.positionId name:object.name];
+        }
+        
+        for (SubPosition * object in collectionUEBSub)
+        {
+            [object initDB];
+            [object saveData:object.subId name:object.name uebName:object.uebName contenttype:object.contenttype imageURL:object.imageUrl foreignkey:object.foreignkey];
+            
+        }
+        
+        [modelVersionControl initDB];
+        [modelVersionControl updateData:@"versionueb =:versionueb" variable:@":versionueb" data:serverVersion];
+        statusImage = @"download";
     }
     else
     {
-        [self getVersionWebService];
-        modelVersionControl = [[VersionControl alloc] init];
-        [modelVersionControl initDB];
-        [modelVersionControl selectData];
-        
-        collectionUEB = [[NSMutableArray alloc] init];
-        collectionUEBSub = [[NSMutableArray alloc] init];
-        
-        if ([modelVersionControl.vUEB isEqualToString: @"0"])
+        if ([modelVersionControl.vUEB isEqualToString: serverVersion])
         {
-            // initialize welcometalk
-            NSLog(@"NSUEBViewController: %s","initialize UEB");
+            // sqlite db version is equal to mysql db version
+            // get data from sqlite database
+            NSLog(@"NSUEBViewController: %s","fetch from UEB(sqlite)");
+            SubPosition *subueb = [[SubPosition alloc] init];
+            [subueb initDB];
+            collectionUEBSub = [[subueb selectData] mutableCopy];
+            
+            Position *ueb = [[Position alloc] init];
+            [ueb initDB];
+            collectionUEB = [[ueb selectData] mutableCopy];
+            
+            for (Position * object in collectionUEB)
+            {
+                for (SubPosition * obj in collectionUEBSub)
+                {
+                    if(obj.foreignkey == object.positionId)
+                    {
+                        [object.subCollection addObject:obj];
+                    }
+                }
+                
+                SubPosition *s1 = [[SubPosition alloc] init];
+                [object.subCollection addObject:s1];
+                SubPosition *s2 = [[SubPosition alloc] init];
+                [object.subCollection addObject:s2];
+            }
+        }
+        else
+        {
+            // load data from mysql database
+            // update data in sqlite database
+            NSLog(@"NSUEBViewController: %s","fetch from UEB(Web database)");
             [self loadDataFromWebService];
+            
             Position *p = [[Position alloc]init];
             SubPosition *s = [[SubPosition alloc] init];
             
@@ -135,79 +195,15 @@ NSString *statusImage;
             {
                 [object initDB];
                 [object saveData:object.subId name:object.name uebName:object.uebName contenttype:object.contenttype imageURL:object.imageUrl foreignkey:object.foreignkey];
-                
             }
             
             [modelVersionControl initDB];
             [modelVersionControl updateData:@"versionueb =:versionueb" variable:@":versionueb" data:serverVersion];
             statusImage = @"download";
-        }
-        else
-        {
-            if ([modelVersionControl.vUEB isEqualToString: serverVersion])
-            {
-                // sqlite db version is equal to mysql db version
-                // get data from sqlite database
-                NSLog(@"NSUEBViewController: %s","fetch from UEB(sqlite)");
-                SubPosition *subueb = [[SubPosition alloc] init];
-                [subueb initDB];
-                collectionUEBSub = [[subueb selectData] mutableCopy];
-                
-                Position *ueb = [[Position alloc] init];
-                [ueb initDB];
-                collectionUEB = [[ueb selectData] mutableCopy];
-                
-                for (Position * object in collectionUEB)
-                {
-                    for (SubPosition * obj in collectionUEBSub)
-                    {
-                        if(obj.foreignkey == object.positionId)
-                        {
-                            [object.subCollection addObject:obj];
-                        }
-                    }
-                    
-                    SubPosition *s1 = [[SubPosition alloc] init];
-                    [object.subCollection addObject:s1];
-                    SubPosition *s2 = [[SubPosition alloc] init];
-                    [object.subCollection addObject:s2];
-                }
-            }
-            else
-            {
-                // load data from mysql database
-                // update data in sqlite database
-                NSLog(@"NSUEBViewController: %s","fetch from UEB(Web database)");
-                [self loadDataFromWebService];
-                
-                Position *p = [[Position alloc]init];
-                SubPosition *s = [[SubPosition alloc] init];
-                
-                [s initDB];
-                [s clearData];
-                
-                [p initDB];
-                [p clearData];
-                
-                for (Position * object in collectionUEB)
-                {
-                    [object initDB];
-                    [object saveData:object.positionId name:object.name];
-                }
-                
-                for (SubPosition * object in collectionUEBSub)
-                {
-                    [object initDB];
-                    [object saveData:object.subId name:object.name uebName:object.uebName contenttype:object.contenttype imageURL:object.imageUrl foreignkey:object.foreignkey];
-                }
-                
-                [modelVersionControl initDB];
-                [modelVersionControl updateData:@"versionueb =:versionueb" variable:@":versionueb" data:serverVersion];
-                statusImage = @"download";
-                
-            }
+            
         }
     }
+ 
     
     [self.tableView reloadData];
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
@@ -361,7 +357,7 @@ NSString *statusImage;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     
@@ -382,13 +378,13 @@ NSString *statusImage;
         cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
         cell.userInteractionEnabled = true;
         //cell.imageView.image = [UIImage imageNamed:@"noimage.jpeg"];
+
+        cell.textLabel.text = [NSString stringWithFormat:@"-%@",sub.name];
         cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
-        cell.textLabel.text = [NSString stringWithFormat:@"-%@",[sub.name stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"]];
-        
     }
 	// just change the cells background color to indicate group separation
-	cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-	cell.backgroundView.backgroundColor = [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0];
+	//cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+	//cell.backgroundView.backgroundColor = [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0];
 	
     return cell;
 }
@@ -410,7 +406,7 @@ NSString *statusImage;
     self.appDelegate.splitViewController.delegate = (id)self.uebDetailVC;
     
   
-    SubPosition *sub ;
+    SubPosition *sub;
     Position *ueb = [collectionUEB objectAtIndex:indexPath.section];
     sub = [ueb.subCollection objectAtIndex:indexPath.row];
   
@@ -492,24 +488,27 @@ NSString *statusImage;
     }
     return result;
 }
-
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
-    }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
+        exit(-1);
     }
     
 }
+
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
     return (connect!=NULL)?YES:NO;
 }
+
 
 
 @end

@@ -34,6 +34,7 @@
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -43,6 +44,7 @@
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -64,21 +66,26 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.title=@"Social";
-}
-
-
-- (void)viewDidLoad
-{
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     self.popoverController = nil;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+
+    UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Social";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
     
     self.webview.scalesPageToFit = YES;
     self.webview.frame=self.view.bounds;
-    
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    if ([self connectedToNetwork]==YES)
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
 }
 
@@ -140,6 +147,27 @@
     
     [[self.appDelegate.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
     [self.appDelegate.splitViewController viewWillAppear:YES];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        exit(-1);
+    }
+    
+}
+
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
+    return (connect!=NULL)?YES:NO;
 }
 
 @end

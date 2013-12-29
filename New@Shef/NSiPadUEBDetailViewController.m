@@ -9,7 +9,7 @@
 #import "NSiPadUEBDetailViewController.h"
 #import "NSiPadUEBViewController.h"
 #import "NSiPadRootViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
 @interface NSiPadUEBDetailViewController ()
 
 @end
@@ -17,7 +17,7 @@
 @implementation NSiPadUEBDetailViewController
 
 @synthesize appDelegate, popoverController;
-@synthesize labelRole,tvDetails, txtName, txtRole, txtDescription, ivPhoto, txtStatus, uebId, txtUrl, txtType, uebVC;
+@synthesize txtName, txtRole, txtDescription, txtStatus, uebId, txtUrl, txtType, uebVC,scrollView;
 -(id) init {
 	if (self=[super init]) {
 		self.appDelegate = (NSAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -33,6 +33,7 @@
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -42,6 +43,7 @@
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -63,38 +65,39 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.title=@"UEB";
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
  
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.popoverController = nil;
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+ 
+	UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-    
-    [self.tvDetails setEditable:NO];
-    self.tvDetails.textAlignment = NSTextAlignmentJustified;
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = screenBound.size;
-    [self.tvDetails setFont:[UIFont systemFontOfSize:14]];
-    [self.tvDetails setFrame:CGRectMake(screenSize.width/8,
-                                        screenSize.height/8,
-                                        screenSize.width/4*3,
-                                        screenSize.height/8*5)];
-    //prepare for label
-    labelRole.numberOfLines = 0;
-    labelRole.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    labelRole.text = [txtName stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-    [labelRole setFont: [UIFont systemFontOfSize:14]];
-    
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = self.txtRole;
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+
+    if ([self connectedToNetwork]==YES)
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
     
     UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
-                                initWithTitle:@"Back"
+                                initWithTitle:@"< Back"
                                 style:UIBarButtonItemStyleBordered
                                 target:self
                                 action:@selector(goBack)];
+    btnBack.tintColor = [UIColor blueColor];
     self.navigationItem.leftBarButtonItem = btnBack;
 
 }
@@ -104,38 +107,34 @@
     NSLog(@"NSUEBDetailViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     UIImage * myImage;
-    if ([self connectedToNetwork] == NO)
+ 
+    // prepare for image
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *name = [NSString stringWithFormat:@"ueb_%@", uebId];
+    NSString *dirpath = [path objectAtIndex:0];
+    
+    if([txtStatus isEqualToString:@"download"])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+        myImage = [self getImageFromURL:txtUrl];
+        [self saveImage:myImage withFileName:name ofType:txtType inDirectory:dirpath];
+        NSLog(@"download from webservice, due to web server updating....");
+        
     }
     else
     {
-        // prepare for image
-        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *name = [NSString stringWithFormat:@"ueb_%@", uebId];
-        NSString *dirpath = [path objectAtIndex:0];
+        myImage = [self loadImage:name ofType:txtType inDirectory:dirpath];
         
-        if([txtStatus isEqualToString:@"download"])
+        if(myImage==NULL)
         {
             myImage = [self getImageFromURL:txtUrl];
             [self saveImage:myImage withFileName:name ofType:txtType inDirectory:dirpath];
-            NSLog(@"download from webservice, due to web server updating....");
-            
-        }
-        else
-        {
-            myImage = [self loadImage:name ofType:txtType inDirectory:dirpath];
-            
-            if(myImage==NULL)
-            {
-                myImage = [self getImageFromURL:txtUrl];
-                [self saveImage:myImage withFileName:name ofType:txtType inDirectory:dirpath];
-                NSLog(@"download from webservice, first download");
-            }
+            NSLog(@"download from webservice, first download");
         }
     }
+   
+   
     [self performSelectorOnMainThread:@selector(mainThreadFinishing:) withObject:myImage waitUntilDone:NO];
+    
     NSLog(@"NSUEBDetailViewController: %s","backgroundThread finishing...");
 }
 
@@ -149,22 +148,33 @@
 
 -(void)mainThreadFinishing:(UIImage *) myImage
 {
-    [ivPhoto setImage:myImage];
+    UILabel *labelTitle = [[UILabel alloc]initWithFrame:CGRectMake(50,50,self.view.frame.size.width, 20)];
+    labelTitle.text = txtName;
+    labelTitle.textAlignment = NSTextAlignmentLeft;
+    labelTitle.numberOfLines = 0;
+    labelTitle.lineBreakMode = NSLineBreakByWordWrapping;
+    labelTitle.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    [self.scrollView addSubview:labelTitle];
+ 
+    UITextView * mainContent = [[UITextView alloc]initWithFrame:CGRectMake(50,180, self.view.frame.size.width-100.f, 0)];
+    mainContent.text = txtDescription;
+    mainContent.textAlignment = NSTextAlignmentJustified;
+    mainContent.textColor = [UIColor blackColor];
+    mainContent.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    mainContent.scrollEnabled = NO;
+    mainContent.editable = NO;
+    mainContent.layer.borderWidth =1.0;
+    mainContent.layer.cornerRadius =5.0;
+    mainContent.layer.borderColor = [UIColor grayColor].CGColor;
+    [mainContent sizeToFit];
+    [self.scrollView addSubview: mainContent];
     
-    // prepare for description
-    self.tvDetails.text = @"";
-    // first, separate by new line
-    self.tvDetails.text = txtDescription;
+    UIImageView *ivUEB= [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 125.f, 50.f, 75.f, 100.f)];
+    [ivUEB setImage:myImage];
+    [self.scrollView addSubview:ivUEB];
     
-    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = [txtRole stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-    titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:16.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
-    self.navigationItem.titleView = titleView;
-    [titleView sizeToFit];
+    [self.scrollView setScrollEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, mainContent.frame.size.height+50.f+180.f)];
     
     activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
@@ -254,38 +264,43 @@
     return result;
 }
 
+-(void)goBack
+{
+  
+        [self.appDelegate.splitViewController viewWillDisappear:YES];
+        NSMutableArray *viewControllerArray=[[NSMutableArray alloc] initWithArray:[[self.appDelegate.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
+        [viewControllerArray removeLastObject];
+        
+        self.uebVC=[[NSiPadUEBViewController alloc]init];
+        [viewControllerArray addObject:self.uebVC];
+        self.appDelegate.splitViewController.delegate = (id)self.uebVC;
+        
+        [[self.appDelegate.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
+        [self.appDelegate.splitViewController viewWillAppear:YES];
+     
+}
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+        exit(-1);
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+    
 }
 
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
     return (connect!=NULL)?YES:NO;
 }
 
--(void)goBack
-{
-    [self.appDelegate.splitViewController viewWillDisappear:YES];
-	NSMutableArray *viewControllerArray=[[NSMutableArray alloc] initWithArray:[[self.appDelegate.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
-	[viewControllerArray removeLastObject];
-	
-    self.uebVC=[[NSiPadUEBViewController alloc]init];
-    [viewControllerArray addObject:self.uebVC];
-    self.appDelegate.splitViewController.delegate = (id)self.uebVC;
-    
-    [[self.appDelegate.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
-	[self.appDelegate.splitViewController viewWillAppear:YES];
-    
-}
 
 
 @end

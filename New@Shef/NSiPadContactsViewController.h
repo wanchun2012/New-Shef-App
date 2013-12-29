@@ -15,6 +15,10 @@
 #define GETFaculty @"http://54.213.22.84/getFaculty.php"
 #define GETDepartment @"http://54.213.22.84/getDepartment.php"
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
+#define NOEMAILTITLE @"No email account"
+#define NOEMAILMSG @"Do you want exit app and login one email account now?"
 @interface NSiPadContactsViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 {
     

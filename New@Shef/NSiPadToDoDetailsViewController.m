@@ -14,7 +14,7 @@
 
 @implementation NSiPadToDoDetailsViewController
 @synthesize appDelegate, popoverController;
-@synthesize tvDescription, labelStatus, txtResponsiblePerson,txtDescription, txtStatus,txtId, iCloudText,document,documentURL,ubiquityURL,metadataQuery, checklistVC;
+@synthesize txtResponsiblePerson,txtDescription, txtStatus,txtId, iCloudText,document,documentURL,ubiquityURL,metadataQuery, checklistVC, txtActivityName;
 -(id) init {
 	if (self=[super init]) {
 		self.appDelegate = (NSAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -30,6 +30,7 @@
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -39,6 +40,7 @@
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -60,24 +62,39 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.title=@"Welcome Talk";
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+    UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Checklist";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
+    
+    btnDone = [[UIBarButtonItem alloc]
+               initWithTitle:@"Done"
+               style:UIBarButtonItemStyleBordered
+               target:self
+               action:@selector(saveDocument)];
+    self.navigationItem.rightBarButtonItem = btnDone;
+    
     
     UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
-                                initWithTitle:@"Back"
+                                initWithTitle:@"< Back"
                                 style:UIBarButtonItemStyleBordered
                                 target:self
                                 action:@selector(goBack)];
+    btnBack.tintColor = [UIColor blueColor];
     self.navigationItem.leftBarButtonItem = btnBack;
 
-    
-    self.navigationController.navigationBar.translucent = NO;
-    if ([self connectedToNetwork] == NO)
+    btnDone.tintColor = [UIColor blueColor];
+ 
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
-    }
-    else
-    {
+ 
         // iCloud loading
         NSLog(@"iCloud loading..........................");
         
@@ -113,40 +130,56 @@
         NSLog(@"starting query");
         [metadataQuery startQuery];
         
+        labelTitle = [[UILabel alloc]initWithFrame:CGRectMake(50,50,self.view.frame.size.width, 20)];
         if([txtStatus isEqualToString:@"Incomplete"])
         {
+            labelTitle.text = @"Status: Incomplete";
             btnDone.enabled = YES;
         }
         else
         {
+            labelTitle.text = txtStatus;
             btnDone.enabled = NO;
         }
+        labelTitle.textAlignment = NSTextAlignmentLeft;
+        labelTitle.numberOfLines = 0;
+        labelTitle.lineBreakMode = NSLineBreakByWordWrapping;
+        labelTitle.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+        [self.scrollView addSubview:labelTitle];
+        
+        NSString *text = [NSString stringWithFormat:@"Summery: \n%@",
+                          [self.txtActivityName stringByReplacingOccurrencesOfString :@"+" withString:@" "]];
+        text = [text stringByAppendingString:@"\n \n"];
+        
+        text = [text stringByAppendingString:
+                [NSString stringWithFormat:@"Responsible person: \n%@",
+                 [self.txtResponsiblePerson stringByReplacingOccurrencesOfString :@"+" withString:@" "]]];
+        text = [text stringByAppendingString:@"\n \n"];
+        
+        text = [text stringByAppendingString:
+                [NSString stringWithFormat:@"Description: \n%@",
+                 [self.txtDescription stringByReplacingOccurrencesOfString :@"+" withString:@" "]]];
+        
+        
+        UITextView *mainContent = [[UITextView alloc]initWithFrame:CGRectMake(50,80, self.view.frame.size.width-100.f,0)];
+        mainContent.text = text;
+        mainContent.textAlignment = NSTextAlignmentJustified;
+        mainContent.textColor = [UIColor blackColor];
+        mainContent.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+        mainContent.scrollEnabled = NO;
+        mainContent.editable = NO;
+        mainContent.layer.borderWidth =1.0;
+        mainContent.layer.cornerRadius =5.0;
+        mainContent.layer.borderColor = [UIColor grayColor].CGColor;
+        [mainContent sizeToFit];
+        [self.scrollView addSubview: mainContent];
+        
+        [self.scrollView setScrollEnabled:YES];
+        [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, mainContent.frame.size.height+80.f+50.f)];
+        
     }
-    
-    btnDone.tintColor = [UIColor blueColor];
-    tvDescription.textAlignment = NSTextAlignmentJustified;
-    tvDescription.userInteractionEnabled = NO;
-    tvDescription.text = [tvDescription.text stringByAppendingString:
-                          [NSString stringWithFormat:@"Responsible person: \n%@",
-                           [self.txtResponsiblePerson stringByReplacingOccurrencesOfString :@"+" withString:@" "]]];
-    tvDescription.text = [tvDescription.text stringByAppendingString:@"\n \n"];
-    
-    tvDescription.text = [tvDescription.text stringByAppendingString:
-                          [NSString stringWithFormat:@"Description: \n%@",
-                           [self.txtDescription stringByReplacingOccurrencesOfString :@"+" withString:@" "]]];
-    
-    
-    labelStatus.text = txtStatus;
-    
-    btnDone = [[UIBarButtonItem alloc]
-                                 initWithTitle:@"Done"
-                                 style:UIBarButtonItemStyleBordered
-                                 target:self
-                                 action:@selector(saveDocument)];
-    self.navigationItem.rightBarButtonItem = btnDone;
 
 }
-
 
 
 - (void)viewDidUnload {
@@ -163,34 +196,39 @@
 
 - (void)saveDocument
 {
-    self.navigationItem.backBarButtonItem.enabled = NO;
-    btnDone.enabled = NO;
-    [[UIBarButtonItem appearance] setTintColor:[UIColor grayColor]];
-    [NSThread detachNewThreadSelector:@selector(activityIndicatorThreadStarting) toTarget:self withObject:nil];
-    NSDate *myDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    NSString *myDateString = [dateFormatter stringFromDate:myDate];
-    labelStatus.numberOfLines = 0;
-    labelStatus.text = [NSString stringWithFormat:@"Status:%@",myDateString];
-    NSString *iCloudStatus = [NSString stringWithFormat:@"%@(%@( end", txtId,labelStatus.text];
-    
-    NSString *test = [document.userText stringByAppendingString:iCloudStatus];
-    self.document.userText = test;
-    
-    [self.document saveToURL:ubiquityURL forSaveOperation:UIDocumentSaveForOverwriting
-           completionHandler:^(BOOL success) {
-               if (success){
-                   NSLog(@"Saved to cloud for overwriting");
-                   
-               } else {
-                   NSLog(@"Not saved to cloud for overwriting");
-               }
-           }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"loadiCloud" object:nil];
-    [self activityThreadFinishing];
+    if ([self connectedToNetwork]==YES)
+    {
+ 
+        self.navigationItem.backBarButtonItem.enabled = NO;
+        btnDone.enabled = NO;
+        [[UIBarButtonItem appearance] setTintColor:[UIColor grayColor]];
+        [NSThread detachNewThreadSelector:@selector(activityIndicatorThreadStarting) toTarget:self withObject:nil];
+        NSDate *myDate = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        NSString *myDateString = [dateFormatter stringFromDate:myDate];
+        labelTitle.numberOfLines = 0;
+        labelTitle.text = [NSString stringWithFormat:@"Status:%@",myDateString];
+        NSString *iCloudStatus = [NSString stringWithFormat:@"%@(%@( end", txtId,labelTitle.text];
+        
+        NSString *test = [document.userText stringByAppendingString:iCloudStatus];
+        self.document.userText = test;
+        
+        [self.document saveToURL:ubiquityURL forSaveOperation:UIDocumentSaveForOverwriting
+               completionHandler:^(BOOL success) {
+                   if (success){
+                       NSLog(@"Saved to cloud for overwriting");
+                       
+                   } else {
+                       NSLog(@"Not saved to cloud for overwriting");
+                   }
+               }];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"loadiCloud" object:nil];
+        [self activityThreadFinishing];
+    }
+  
 }
 
 -(void)activityIndicatorThreadStarting
@@ -200,9 +238,13 @@
 
 -(void)activityThreadFinishing
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved" message:@"Time and Status saved to iCloud" delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-        
+
+    if ([self iCloudIsAvailable]==YES) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved" message:@"Time and Status saved to iCloud" delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+         [alert show];
+    }
+
+    btnDone.tintColor = [UIColor grayColor];
     self.navigationItem.backBarButtonItem.enabled = YES;
 }
 
@@ -213,17 +255,18 @@
     ubiquityURL = [fileManager
                    URLForUbiquityContainerIdentifier:UBIQUITY_CONTAINER_URL];
     
-    NSError *err;
-    if ([ubiquityURL checkResourceIsReachableAndReturnError:&err] == NO)
+    if ([fileManager fileExistsAtPath:[ubiquityURL path]] == NO)
     {
-        return YES;
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please sign in icloud, please try later?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOICLOUDTITLE
+                                                        message:NOICLOUDMSG
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:@"Wait later", nil];
         [alert show];
         return NO;
     }
+    return YES;
 }
 
 - (void)metadataQueryDidFinishGathering:(NSNotification *)notification
@@ -278,17 +321,23 @@
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+        if (![alertView.title isEqualToString:SAVEDTITLE]) {
+            exit(-1);
+        }
+        
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+    
 }
 
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
     return (connect!=NULL)?YES:NO;
 }
 

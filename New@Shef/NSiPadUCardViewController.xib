@@ -6,8 +6,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSiPadUCardViewController">
             <connections>
+                <outlet property="btnLink" destination="WbC-9R-tCh" id="UdA-i2-Wdn"/>
+                <outlet property="btnTake" destination="8l4-Uz-Dke" id="IIc-hR-KUn"/>
                 <outlet property="imageCard" destination="xnF-mO-4AD" id="rze-xv-GQv"/>
                 <outlet property="imageView" destination="UJ8-fl-VzD" id="DxX-68-pRB"/>
+                <outlet property="tvOne" destination="6Kt-A3-Hcv" id="dUH-YR-GCh"/>
+                <outlet property="tvThree" destination="4Qe-bY-8U3" id="QA0-Iw-diB"/>
+                <outlet property="tvTwo" destination="1Oj-hK-uIF" id="9g8-p1-gwl"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>

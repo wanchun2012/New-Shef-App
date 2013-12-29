@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "NSAppDelegate.h"
 #define UniRSS @"http://www.sheffield.ac.uk/cmlink/1.178033"
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @class NSiPadNewsContentViewController;
 
 @interface NSiPadNewsViewController : UITableViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate,NSXMLParserDelegate>

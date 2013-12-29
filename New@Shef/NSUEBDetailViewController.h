@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @interface NSUEBDetailViewController : UIViewController
 {
-        UIActivityIndicatorView *activityIndicator;
+    UIActivityIndicatorView *activityIndicator;
+  
 }
 
 @property (strong) NSString *txtName;
@@ -20,9 +22,9 @@
 @property (strong) NSString *txtStatus;
 @property (strong) NSString *txtType;
 @property (strong) NSString *uebId;
-@property (weak, nonatomic) IBOutlet UILabel *labelRole;
-@property (weak, nonatomic) IBOutlet UIImageView *ivPhoto;
-@property (weak, nonatomic) IBOutlet UITextView *tvDetails;
+ 
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 

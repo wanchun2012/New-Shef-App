@@ -6,9 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSiPadUEBDetailViewController">
             <connections>
-                <outlet property="ivPhoto" destination="ais-XQ-K04" id="9Fp-jI-ad8"/>
-                <outlet property="labelRole" destination="mEj-yr-M8P" id="X3s-jp-fJi"/>
-                <outlet property="tvDetails" destination="44Y-2B-j2v" id="dGh-2T-mYt"/>
+                <outlet property="scrollView" destination="GhI-T4-lXu" id="h2c-mV-Rhh"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -17,39 +15,17 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEj-yr-M8P">
-                    <rect key="frame" x="100" y="50" width="0.0" height="0.0"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ais-XQ-K04">
-                    <rect key="frame" x="593" y="50" width="75" height="100"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="75" id="97F-C2-gYr"/>
-                        <constraint firstAttribute="height" constant="100" id="CJb-Zi-J5S"/>
-                    </constraints>
-                </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44Y-2B-j2v">
-                    <rect key="frame" x="100" y="200" width="568" height="754"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GhI-T4-lXu">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="44Y-2B-j2v" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="100" id="C34-Ps-s0z"/>
-                <constraint firstItem="mEj-yr-M8P" firstAttribute="top" secondItem="2" secondAttribute="top" constant="50" id="CT5-1S-KRw"/>
-                <constraint firstAttribute="trailing" secondItem="ais-XQ-K04" secondAttribute="trailing" constant="100" id="Y7N-uX-Hei"/>
-                <constraint firstItem="ais-XQ-K04" firstAttribute="top" secondItem="2" secondAttribute="top" constant="50" id="dHj-ka-XLh"/>
-                <constraint firstAttribute="bottom" secondItem="44Y-2B-j2v" secondAttribute="bottom" constant="50" id="ewW-Kd-FHa"/>
-                <constraint firstAttribute="trailing" secondItem="44Y-2B-j2v" secondAttribute="trailing" constant="100" id="oGd-v9-4DS"/>
-                <constraint firstItem="44Y-2B-j2v" firstAttribute="top" secondItem="ais-XQ-K04" secondAttribute="bottom" constant="50" id="qfu-Sn-wKg"/>
-                <constraint firstItem="mEj-yr-M8P" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="100" id="saF-5r-fi3"/>
+                <constraint firstItem="GhI-T4-lXu" firstAttribute="top" secondItem="2" secondAttribute="top" id="F6c-an-8yv"/>
+                <constraint firstAttribute="trailing" secondItem="GhI-T4-lXu" secondAttribute="trailing" id="Flp-DZ-KyZ"/>
+                <constraint firstItem="GhI-T4-lXu" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="XZS-w6-Kq2"/>
+                <constraint firstAttribute="bottom" secondItem="GhI-T4-lXu" secondAttribute="bottom" id="cxZ-cH-L0s"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
         </view>

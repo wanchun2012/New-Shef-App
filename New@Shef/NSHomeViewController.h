@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @interface NSHomeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *labelNews;
+@property (weak, nonatomic) IBOutlet UILabel *labelMap;
+@property (weak, nonatomic) IBOutlet UILabel *labelSocial;
+@property (weak, nonatomic) IBOutlet UILabel *labelUEB;
+@property (weak, nonatomic) IBOutlet UILabel *labelChecklist;
+@property (weak, nonatomic) IBOutlet UILabel *labelUCard;
+@property (weak, nonatomic) IBOutlet UILabel *labelContacts;
+@property (weak, nonatomic) IBOutlet UILabel *labelFAQ;
+@property (weak, nonatomic) IBOutlet UILabel *labelLink;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnNews;
 @property (weak, nonatomic) IBOutlet UIButton *btnMap;
@@ -19,5 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnContacts;
 @property (weak, nonatomic) IBOutlet UIButton *btnFAQ;
 @property (weak, nonatomic) IBOutlet UIButton *btnLinks;
+@property (weak, nonatomic) IBOutlet UILabel *footer;
+@property (weak, nonatomic) IBOutlet UIButton *btnTerms;
 
 @end

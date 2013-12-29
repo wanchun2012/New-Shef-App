@@ -37,48 +37,110 @@ NSString *emailAddress;
 
 - (void)viewDidLoad
 {
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"Contacts";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:30.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
     
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    if ([self connectedToNetwork] == NO)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
 }
 
 -(void)backgroundThread
 {
+    self.tableView.separatorStyle = NO;
     NSLog(@"NSContactsViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
-    if ([self connectedToNetwork] == NO)
+ 
+    [self getVersionWebService];
+    modelVersionControl = [[VersionControl alloc] init];
+    [modelVersionControl initDB];
+    [modelVersionControl selectData];
+    
+    collectionFaculty = [[NSMutableArray alloc] init];
+    collectionDepartment = [[NSMutableArray alloc] init];
+    
+    if ([modelVersionControl.vContact isEqualToString: @"0"])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+        // initialize welcometalk
+        NSLog(@"NSContactsViewController: %s","initialize CONTACT");
+        [self loadDataFromWebService];
+        Faculty *f = [[Faculty alloc]init];
+        Department *d = [[Department alloc] init];
+        
+        [d initDB];
+        [d clearData];
+        
+        [f initDB];
+        [f clearData];
+        
+        for (Faculty * object in collectionFaculty)
+        {
+            [object initDB];
+            [object saveData:object.facultyId name:object.name];
+        }
+        
+        for (Department * object in collectionDepartment)
+        {
+            [object initDB];
+            [object saveData:object.departmentId name:object.name email:object.email phone:object.phone foreignkey:object.foreignkey];
+        }
+        [modelVersionControl initDB];
+        [modelVersionControl updateData:@"versioncontact =:versioncontact" variable:@":versioncontact" data:serverVersion];
     }
     else
     {
-        [self getVersionWebService];
-        modelVersionControl = [[VersionControl alloc] init];
-        [modelVersionControl initDB];
-        [modelVersionControl selectData];
-        
-        collectionFaculty = [[NSMutableArray alloc] init];
-        collectionDepartment = [[NSMutableArray alloc] init];
-        
-        if ([modelVersionControl.vContact isEqualToString: @"0"])
+        if ([modelVersionControl.vContact isEqualToString: serverVersion])
         {
-            // initialize welcometalk
-            NSLog(@"NSContactsViewController: %s","initialize CONTACT");
+            // sqlite db version is equal to mysql db version
+            // get data from sqlite database
+            NSLog(@"NSContactsViewController: %s","fetch from Contact(sqlite)");
+            Department *department = [[Department alloc] init];
+            [department initDB];
+            collectionDepartment = [[department selectData] mutableCopy];
+            
+            Faculty *faculty = [[Faculty alloc] init];
+            [faculty initDB];
+            collectionFaculty = [[faculty selectData] mutableCopy];
+            
+            for (Faculty * object in collectionFaculty)
+            {
+                for (Department * obj in collectionDepartment)
+                {
+                    if(obj.foreignkey == object.facultyId)
+                    {
+                        [object.deptCollection addObject:obj];
+                    }
+                }
+                
+                Department *d1 = [[Department alloc] init];
+                [object.deptCollection addObject:d1];
+                Department *d2 = [[Department alloc] init];
+                [object.deptCollection addObject:d2];
+            }
+        }
+        else
+        {
+            // load data from mysql database
+            // update data in sqlite database
+            NSLog(@"NSContactsViewController: %s","fetch from Contact(Web database)");
             [self loadDataFromWebService];
+            
             Faculty *f = [[Faculty alloc]init];
             Department *d = [[Department alloc] init];
             
@@ -99,73 +161,12 @@ NSString *emailAddress;
                 [object initDB];
                 [object saveData:object.departmentId name:object.name email:object.email phone:object.phone foreignkey:object.foreignkey];
             }
+            
             [modelVersionControl initDB];
             [modelVersionControl updateData:@"versioncontact =:versioncontact" variable:@":versioncontact" data:serverVersion];
         }
-        else
-        {
-            if ([modelVersionControl.vContact isEqualToString: serverVersion])
-            {
-                // sqlite db version is equal to mysql db version
-                // get data from sqlite database
-                NSLog(@"NSContactsViewController: %s","fetch from Contact(sqlite)");
-                Department *department = [[Department alloc] init];
-                [department initDB];
-                collectionDepartment = [[department selectData] mutableCopy];
-                
-                Faculty *faculty = [[Faculty alloc] init];
-                [faculty initDB];
-                collectionFaculty = [[faculty selectData] mutableCopy];
-                
-                for (Faculty * object in collectionFaculty)
-                {
-                    for (Department * obj in collectionDepartment)
-                    {
-                        if(obj.foreignkey == object.facultyId)
-                        {
-                            [object.deptCollection addObject:obj];
-                        }
-                    }
-                    
-                    Department *d1 = [[Department alloc] init];
-                    [object.deptCollection addObject:d1];
-                    Department *d2 = [[Department alloc] init];
-                    [object.deptCollection addObject:d2];
-                }
-            }
-            else
-            {
-                // load data from mysql database
-                // update data in sqlite database
-                NSLog(@"NSContactsViewController: %s","fetch from Contact(Web database)");
-                [self loadDataFromWebService];
-                
-                Faculty *f = [[Faculty alloc]init];
-                Department *d = [[Department alloc] init];
-                
-                [d initDB];
-                [d clearData];
-                
-                [f initDB];
-                [f clearData];
-                
-                for (Faculty * object in collectionFaculty)
-                {
-                    [object initDB];
-                    [object saveData:object.facultyId name:object.name];
-                }
-                
-                for (Department * object in collectionDepartment)
-                {
-                    [object initDB];
-                    [object saveData:object.departmentId name:object.name email:object.email phone:object.phone foreignkey:object.foreignkey];
-                }
-                
-                [modelVersionControl initDB];
-                [modelVersionControl updateData:@"versioncontact =:versioncontact" variable:@":versioncontact" data:serverVersion];
-            }
-        }
     }
+    
     [self.tableView reloadData];
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
     NSLog(@"NSContactsViewController: %s","backgroundThread finishing...");
@@ -184,6 +185,7 @@ NSString *emailAddress;
     activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
     [activityIndicator removeFromSuperview];
+    self.tableView.separatorStyle = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -295,7 +297,7 @@ NSString *emailAddress;
     static NSString *CellIdentifier = @"RowCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	cell.textLabel.font =[UIFont systemFontOfSize:15.0f];
+ 
     
     Faculty *faculty = [collectionFaculty objectAtIndex:indexPath.section];
     Department *department = [faculty.deptCollection objectAtIndex:indexPath.row];
@@ -307,8 +309,8 @@ NSString *emailAddress;
     CGSize screenSize = screenBound.size;
     CGFloat screenWidth = screenSize.width;
     UICustomizedButton *btnPhone = [UICustomizedButton buttonWithType:UIButtonTypeRoundedRect];
-    //set the position of the butto
-    btnPhone.frame = CGRectMake(cell.frame.origin.x+screenWidth-cell.frame.size.height/2, cell.frame.origin.y, cell.frame.size.height/2, cell.frame.size.height/2);
+    //set the position of the button
+    btnPhone.frame = CGRectMake(cell.frame.origin.x+screenWidth-cell.frame.size.height-10.f, cell.frame.origin.y+cell.frame.size.height/4, cell.frame.size.height/2, cell.frame.size.height/2);
     btnPhone.phone = department.phone;//[department.phone stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     btnPhone.backgroundColor= [UIColor clearColor];
     [cell.contentView addSubview:btnPhone];
@@ -318,7 +320,7 @@ NSString *emailAddress;
   
     UICustomizedButton *btnEmail = [UICustomizedButton buttonWithType:UIButtonTypeRoundedRect];
     //set the position of the button
-    btnEmail.frame = CGRectMake(btnPhone.frame.origin.x, cell.frame.origin.y+cell.frame.size.height/2, cell.frame.size.height/2, cell.frame.size.height/2);
+    btnEmail.frame = CGRectMake(cell.frame.origin.x+screenWidth-cell.frame.size.height/2-5.f, cell.frame.origin.y+cell.frame.size.height/4, cell.frame.size.height/2, cell.frame.size.height/2);
     
     btnEmail.email = department.email;
     btnEmail.backgroundColor= [UIColor clearColor];
@@ -339,7 +341,7 @@ NSString *emailAddress;
     {
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+        cell.textLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
         
         cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
         cell.userInteractionEnabled = true;
@@ -349,7 +351,7 @@ NSString *emailAddress;
     }
 	// just change the cells background color to indicate group separation
 	cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-	cell.backgroundView.backgroundColor = [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0];
+	cell.backgroundView.backgroundColor = [UIColor whiteColor];
 	cell.accessoryType=UITableViewCellAccessoryNone;
     //cell.userInteractionEnabled = NO;
     return cell;
@@ -360,10 +362,9 @@ NSString *emailAddress;
     static NSString *CellIdentifier = @"GroupCell";
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.textLabel.font = [UIFont fontWithName:@"CenturyGothic-Bold" size:12];
+    cell.textLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    
     
     Faculty *faculty = [collectionFaculty objectAtIndex:section];
     cell.textLabel.text = faculty.name;
@@ -427,35 +428,37 @@ NSString *emailAddress;
     else
     {
         //show alert later
-        NSMutableString *msg = [[NSMutableString alloc] initWithString:@"Cant make call on ipad and do you have enough credit on the phone? Try this number:"];
+        NSMutableString *msg = [[NSMutableString alloc] initWithString:NOPHONEMSG];
         s = [s stringByReplacingOccurrencesOfString :@"+" withString:@" "];
         [msg appendString:s];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:msg delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOPHONETITLE message:msg delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
 }
 
 -(void)sendEmail:(UICustomizedButton *)sender
 {
-    if ([MFMailComposeViewController canSendMail])
-    {
-        // device is configured to send mail
-        MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
-        [mailController setMailComposeDelegate:self];
-        NSString *toEmail = sender.email;
-        NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
-        NSString *message = @"";//self.emailbody.text;
-        [mailController setMessageBody:message isHTML:NO];
-        [mailController setToRecipients:emailArray];
-        [mailController setSubject:@"New@Shef:questions"];
-        [self presentViewController:mailController animated:YES completion:nil];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Do you want to login one email account now?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
-    }
+ 
+        if ([MFMailComposeViewController canSendMail])
+        {
+            MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
+            [mailController setMailComposeDelegate:self];
+            NSString *toEmail = sender.email;
+            NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
+            NSString *message = @"";//self.emailbody.text;
+            [mailController setMessageBody:message isHTML:NO];
+            [mailController setToRecipients:emailArray];
+            [mailController setSubject:@""];
+            [self presentViewController:mailController animated:YES completion:nil];
+        }
+
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOEMAILTITLE message:NOEMAILMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Wait later", nil];
+            [alert show];
+        }
+    
 }
 
 -(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -469,12 +472,11 @@ NSString *emailAddress;
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+        if (![alertView.title isEqualToString:NOPHONETITLE])
+       
+          exit(-1);
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+ 
 }
 
 - (BOOL) connectedToNetwork

@@ -22,15 +22,6 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </webView>
-                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3PK-w6-aJX">
-                    <rect key="frame" x="0.0" y="954" width="768" height="50"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="roK-TD-wbf"/>
-                    </constraints>
-                    <items/>
-                </tabBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uY3-mS-jAg">
                     <rect key="frame" x="243" y="969" width="68" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -64,11 +55,8 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="3PK-w6-aJX" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="1Ni-hY-vFF"/>
                 <constraint firstItem="Yd3-Gu-Z5S" firstAttribute="top" secondItem="2" secondAttribute="top" id="5L5-cj-8S6"/>
-                <constraint firstAttribute="bottom" secondItem="3PK-w6-aJX" secondAttribute="bottom" id="8tm-Td-xaH"/>
                 <constraint firstAttribute="centerX" secondItem="evO-rb-fC2" secondAttribute="centerX" id="A9F-e1-kkn"/>
-                <constraint firstAttribute="trailing" secondItem="3PK-w6-aJX" secondAttribute="trailing" id="BuW-CU-xsT"/>
                 <constraint firstAttribute="bottom" secondItem="Yd3-Gu-Z5S" secondAttribute="bottom" constant="50" id="S3I-Dy-lcD"/>
                 <constraint firstAttribute="trailing" secondItem="Yd3-Gu-Z5S" secondAttribute="trailing" id="cP3-Vl-sYc"/>
                 <constraint firstAttribute="bottom" secondItem="uY3-mS-jAg" secondAttribute="bottom" constant="5" id="ebb-Qi-N1e"/>

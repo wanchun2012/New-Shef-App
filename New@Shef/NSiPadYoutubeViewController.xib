@@ -22,15 +22,6 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </webView>
-                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rxf-XO-l6A">
-                    <rect key="frame" x="0.0" y="954" width="768" height="50"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="sKO-2m-ivr"/>
-                    </constraints>
-                    <items/>
-                </tabBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wki-pO-NGw">
                     <rect key="frame" x="361" y="969" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -66,7 +57,6 @@
             <constraints>
                 <constraint firstItem="qcY-yT-TvU" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="2qw-OX-S4Q"/>
                 <constraint firstAttribute="bottom" secondItem="2Ad-Fv-F67" secondAttribute="bottom" constant="5" id="7sl-Mb-fjN"/>
-                <constraint firstItem="Rxf-XO-l6A" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="98E-AC-r2U"/>
                 <constraint firstAttribute="centerX" secondItem="Wki-pO-NGw" secondAttribute="centerX" id="A6x-jc-Sho"/>
                 <constraint firstAttribute="bottom" secondItem="RFJ-yR-cjp" secondAttribute="bottom" constant="5" id="JUd-YF-4Cy"/>
                 <constraint firstAttribute="trailing" secondItem="qcY-yT-TvU" secondAttribute="trailing" id="ObU-Is-f4G"/>
@@ -74,8 +64,6 @@
                 <constraint firstItem="Wki-pO-NGw" firstAttribute="leading" secondItem="RFJ-yR-cjp" secondAttribute="trailing" constant="35" id="alh-fp-EAr"/>
                 <constraint firstAttribute="bottom" secondItem="Wki-pO-NGw" secondAttribute="bottom" constant="5" id="bfZ-Kd-AD7"/>
                 <constraint firstAttribute="bottom" secondItem="qcY-yT-TvU" secondAttribute="bottom" constant="50" id="dzZ-L9-GP5"/>
-                <constraint firstAttribute="bottom" secondItem="Rxf-XO-l6A" secondAttribute="bottom" id="eaP-IF-56v"/>
-                <constraint firstAttribute="trailing" secondItem="Rxf-XO-l6A" secondAttribute="trailing" id="ilp-DL-ecP"/>
                 <constraint firstItem="2Ad-Fv-F67" firstAttribute="leading" secondItem="Wki-pO-NGw" secondAttribute="trailing" constant="50" id="xFA-NO-Wof"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>

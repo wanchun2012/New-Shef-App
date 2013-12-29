@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 
 @interface NSNewsContentViewController : UIViewController
 {

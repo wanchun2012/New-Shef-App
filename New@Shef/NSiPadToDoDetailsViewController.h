@@ -11,6 +11,12 @@
 #import "NSiPadRootViewController.h"
 #import "MyDocument.h"
 #define UBIQUITY_CONTAINER_URL @"R84A95845G.The-University-of-Sheffield.NewShef"
+#define NOICLOUDTITLE @"No iCloud account"
+#define NOICLOUDMSG @"There is no iCloud account, exit app or try later to sign in"
+#define SAVEDTITLE @"Saved"
+#define SAVEDMSG @"Time and Status saved to iCloud"
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 
 @class NSiPadChecklistViewController;
 @interface NSiPadToDoDetailsViewController : UIViewController
@@ -27,16 +33,15 @@
     UIBarButtonItem *btnDone;
     
     NSiPadChecklistViewController *checklistVC;
+    UILabel *labelTitle;
 
 }
 
 @property (nonatomic, assign) NSAppDelegate *appDelegate;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 
- 
-@property (weak, nonatomic) IBOutlet UITextView *tvDescription;
-@property (weak, nonatomic) IBOutlet UILabel *labelStatus;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong) NSString *txtActivityName;
 @property (strong) NSString *txtResponsiblePerson;
 @property (strong) NSString *txtDescription;
 @property (strong) NSString *txtId;

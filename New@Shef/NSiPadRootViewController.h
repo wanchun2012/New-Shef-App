@@ -8,7 +8,8 @@
 //  http://kshitizghimire.com.np/uisplitviewcontroller-multipledetailviews-with-navigation-controller/
 
 #import <UIKit/UIKit.h>
-
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @class NSiPadWelcomeViewController;
 @class NSiPadNewsViewController;
 @class NSiPadFacebookViewController;

@@ -17,6 +17,11 @@
 #define GETActivity @"http://54.213.22.84/getActivity.php"
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
 
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
+#define NOICLOUDTITLE @"No iCloud account"
+#define NOICLOUDMSG @"There is no iCloud account, exit app or try later to sign in"
+
 @class NSiPadToDoDetailsViewController;
 @interface NSiPadChecklistViewController : UITableViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate>
 {

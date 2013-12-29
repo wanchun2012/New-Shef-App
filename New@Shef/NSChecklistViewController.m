@@ -41,29 +41,27 @@ NSIndexPath *selectedPath=0;
 
 - (void)viewDidLoad
 {
+    UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"Checklist";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:30.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
     
-    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     if ([self iCloudIsAvailable])
     {
         if ([self connectedToNetwork] == NO)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-        
         }
+      
         else
         {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLoad) name:@"loadiCloud" object:nil];
@@ -78,6 +76,7 @@ NSIndexPath *selectedPath=0;
 
 -(void)backgroundThread
 {
+    self.tableView.separatorStyle = NO;
     NSLog(@"NSChecklistViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     
@@ -169,6 +168,7 @@ NSIndexPath *selectedPath=0;
     activityIndicator.hidden = YES;
     [activityIndicator stopAnimating];
     [activityIndicator removeFromSuperview];
+    self.tableView.separatorStyle = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -280,7 +280,7 @@ NSIndexPath *selectedPath=0;
     static NSString *CellIdentifier = @"RowCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	cell.textLabel.font =[UIFont systemFontOfSize:15.0f];
+	cell.textLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];;
     
     Group *group = [collectionGroup objectAtIndex:indexPath.section];
     Activity *activity = [group.activityCollection objectAtIndex:indexPath.row];
@@ -294,6 +294,9 @@ NSIndexPath *selectedPath=0;
     }
     else
     {
+        if (collectionFinished.count == 0) {
+            cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+        }
         for (Finished* object in collectionFinished)
         {
             if(object.activityId == activity.activityId)
@@ -309,16 +312,14 @@ NSIndexPath *selectedPath=0;
         
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        
         cell.userInteractionEnabled = true;
         cell.textLabel.text = [NSString stringWithFormat:@"-%@",activity.name];
- 
         cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
         
     }
 	// just change the cells background color to indicate group separation
 	cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-	cell.backgroundView.backgroundColor = [UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0];
+	cell.backgroundView.backgroundColor = [UIColor whiteColor];
 	
     return cell;
 }
@@ -328,7 +329,7 @@ NSIndexPath *selectedPath=0;
     static NSString *CellIdentifier = @"GroupCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.textLabel.font = [UIFont fontWithName:@"CenturyGothic-Bold" size:12];
+    cell.textLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
 
@@ -391,8 +392,8 @@ NSIndexPath *selectedPath=0;
     selectedPath = indexPath;
     Group *group = [collectionGroup objectAtIndex:indexPath.section];
     Activity *activity = [group.activityCollection objectAtIndex:indexPath.row-1];
-	//viewController.text = activity.name;
     
+	viewController.txtActivityName = activity.name;
     viewController.txtDescription = activity.detail;
     viewController.txtResponsiblePerson = activity.responsiblePerson;
     viewController.txtId = [NSString stringWithFormat:@"%d",activity.activityId];
@@ -457,11 +458,11 @@ NSIndexPath *selectedPath=0;
     if ([fileManager fileExistsAtPath:[ubiquityURL path]] == NO)
     {
        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ROFL"
-                                                        message:@"Dee dee doo doo."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOICLOUDTITLE
+                                                        message:NOICLOUDMSG
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+                                              otherButtonTitles:@"Wait later", nil];
         [alert show];
         return NO;
     }
@@ -529,12 +530,9 @@ NSIndexPath *selectedPath=0;
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+         exit(-1); 
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+ 
 }
 
 - (BOOL) connectedToNetwork

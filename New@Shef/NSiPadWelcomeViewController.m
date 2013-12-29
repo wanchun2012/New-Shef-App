@@ -15,7 +15,7 @@
 
 @implementation NSiPadWelcomeViewController
 @synthesize appDelegate, popoverController;
-@synthesize tvWelcome, ivWelcomeImage, loadingIndicator;
+@synthesize scrollView;
 
 NSString *serverVersion;
 NSString *imagetype;
@@ -34,6 +34,7 @@ NSString *imagetype;
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -43,6 +44,7 @@ NSString *imagetype;
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -64,18 +66,18 @@ NSString *imagetype;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.title=@"Welcome Talk";
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+	UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Welcome to the University of Sheffield";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
  
-    ivWelcomeImage.frame = CGRectMake(ivWelcomeImage.frame.origin.x,ivWelcomeImage.frame.origin.y,75,100);
-    // prepare for welcome text
-    [self.tvWelcome setEditable:NO];
-    self.tvWelcome.textAlignment = NSTextAlignmentJustified;
-    CGRect screenBound = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = screenBound.size;
-    [self.tvWelcome setFont:[UIFont systemFontOfSize:12]];
-    [self.tvWelcome setFrame:CGRectMake(screenSize.width/8,screenSize.height/8,
-                                        screenSize.width/4*3, screenSize.height/8*5)];
-    
     [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
     
 }
@@ -203,9 +205,8 @@ NSString *imagetype;
     UIImage *image;
     if ([self connectedToNetwork] == NO)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-        NSLog(@"NSWelcomeViewController: %s","There is no network...");
     }
     else
     {
@@ -270,23 +271,37 @@ NSString *imagetype;
 
 -(void)mainThreadStarting
 {
-    [self.loadingIndicator startAnimating];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:activityIndicator];
+    activityIndicator.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [activityIndicator startAnimating];
 }
 
 -(void)mainThreadFinishing:(UIImage *)image
 {
     if ([self connectedToNetwork])
     {
-        // prepare for welcome image
-        [ivWelcomeImage setImage:image];
+        UITextView * mainContent = [[UITextView alloc]initWithFrame:CGRectMake(50,50, self.view.frame.size.width-260.f, 0)];
+        mainContent.text = modelWelcomeTalk.welcomeText;
+        mainContent.textAlignment = NSTextAlignmentJustified;
+        mainContent.textColor = [UIColor blackColor];
+        mainContent.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+        [mainContent sizeToFit];
+        mainContent.scrollEnabled = NO;
+        mainContent.editable = NO;
+        [self.scrollView addSubview: mainContent];
+        UIImageView *ivWelcome = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 170.f, 50.f, 120.f, 160.f)];
+        [ivWelcome setImage:image];
+        [self.scrollView addSubview:ivWelcome];
         
-        // prepare for welcome text
-        self.tvWelcome.text = modelWelcomeTalk.welcomeText;
-  
+        [self.scrollView setScrollEnabled:YES];
+        [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, mainContent.frame.size.height+50.f+50.f)];
+
     }
     
-    self.loadingIndicator.hidden = YES;
-    [self.loadingIndicator stopAnimating];
+    activityIndicator.hidden = YES;
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning
@@ -299,12 +314,9 @@ NSString *imagetype;
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+         exit(-1); 
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+ 
 }
 
 - (BOOL) connectedToNetwork

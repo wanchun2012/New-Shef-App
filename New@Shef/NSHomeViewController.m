@@ -14,7 +14,9 @@
 @end
 
 @implementation NSHomeViewController
-@synthesize btnChecklist,btnContacts,btnFAQ,btnLinks,btnMap,btnNews,btnSocial,btnUCard,btnUEB;
+@synthesize btnChecklist,btnContacts,btnFAQ,btnLinks,btnMap,btnNews,btnSocial,btnUCard,btnUEB,
+    labelChecklist,labelContacts,labelFAQ,labelLink,labelMap,labelNews,labelSocial,labelUCard,labelUEB,footer,btnTerms;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,10 +34,22 @@
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"New@Shef";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:30.0f];
     titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
+    
+    self.labelUEB.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelUCard.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelSocial.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelNews.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelMap.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelLink.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelFAQ.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelContacts.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.labelChecklist.font = [UIFont fontWithName:@"AppleGothic" size:12.0f];
+    self.footer.font = [UIFont fontWithName:@"AppleGothic" size:10.0f];
+    self.btnTerms.titleLabel.font = [UIFont fontWithName:@"AppleGothic" size:10.0f];
     
     self.btnChecklist.layer.cornerRadius = 10;
     self.btnChecklist.clipsToBounds = YES;
@@ -84,10 +98,10 @@
    //   ||[[segue identifier] isEqualToString:@"segueLinks"]
         ||[[segue identifier] isEqualToString:@"segueFAQ"]) {
         
-        if ([self connectedToNetwork] == NO) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        if ([self connectedToNetwork] == NO)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-
         }
     }
 }
@@ -96,12 +110,9 @@
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+        exit(-1); // no
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
+
     
 }
 

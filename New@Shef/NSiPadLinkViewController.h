@@ -12,9 +12,11 @@
 #import "Link.h"
 #import "VersionControl.h"
 
-
 #define GETVersion @"http://54.213.22.84/getVersionControl.php"
-#define GETUrl @"http://54.213.22.84/getLink.php"
+#define GETLINK @"http://54.213.22.84/getLink.php"
+
+#define NOINTERNETMSG @"There is no internet, app exit, please wait and try later."
+#define NOINTERNETALERTTITLE @"No internet"
 @class NSiPadWebsiteViewController;
 @interface NSiPadLinkViewController : UITableViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate>
 {

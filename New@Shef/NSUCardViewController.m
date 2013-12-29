@@ -13,7 +13,7 @@
 @end
 
 @implementation NSUCardViewController
-@synthesize sendbutton;
+@synthesize sendbutton, tvLineFour, tvLineOne, tvLineThree, tvLineTwo, tvLineFive, btnChoose, btnLink, btnTake;
 - (IBAction)TakePhoto
 {
     self.picker1 = [[UIImagePickerController alloc] init];
@@ -34,16 +34,10 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-      NSLog(@"finish ======++++++");
-     self.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    
-    
+  
+    self.image = [info objectForKey:UIImagePickerControllerOriginalImage];
     self.imageView.image = self.image;
-    
- 
     [self dismissViewControllerAnimated:YES completion:NULL];
-    
     [self.imageCard addSubview:self.imageView];
 }
 
@@ -54,23 +48,49 @@
 
 -(IBAction)SendEmail
 {
-    if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
-        [mailController setMailComposeDelegate:self];
-        NSString *toEmail = UCardEmail;
-        NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
-        NSString *message = @"hello this is the photo for ucard";
-        [mailController setMessageBody:message isHTML:NO];
-        [mailController setToRecipients:emailArray];
-        [mailController setSubject:@"New@Shef:ucard"];
-        NSData *imageData = UIImagePNGRepresentation(self.image);
-        [mailController addAttachmentData:imageData mimeType:@"image/png" fileName:@"Name"];
-        [self presentViewController:mailController animated:YES completion:nil];
+    if ([self connectedToNetwork] == NO)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        btnChoose.enabled = NO;
+        btnTake.enabled = NO;
+        btnLink.enabled = NO;
+        
+        
+        btnChoose.tintColor = [UIColor grayColor];
+        btnLink.tintColor = [UIColor grayColor];
+        btnTake.tintColor = [UIColor grayColor];
+        sendbutton.tintColor = [UIColor grayColor];
+        
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Do you want to login one email account now?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
+        if ([MFMailComposeViewController canSendMail]) {
+            if(self.image == nil)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOPHOTOTITLE message:NOPHOTOMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            else
+            {
+                MFMailComposeViewController *mailController = [[ MFMailComposeViewController alloc]init];
+                [mailController setMailComposeDelegate:self];
+                NSString *toEmail = UCardEmail;
+                NSArray *emailArray = [[NSArray alloc]initWithObjects:toEmail, nil];
+                NSString *message = UCARDEMAILMSG;
+                [mailController setMessageBody:message isHTML:NO];
+                [mailController setToRecipients:emailArray];
+                [mailController setSubject:UCARDEMAILSUBJECT];
+                NSData *imageData = UIImagePNGRepresentation(self.image);
+                [mailController addAttachmentData:imageData mimeType:@"image/png" fileName:@"Name"];
+                [self presentViewController:mailController animated:YES completion:nil];
+            }
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOEMAILTITLE message:NOEMAILMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Wait later", nil];
+            [alert show];
+        }
     }
 }
 
@@ -91,19 +111,56 @@
 
 - (void)viewDidLoad
 {
+    UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    self.sendbutton.tintColor = [UIColor blueColor]; 
-    [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
     titleView.text = @"UCard";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:30.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
+    
+    tvLineOne.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    tvLineTwo.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    tvLineThree.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    tvLineFour.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    tvLineFive.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    
+    btnTake.titleLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    btnChoose.titleLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    btnLink.titleLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
+    
+    if ([self connectedToNetwork] == NO)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        btnChoose.enabled = NO;
+        btnTake.enabled = NO;
+        btnLink.enabled = NO;
+        sendbutton.enabled = NO;
+        
+        
+        btnChoose.tintColor = [UIColor grayColor];
+        btnLink.tintColor = [UIColor grayColor];
+        btnTake.tintColor = [UIColor grayColor];
+        sendbutton.tintColor = [UIColor grayColor];
+        
+    }
+    else
+    {
+        btnChoose.enabled = YES;
+        btnTake.enabled = YES;
+        btnLink.enabled = YES;
+        sendbutton.enabled = YES;
+        
+        UIColor *iosBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+        btnChoose.tintColor = iosBlue;
+        btnLink.tintColor = iosBlue;
+        btnTake.tintColor = iosBlue;
+        sendbutton.tintColor = iosBlue;
+    }
 	// Do any additional setup after loading the view.
 }
 
@@ -117,12 +174,14 @@
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+        if (![alertView.title isEqualToString:NOPHOTOTITLE])
+            exit(-1);
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
-    
+}
+
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    return (connect!=NULL)?YES:NO;
 }
 @end

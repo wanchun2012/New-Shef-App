@@ -29,6 +29,7 @@
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -38,6 +39,7 @@
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -59,36 +61,38 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	self.title=@"Welcome Talk";
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
 - (void)viewDidLoad
 {
     self.popoverController = nil;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-    
+	UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
     UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.text = @"Uni News";
+    titleView.text = @"News";
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont boldSystemFontOfSize:20.0];
-    titleView.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    titleView.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    titleView.textColor = [UIColor blackColor]; // Your color here
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
     
     self.webview.scalesPageToFit = YES;
     self.webview.frame=self.view.bounds;
-    
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    if ([self connectedToNetwork]==YES)
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
     
     UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
-                                 initWithTitle:@"Back"
+                                 initWithTitle:@"< Back"
                                  style:UIBarButtonItemStyleBordered
                                  target:self
                                  action:@selector(goBack)];
+    btnBack.tintColor = [UIColor blueColor];
     self.navigationItem.leftBarButtonItem = btnBack;
 
 }
@@ -136,5 +140,29 @@
 	[self.appDelegate.splitViewController viewWillAppear:YES];
 
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        exit(-1);
+    }
+    
+}
+
+- (BOOL) connectedToNetwork
+{
+    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
+    return (connect!=NULL)?YES:NO;
+}
+
+
+
 
 @end

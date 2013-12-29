@@ -27,6 +27,9 @@ NSString *lonDetail;
 NSString *latDetail;
 NSString *titleDetail;
 NSString *snippetDetail;
+UIBarButtonItem *btnBack;
+UIView *temp;
+UIView *backup;
  
 -(id) init {
 	if (self=[super init]) {
@@ -41,6 +44,7 @@ NSString *snippetDetail;
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     
 }
 
@@ -50,6 +54,7 @@ NSString *snippetDetail;
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
 }
 
 
@@ -71,13 +76,32 @@ NSString *snippetDetail;
 
 - (void)viewWillAppear:(BOOL)animated {
     self.popoverController = nil;
-  
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
     [super viewWillAppear:animated];
-	self.title=@"Overview";
+	UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.barTintColor = nevBarColor;
+    UILabel * titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleView.text = @"Map-Overview";
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.font = [UIFont fontWithName:@"AppleGothic" size:20.0f];
+    titleView.textColor = [UIColor whiteColor]; // Your color here
+    self.navigationItem.titleView = titleView;
+    [titleView sizeToFit];
     
-    [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    btnBack = [[UIBarButtonItem alloc]
+               initWithTitle:@"< Back"
+               style:UIBarButtonItemStyleBordered
+               target:self
+               action:@selector(goBack)];
+    btnBack.tintColor = nevBarColor;
+    btnBack.enabled = NO;
+    self.navigationItem.leftBarButtonItem = btnBack;
+    
+    if ([self connectedToNetwork]==YES)
+    {
+        [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
+    }
     [super viewDidLoad];
     
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
@@ -96,28 +120,53 @@ NSString *snippetDetail;
     NSLog(@"NSMapListViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     
-    if ([self connectedToNetwork] == NO)
+ 
+    [self getVersionWebService];
+    modelVersionControl = [[VersionControl alloc] init];
+    [modelVersionControl initDB];
+    [modelVersionControl selectData];
+    
+    collection = [[NSMutableArray alloc] init];
+    insideCollection = [[NSMutableArray alloc] init];
+    
+    if ([modelVersionControl.vGoogleMap isEqualToString: @"0"])
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        [alert show];
-        
+        // initialize welcometalk
+        NSLog(@"NSMapListViewController: %s","initialize GOOGLEMAP");
+        [self loadDataFromWebService];
+        int first = 0;
+        for (GoogleMap * object in collection)
+        {
+            [object initDB];
+            if(first == 0)
+            {
+                [object clearData];
+                first = 1;
+            }
+            
+            [object saveData:object.googleMapId insideview:object.insideview latitude:object.latitude longitude:object.longitude title:object.title snippet:object.snippet];
+        }
+        [modelVersionControl initDB];
+        [modelVersionControl updateData:@"versiongooglemap =:versiongooglemap" variable:@":versiongooglemap" data:serverVersion];
     }
     else
     {
-        
-        [self getVersionWebService];
-        modelVersionControl = [[VersionControl alloc] init];
-        [modelVersionControl initDB];
-        [modelVersionControl selectData];
-        
-        collection = [[NSMutableArray alloc] init];
-        insideCollection = [[NSMutableArray alloc] init];
-        
-        if ([modelVersionControl.vGoogleMap isEqualToString: @"0"])
+        if ([modelVersionControl.vGoogleMap isEqualToString: serverVersion])
         {
-            // initialize welcometalk
-            NSLog(@"NSMapListViewController: %s","initialize GOOGLEMAP");
+            // sqlite db version is equal to mysql db version
+            // get data from sqlite database
+            NSLog(@"NSMapListViewController: %s","fetch from GOOGLEMAP(sqlite)");
+            GoogleMap *googleMap = [[GoogleMap alloc] init];
+            [googleMap initDB];
+            collection = [[googleMap selectData] mutableCopy];
+        }
+        else
+        {
+            // load data from mysql database
+            // update data in sqlite database
+            NSLog(@"NSMapListViewController: %s","fetch from GOOGLEMAP(Web database)");
             [self loadDataFromWebService];
+            
             int first = 0;
             for (GoogleMap * object in collection)
             {
@@ -127,52 +176,19 @@ NSString *snippetDetail;
                     [object clearData];
                     first = 1;
                 }
-                
                 [object saveData:object.googleMapId insideview:object.insideview latitude:object.latitude longitude:object.longitude title:object.title snippet:object.snippet];
             }
+            
             [modelVersionControl initDB];
             [modelVersionControl updateData:@"versiongooglemap =:versiongooglemap" variable:@":versiongooglemap" data:serverVersion];
         }
-        else
-        {
-            if ([modelVersionControl.vGoogleMap isEqualToString: serverVersion])
-            {
-                // sqlite db version is equal to mysql db version
-                // get data from sqlite database
-                NSLog(@"NSMapListViewController: %s","fetch from GOOGLEMAP(sqlite)");
-                GoogleMap *googleMap = [[GoogleMap alloc] init];
-                [googleMap initDB];
-                collection = [[googleMap selectData] mutableCopy];
-            }
-            else
-            {
-                // load data from mysql database
-                // update data in sqlite database
-                NSLog(@"NSMapListViewController: %s","fetch from GOOGLEMAP(Web database)");
-                [self loadDataFromWebService];
-                
-                int first = 0;
-                for (GoogleMap * object in collection)
-                {
-                    [object initDB];
-                    if(first == 0)
-                    {
-                        [object clearData];
-                        first = 1;
-                    }
-                    [object saveData:object.googleMapId insideview:object.insideview latitude:object.latitude longitude:object.longitude title:object.title snippet:object.snippet];
-                }
-                
-                [modelVersionControl initDB];
-                [modelVersionControl updateData:@"versiongooglemap =:versiongooglemap" variable:@":versiongooglemap" data:serverVersion];
-            }
-        }
-        
-        for (GoogleMap * object in collection)
-        {
-            [insideCollection addObject:object];
-        }
     }
+    
+    for (GoogleMap * object in collection)
+    {
+        [insideCollection addObject:object];
+    }
+    
     [self.tableView reloadData];
     [self performSelectorOnMainThread:@selector(mainThreadFinishing) withObject:nil waitUntilDone:NO];
     NSLog(@"NSMapListViewController: %s","backgroundThread finishing...");
@@ -254,6 +270,40 @@ NSString *snippetDetail;
     return insideCollection.count;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+}
+
+-(CGFloat)getLabelHeightForText:(NSString *)text andWidth:(CGFloat)labelWidth
+{
+    NSAttributedString *attributedText = [[NSAttributedString alloc]initWithString:text
+                                                                        attributes:@{NSFontAttributeName: [UIFont fontWithName:@"AppleGothic" size:15.0f]}];
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){labelWidth, 10000}
+                                               options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    return rect.size.height;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GoogleMap *marker = [[GoogleMap alloc]init];
+    marker = [insideCollection objectAtIndex:indexPath.row];
+    
+    NSString *string = marker.title;
+    string = [string stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+    CGFloat textHeight = [self getLabelHeightForText:string andWidth:self.view.frame.size.width];//give your label width
+    
+    if (textHeight > 60.f)
+    {
+        return textHeight + 10.f;
+    }
+    else
+    {
+        return 60.f;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)atableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -265,13 +315,12 @@ NSString *snippetDetail;
     }
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     
     GoogleMap *marker = [[GoogleMap alloc]init];
     marker = [insideCollection objectAtIndex:indexPath.row];
     cell.textLabel.text = marker.title;
     cell.textLabel.text = [cell.textLabel.text stringByReplacingOccurrencesOfString :@"+" withString:@" "];
-    
+    cell.textLabel.font = [UIFont fontWithName:@"AppleGothic" size:15.0f];
     return cell;
 }
 
@@ -290,12 +339,12 @@ NSString *snippetDetail;
  
     titleDetail = [titleDetail stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     snippetDetail = [snippetDetail stringByReplacingOccurrencesOfString :@"+" withString:@" "];
-
+    btnBack.enabled = YES;
+    btnBack.tintColor = [UIColor blueColor];
+    if ([self connectedToNetwork]==YES) {
     [self updateToView];
-
+    }
 }
-
-
 
 - (void)updateToView
 {
@@ -313,8 +362,9 @@ NSString *snippetDetail;
     mapView_.settings.myLocationButton =YES;
     mapView_.buildingsEnabled = YES;
     mapView_.indoorEnabled = YES;
-    
-    self.view = mapView_;
+    backup = self.view;
+    temp = mapView_;
+    self.view = temp;
     
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
@@ -325,24 +375,36 @@ NSString *snippetDetail;
     marker.map = mapView_;
 }
 
+-(void)goBack
+{
+    if ([self connectedToNetwork]==YES)
+    {
+        self.view = backup;
+        self.tableView.hidden = NO;
+        UIColor *nevBarColor = [UIColor colorWithRed:51.0f/255.0f green:51.0f/255.0f blue:51.0f/255.0f alpha:0.5f];
+        btnBack.tintColor = nevBarColor;
+        btnBack.enabled = NO;
+    }
+}
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
     {
-        //  exit(-1); // no
+        exit(-1);
     }
-    if(buttonIndex == 1)
-    {
-        exit(-1); // yes
-    }
-
+    
 }
 
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
+    if (connect==NULL) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
     return (connect!=NULL)?YES:NO;
 }
-
 
 @end

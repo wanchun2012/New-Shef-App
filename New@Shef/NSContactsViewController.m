@@ -450,6 +450,7 @@ NSString *emailAddress;
             [mailController setMessageBody:message isHTML:NO];
             [mailController setToRecipients:emailArray];
             [mailController setSubject:@""];
+            mailController.navigationBar.tintColor = [UIColor blackColor];
             [self presentViewController:mailController animated:YES completion:nil];
         }
 

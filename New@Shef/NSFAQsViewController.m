@@ -238,6 +238,7 @@ NSString *serverVersion;
             [mailController setMessageBody:message isHTML:NO];
             [mailController setToRecipients:emailArray];
             [mailController setSubject:FAQSUBJECT];
+            mailController.navigationBar.tintColor = [UIColor blackColor];
             [self presentViewController:mailController animated:YES completion:nil];
         }
         else

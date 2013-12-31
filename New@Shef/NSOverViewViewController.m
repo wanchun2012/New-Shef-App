@@ -17,7 +17,7 @@
 @end
 
 @implementation NSOverViewViewController
-@synthesize lat, lon, title, snippet;
+@synthesize lat, lon, titlet, snippet;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,7 +83,7 @@
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
         marker.position = CLLocationCoordinate2DMake([lat floatValue],[lon floatValue]);
-        marker.title = title;
+        marker.title = titlet;
         marker.title = [marker.title stringByReplacingOccurrencesOfString :@"+" withString:@" "];
         marker.snippet = snippet;
         marker.snippet = [marker.snippet stringByReplacingOccurrencesOfString :@"+" withString:@" "];

@@ -87,7 +87,8 @@ NSString *serverVersion;
                                    style:UIBarButtonItemStyleBordered
                                    target:self
                                    action:@selector(sendEmail)];
-    btnEmail.tintColor = [UIColor blueColor];
+    UIColor *iosBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    btnEmail.tintColor = iosBlue;
     self.navigationItem.rightBarButtonItem = btnEmail;
   
     if ([self connectedToNetwork]==YES)

@@ -7,7 +7,7 @@
 //
 
 #import "NSUCardViewController.h"
-
+#define SOURCETYPE UIImagePickerControllerSourceTypeCamera
 @interface NSUCardViewController ()
 
 @end
@@ -16,11 +16,17 @@
 @synthesize sendbutton, tvLineFour, tvLineOne, tvLineThree, tvLineTwo, tvLineFive, btnChoose, btnLink, btnTake;
 - (IBAction)TakePhoto
 {
+    if ([UIImagePickerController isSourceTypeAvailable:SOURCETYPE]) {
     self.picker1 = [[UIImagePickerController alloc] init];
     self.picker1.delegate = self;
     [self.picker1 setSourceType:UIImagePickerControllerSourceTypeCamera];
     [self presentViewController:self.picker1 animated:YES completion:NULL];
     //[picker1 relsease];
+    } else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOCAMERATITLE message:NOCAMERAMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Wait later", nil];
+        [alert show];
+    }
 }
 
 - (IBAction)ChoosePhoto

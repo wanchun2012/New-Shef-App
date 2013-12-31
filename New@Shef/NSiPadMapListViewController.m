@@ -340,7 +340,8 @@ UIView *backup;
     titleDetail = [titleDetail stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     snippetDetail = [snippetDetail stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     btnBack.enabled = YES;
-    btnBack.tintColor = [UIColor blueColor];
+    UIColor *iosBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    btnBack.tintColor = iosBlue;
     if ([self connectedToNetwork]==YES) {
     [self updateToView];
     }

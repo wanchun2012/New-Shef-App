@@ -19,6 +19,8 @@
 #define NOEMAILMSG @"Do you want exit app and login one email account now?"
 #define NOPHOTOTITLE @"No photo exists"
 #define NOPHOTOMSG @"Please, take a photo before submit."
+#define NOCAMERATITLE @"No camera"
+#define NOCAMERAMSG @"No camera exist, exit app and try on iPhone or iPad"
 @class NSiPadUCardDetailViewController;
 @interface NSiPadUCardViewController : UIViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationBarDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate> 
 {

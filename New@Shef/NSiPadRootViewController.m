@@ -80,7 +80,7 @@
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    NSLog(@"hello we are working on table cells");
+    
     // Configure the cell.
     if (indexPath.row == 0) {
         cell.textLabel.text = @"Welcome Talk";
@@ -137,7 +137,7 @@
         cell.textLabel.text = @"Terms of Use";
     }
         
-        NSLog(@"hello we are working on table cells");
+  
     return cell;
 }
  

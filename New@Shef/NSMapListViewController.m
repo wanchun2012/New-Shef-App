@@ -277,8 +277,8 @@ NSString *serverVersion;
         
         viewController.lon = lon;
         viewController.lat = lat;
-        viewController.title = title;
-        viewController.title = [viewController.title stringByReplacingOccurrencesOfString :@"+" withString:@" "];
+        viewController.titlet = title;
+        viewController.titlet = [viewController.titlet stringByReplacingOccurrencesOfString :@"+" withString:@" "];
         viewController.snippet = snippet;
         viewController.snippet = [viewController.snippet stringByReplacingOccurrencesOfString :@"+" withString:@" "];
     }

@@ -37,7 +37,7 @@ UIBarButtonItem *btnBack;
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
-    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+ 
     
 }
 
@@ -47,7 +47,7 @@ UIBarButtonItem *btnBack;
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
-    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+  
 }
 
 
@@ -90,7 +90,8 @@ UIBarButtonItem *btnBack;
                                 style:UIBarButtonItemStyleBordered
                                 target:self
                                 action:@selector(goBack)];
-    btnBack.tintColor = nevBarColor;
+    UIColor *iosBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    btnBack.tintColor = iosBlue;
     btnBack.enabled = NO;
     self.navigationItem.leftBarButtonItem = btnBack;
  
@@ -383,7 +384,8 @@ UIBarButtonItem *btnBack;
     [activityIndicator removeFromSuperview];
     [self.view addSubview:webview];
     btnBack.enabled = YES;
-    btnBack.tintColor = [UIColor blueColor];
+    UIColor *iosBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    btnBack.tintColor = iosBlue;
 }
 
 -(void) goBack

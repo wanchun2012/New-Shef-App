@@ -9,6 +9,8 @@
 #import "NSiPadUCardViewController.h"
 #import "NSiPadUCardDetailViewController.h"
 #import "NSiPadRootViewController.h"
+
+#define SOURCETYPE UIImagePickerControllerSourceTypeCamera
 @interface NSiPadUCardViewController ()
 
 @end
@@ -106,12 +108,13 @@
      
         btnTake.enabled = NO;
         btnLink.enabled = NO;
-     
+        btnEmail.enabled = NO;
         
         
  
         btnLink.tintColor = [UIColor grayColor];
         btnTake.tintColor = [UIColor grayColor];
+        btnEmail.tintColor = [UIColor grayColor];
      
         
     }
@@ -125,6 +128,7 @@
       
         btnLink.tintColor = iosBlue;
         btnTake.tintColor = iosBlue;
+        btnEmail.tintColor = iosBlue;
         
     }
 
@@ -133,11 +137,17 @@
 
 - (IBAction)TakePhoto
 {
-    self.picker1 = [[UIImagePickerController alloc] init];
-    self.picker1.delegate = self;
-    [self.picker1 setSourceType:UIImagePickerControllerSourceTypeCamera];
-    [self presentViewController:self.picker1 animated:YES completion:NULL];
-    //[picker1 relsease];
+    if ([UIImagePickerController isSourceTypeAvailable:SOURCETYPE]) {
+        self.picker1 = [[UIImagePickerController alloc] init];
+        self.picker1.delegate = self;
+        [self.picker1 setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:self.picker1 animated:YES completion:NULL];
+        //[picker1 relsease];
+    } else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOCAMERATITLE message:NOCAMERAMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Wait later", nil];
+        [alert show];
+    }
 }
 /*
 - (IBAction)ChoosePhoto

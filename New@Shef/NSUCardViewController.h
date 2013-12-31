@@ -18,6 +18,8 @@
 #define NOEMAILMSG @"Do you want exit app and login one email account now?"
 #define NOPHOTOTITLE @"No photo exists"
 #define NOPHOTOMSG @"Please, take a photo or choose from library before submit."
+#define NOCAMERATITLE @"No camera"
+#define NOCAMERAMSG @"No camera exist, exit app and try on iPhone or iPad"
 
 @interface NSUCardViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationBarDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 

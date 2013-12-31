@@ -32,7 +32,7 @@
     [[self navigationItem] setLeftBarButtonItem:barButtonItem];
 	[self setPopoverController:pc];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
-    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+ 
     
 }
 
@@ -42,7 +42,7 @@
 	[[self navigationItem] setLeftBarButtonItem:nil];
 	[self setPopoverController:nil];
 	self.appDelegate.rootPopoverButtonItem = barButtonItem;
-    [[UINavigationBar appearance] setBarTintColor:[UIColor blueColor]];
+    
 }
 
 

@@ -21,12 +21,11 @@
 		C011EF4C179EC50E006216D6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C011EF4B179EC50E006216D6 /* QuartzCore.framework */; };
 		C011EF4E179EC51C006216D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C011EF4D179EC51C006216D6 /* SystemConfiguration.framework */; };
 		C011EF52179EC6BE006216D6 /* NSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C011EF51179EC6BE006216D6 /* NSMapViewController.m */; };
+		C012D7DD18716A2700EFA35C /* splash_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = C012D7DC18716A2700EFA35C /* splash_iPhone.png */; };
+		C012D7DF18716C4100EFA35C /* splash_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = C012D7DE18716C4100EFA35C /* splash_iPad.png */; };
+		C012D82E1871831900EFA35C /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C012D82D1871831900EFA35C /* GoogleMaps.framework */; };
+		C012D8301871837900EFA35C /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C012D82F1871837900EFA35C /* GoogleMaps.bundle */; };
 		C0160146179C5FDE0008AB9C /* NSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0160145179C5FDE0008AB9C /* NSHomeViewController.m */; };
-		C024341217E8881300AADA23 /* NSWelcomeViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C024341117E8881300AADA23 /* NSWelcomeViewControlleriPad.m */; };
-		C024341617E88CC400AADA23 /* NSUCardViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C024341517E88CC400AADA23 /* NSUCardViewControlleriPad.m */; };
-		C024341A17E890F700AADA23 /* NSFAQsViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C024341917E890F700AADA23 /* NSFAQsViewControlleriPad.m */; };
-		C024341E17E8946100AADA23 /* NSNewsViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C024341D17E8946100AADA23 /* NSNewsViewControlleriPad.m */; };
-		C024342117E8947D00AADA23 /* NSNewsContentViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C024342017E8947D00AADA23 /* NSNewsContentViewControlleriPad.m */; };
 		C033FD55179C332800BFF62C /* News64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD54179C332800BFF62C /* News64.png */; };
 		C033FD57179C33C100BFF62C /* Map64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD56179C33C100BFF62C /* Map64.png */; };
 		C033FD59179C33EC00BFF62C /* Checklist64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD58179C33EC00BFF62C /* Checklist64.png */; };
@@ -36,33 +35,57 @@
 		C033FD61179C353700BFF62C /* Links64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD60179C353700BFF62C /* Links64.png */; };
 		C033FD63179C353B00BFF62C /* Contacts64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD62179C353B00BFF62C /* Contacts64.png */; };
 		C033FD65179C354200BFF62C /* UEB64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD64179C354200BFF62C /* UEB64.png */; };
-		C03561F217EE530D00FFD009 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C03561F117EE530D00FFD009 /* background.jpg */; };
-		C03561F417EE558F00FFD009 /* splash-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C03561F317EE558F00FFD009 /* splash-568h@2x.png */; };
+		C039B86F186545740057C947 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C039B86E186545740057C947 /* MainWindow.xib */; };
+		C041B3C118655E2400C7EF81 /* NSiPadRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C041B3BF18655E2400C7EF81 /* NSiPadRootViewController.m */; };
+		C041B3C818655E9D00C7EF81 /* NSiPadNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C041B3C618655E9D00C7EF81 /* NSiPadNewsViewController.m */; };
+		C041B3C918655E9D00C7EF81 /* NSiPadNewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C041B3C718655E9D00C7EF81 /* NSiPadNewsViewController.xib */; };
+		C041B3CE18655EEA00C7EF81 /* NSiPadWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C041B3CC18655EEA00C7EF81 /* NSiPadWelcomeViewController.m */; };
+		C041B3CF18655EEA00C7EF81 /* NSiPadWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C041B3CD18655EEA00C7EF81 /* NSiPadWelcomeViewController.xib */; };
+		C041B3D31865D44A00C7EF81 /* NSiPadNewsContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C041B3D11865D44A00C7EF81 /* NSiPadNewsContentViewController.m */; };
+		C041B3D41865D44A00C7EF81 /* NSiPadNewsContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C041B3D21865D44A00C7EF81 /* NSiPadNewsContentViewController.xib */; };
+		C041B3DA1865F87500C7EF81 /* NSiPadFacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C041B3D81865F87500C7EF81 /* NSiPadFacebookViewController.m */; };
+		C041B3DB1865F87500C7EF81 /* NSiPadFacebookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C041B3D91865F87500C7EF81 /* NSiPadFacebookViewController.xib */; };
+		C041B3DF1865F88800C7EF81 /* NSiPadTwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C041B3DD1865F88800C7EF81 /* NSiPadTwitterViewController.m */; };
+		C041B3E01865F88800C7EF81 /* NSiPadTwitterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C041B3DE1865F88800C7EF81 /* NSiPadTwitterViewController.xib */; };
+		C041B3E41865F89A00C7EF81 /* NSiPadYoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C041B3E21865F89A00C7EF81 /* NSiPadYoutubeViewController.m */; };
+		C041B3E51865F89A00C7EF81 /* NSiPadYoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C041B3E31865F89A00C7EF81 /* NSiPadYoutubeViewController.xib */; };
 		C04429E3179ABC460022B0DE /* NSChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04429E2179ABC460022B0DE /* NSChecklistViewController.m */; };
 		C04429EC179ABC9B0022B0DE /* NSToDoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04429EB179ABC9B0022B0DE /* NSToDoDetailsViewController.m */; };
 		C04E45C117A53308002BFF48 /* NSOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04E45C017A53308002BFF48 /* NSOverViewViewController.m */; };
-		C069D85517EA391A0024DABA /* NSMapViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D85417EA391A0024DABA /* NSMapViewControlleriPad.m */; };
-		C069D85817EA3AD50024DABA /* NSInsideViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D85717EA3AD50024DABA /* NSInsideViewControlleriPad.m */; };
-		C069D85B17EA3BBE0024DABA /* NSBuildingDetailViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D85A17EA3BBE0024DABA /* NSBuildingDetailViewControlleriPad.m */; };
-		C069D85E17EA40320024DABA /* NSMapListViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D85D17EA40320024DABA /* NSMapListViewControlleriPad.m */; };
-		C069D86117EA40930024DABA /* NSOverViewViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D86017EA40930024DABA /* NSOverViewViewControlleriPad.m */; };
-		C069D86517EA46520024DABA /* NSFacebookViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D86417EA46520024DABA /* NSFacebookViewControlleriPad.m */; };
-		C069D86817EA46710024DABA /* NSTwitterViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D86717EA46710024DABA /* NSTwitterViewControlleriPad.m */; };
-		C069D86B17EA46900024DABA /* NSYoutubeViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D86A17EA46900024DABA /* NSYoutubeViewControlleriPad.m */; };
-		C069D86F17EA49F50024DABA /* NSLinkViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D86E17EA49F50024DABA /* NSLinkViewControlleriPad.m */; };
-		C069D87217EA4A1A0024DABA /* NSWebsiteViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D87117EA4A1A0024DABA /* NSWebsiteViewControlleriPad.m */; };
-		C069D87617EA4E9E0024DABA /* NSContactsViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D87517EA4E9E0024DABA /* NSContactsViewControlleriPad.m */; };
-		C069D87917EA4EFB0024DABA /* NSContactDetailViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D87817EA4EFB0024DABA /* NSContactDetailViewControlleriPad.m */; };
-		C069D87D17EA59A70024DABA /* NSUEBViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D87C17EA59A70024DABA /* NSUEBViewControlleriPad.m */; };
-		C069D88017EA59C80024DABA /* NSUEBDetailViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D87F17EA59C80024DABA /* NSUEBDetailViewControlleriPad.m */; };
-		C069D88817EAD0740024DABA /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C069D88717EAD0740024DABA /* GoogleMaps.framework */; };
-		C069D88A17EAD0BA0024DABA /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C069D88917EAD0BA0024DABA /* GoogleMaps.bundle */; };
-		C069D89017EAD4310024DABA /* NSToDoDetailsViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C069D88F17EAD4300024DABA /* NSToDoDetailsViewControlleriPad.m */; };
-		C074D0B617B36A0800777179 /* NSHomeViewControlleriPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C074D0B517B36A0800777179 /* NSHomeViewControlleriPad.m */; };
-		C090EA431796D9F000771382 /* NSContactDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EA421796D9F000771382 /* NSContactDetailViewController.m */; };
+		C0730E4A18669390005111B9 /* NSiPadLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E4818669390005111B9 /* NSiPadLinkViewController.m */; };
+		C0730E4B18669390005111B9 /* NSiPadLinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E4918669390005111B9 /* NSiPadLinkViewController.xib */; };
+		C0730E4F1866968D005111B9 /* NSiPadWebsiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E4D1866968D005111B9 /* NSiPadWebsiteViewController.m */; };
+		C0730E501866968D005111B9 /* NSiPadWebsiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E4E1866968D005111B9 /* NSiPadWebsiteViewController.xib */; };
+		C0730E5518669A5F005111B9 /* NSiPadFAQsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E5318669A5F005111B9 /* NSiPadFAQsViewController.m */; };
+		C0730E5618669A5F005111B9 /* NSiPadFAQsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E5418669A5F005111B9 /* NSiPadFAQsViewController.xib */; };
+		C0730E661866C04C005111B9 /* NSiPadInsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E641866C04C005111B9 /* NSiPadInsideViewController.m */; };
+		C0730E671866C04C005111B9 /* NSiPadInsideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E651866C04C005111B9 /* NSiPadInsideViewController.xib */; };
+		C0730E701866F727005111B9 /* NSiPadMapListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E6E1866F727005111B9 /* NSiPadMapListViewController.m */; };
+		C0730E711866F727005111B9 /* NSiPadMapListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E6F1866F727005111B9 /* NSiPadMapListViewController.xib */; };
+		C0730E7518677F39005111B9 /* NSiPadContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E7318677F39005111B9 /* NSiPadContactsViewController.m */; };
+		C0730E7618677F39005111B9 /* NSiPadContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E7418677F39005111B9 /* NSiPadContactsViewController.xib */; };
+		C0730E7B18679571005111B9 /* NSiPadUEBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E7918679571005111B9 /* NSiPadUEBViewController.m */; };
+		C0730E7C18679571005111B9 /* NSiPadUEBViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E7A18679571005111B9 /* NSiPadUEBViewController.xib */; };
+		C0730E801867A477005111B9 /* NSiPadUEBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E7E1867A477005111B9 /* NSiPadUEBDetailViewController.m */; };
+		C0730E811867A477005111B9 /* NSiPadUEBDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E7F1867A477005111B9 /* NSiPadUEBDetailViewController.xib */; };
+		C0730E871867AC21005111B9 /* NSiPadChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E851867AC21005111B9 /* NSiPadChecklistViewController.m */; };
+		C0730E881867AC21005111B9 /* NSiPadChecklistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E861867AC21005111B9 /* NSiPadChecklistViewController.xib */; };
+		C0730E8C1867BC34005111B9 /* NSiPadToDoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E8A1867BC34005111B9 /* NSiPadToDoDetailsViewController.m */; };
+		C0730E8D1867BC34005111B9 /* NSiPadToDoDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E8B1867BC34005111B9 /* NSiPadToDoDetailsViewController.xib */; };
+		C0730E911867CBD3005111B9 /* NSiPadUCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E8F1867CBD3005111B9 /* NSiPadUCardViewController.m */; };
+		C0730E921867CBD3005111B9 /* NSiPadUCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E901867CBD3005111B9 /* NSiPadUCardViewController.xib */; };
+		C0730E9618681D33005111B9 /* NSiPadUCardDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E9418681D33005111B9 /* NSiPadUCardDetailViewController.m */; };
+		C0730E9718681D33005111B9 /* NSiPadUCardDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E9518681D33005111B9 /* NSiPadUCardDetailViewController.xib */; };
+		C0730E9C186824C6005111B9 /* NSiPadTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E9A186824C6005111B9 /* NSiPadTermsViewController.m */; };
+		C0730E9D186824C6005111B9 /* NSiPadTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E9B186824C6005111B9 /* NSiPadTermsViewController.xib */; };
+		C081C685186C467500B9C5A9 /* NSNevMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C081C684186C467500B9C5A9 /* NSNevMapViewController.m */; };
+		C081C688186C5C3600B9C5A9 /* NSNevSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C081C687186C5C3600B9C5A9 /* NSNevSocialViewController.m */; };
+		C081C697186CD54C00B9C5A9 /* NSTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C081C696186CD54C00B9C5A9 /* NSTermsViewController.m */; };
 		C090EAC117984D7D00771382 /* NSUEBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAC017984D7D00771382 /* NSUEBViewController.m */; };
 		C090EAC417984D9700771382 /* NSUEBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAC317984D9700771382 /* NSUEBDetailViewController.m */; };
-		C097193217CECC2500632D56 /* NSChecklistViewControlleriPadtest.m in Sources */ = {isa = PBXBuildFile; fileRef = C097193117CECC2500632D56 /* NSChecklistViewControlleriPadtest.m */; };
+		C091D1071871B102000156A8 /* ExpandableAccessoryView.png in Resources */ = {isa = PBXBuildFile; fileRef = C091D1061871B102000156A8 /* ExpandableAccessoryView.png */; };
+		C091D1091871BF04000156A8 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C091D1081871BF04000156A8 /* Images-2.xcassets */; };
+		C091D111187215DE000156A8 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C091D110187215DE000156A8 /* libTestFlight.a */; };
 		C097193C17D3AEA200632D56 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = C097193B17D3AEA200632D56 /* MyDocument.m */; };
 		C097193F17D3D1AA00632D56 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = C097193E17D3D1A900632D56 /* Group.m */; };
 		C097194217D3D1C000632D56 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = C097194117D3D1C000632D56 /* Activity.m */; };
@@ -82,6 +105,8 @@
 		C09A821E17CD3ACC00C24319 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = C09A821D17CD3ACB00C24319 /* Position.m */; };
 		C09A822117CD3ADE00C24319 /* SubPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = C09A822017CD3ADE00C24319 /* SubPosition.m */; };
 		C09C42BB17C8A85700A21DE0 /* WelcomeTalk.m in Sources */ = {isa = PBXBuildFile; fileRef = C09C42BA17C8A85700A21DE0 /* WelcomeTalk.m */; };
+		C0B20D12186623E6006FDDFB /* NSiPadMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B20D10186623E6006FDDFB /* NSiPadMapViewController.m */; };
+		C0B20D13186623E6006FDDFB /* NSiPadMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B20D11186623E6006FDDFB /* NSiPadMapViewController.xib */; };
 		C0B86794178D8628006E198F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86793178D8628006E198F /* UIKit.framework */; };
 		C0B86796178D8628006E198F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86795178D8628006E198F /* Foundation.framework */; };
 		C0B86798178D8628006E198F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B86797178D8628006E198F /* CoreGraphics.framework */; };
@@ -89,7 +114,6 @@
 		C0B867A0178D8628006E198F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B8679F178D8628006E198F /* main.m */; };
 		C0B867A4178D8628006E198F /* NSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867A3178D8628006E198F /* NSAppDelegate.m */; };
 		C0B867AD178D8628006E198F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0B867AB178D8628006E198F /* MainStoryboard_iPhone.storyboard */; };
-		C0B867B0178D8628006E198F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0B867AE178D8628006E198F /* MainStoryboard_iPad.storyboard */; };
 		C0B867BB178D86A2006E198F /* NSWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867BA178D86A2006E198F /* NSWelcomeViewController.m */; };
 		C0B867C5178D961C006E198F /* NSNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867C4178D961C006E198F /* NSNewsViewController.m */; };
 		C0B867CB178D96DA006E198F /* NSNewsContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B867CA178D96DA006E198F /* NSNewsContentViewController.m */; };
@@ -103,10 +127,6 @@
 		C0C80F541859A62600D533F1 /* staff.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0C80F531859A62600D533F1 /* staff.jpg */; };
 		C0C80F561859AD1700D533F1 /* anonymous_person.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0C80F551859AD1700D533F1 /* anonymous_person.jpg */; };
 		C0C8165417DA871D00CB18C2 /* NSMapListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C8165317DA871D00CB18C2 /* NSMapListViewController.m */; };
-		C0C8165A17E02BC000CB18C2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8165917E02BBF00CB18C2 /* Default-568h@2x.png */; };
-		C0C8165C17E02C9D00CB18C2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8165B17E02C9D00CB18C2 /* Default.png */; };
-		C0C8165E17E02CBD00CB18C2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8165D17E02CBD00CB18C2 /* Default@2x.png */; };
-		C0C8166217E02E0200CB18C2 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = C0C8166117E02E0200CB18C2 /* splash.png */; };
 		C0CEAD3817D7146200BFB44E /* Finished.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CEAD3717D7146200BFB44E /* Finished.m */; };
 		C0D1F2A0185D904F00E2E6D6 /* FAQ.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D1F29F185D904F00E2E6D6 /* FAQ.m */; };
 		C0D1F2A2185DBCBC00E2E6D6 /* email-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0D1F2A1185DBCBC00E2E6D6 /* email-icon.jpg */; };
@@ -131,18 +151,12 @@
 		C011EF4D179EC51C006216D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C011EF50179EC6BE006216D6 /* NSMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMapViewController.h; sourceTree = "<group>"; };
 		C011EF51179EC6BE006216D6 /* NSMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMapViewController.m; sourceTree = "<group>"; };
+		C012D7DC18716A2700EFA35C /* splash_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_iPhone.png; sourceTree = "<group>"; };
+		C012D7DE18716C4100EFA35C /* splash_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_iPad.png; sourceTree = "<group>"; };
+		C012D82D1871831900EFA35C /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		C012D82F1871837900EFA35C /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		C0160144179C5FDE0008AB9C /* NSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSHomeViewController.h; sourceTree = "<group>"; };
 		C0160145179C5FDE0008AB9C /* NSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHomeViewController.m; sourceTree = "<group>"; };
-		C024341017E8881300AADA23 /* NSWelcomeViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWelcomeViewControlleriPad.h; sourceTree = "<group>"; };
-		C024341117E8881300AADA23 /* NSWelcomeViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSWelcomeViewControlleriPad.m; sourceTree = "<group>"; };
-		C024341417E88CC400AADA23 /* NSUCardViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUCardViewControlleriPad.h; sourceTree = "<group>"; };
-		C024341517E88CC400AADA23 /* NSUCardViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUCardViewControlleriPad.m; sourceTree = "<group>"; };
-		C024341817E890F700AADA23 /* NSFAQsViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFAQsViewControlleriPad.h; sourceTree = "<group>"; };
-		C024341917E890F700AADA23 /* NSFAQsViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFAQsViewControlleriPad.m; sourceTree = "<group>"; };
-		C024341C17E8946100AADA23 /* NSNewsViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNewsViewControlleriPad.h; sourceTree = "<group>"; };
-		C024341D17E8946100AADA23 /* NSNewsViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNewsViewControlleriPad.m; sourceTree = "<group>"; };
-		C024341F17E8947D00AADA23 /* NSNewsContentViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNewsContentViewControlleriPad.h; sourceTree = "<group>"; };
-		C024342017E8947D00AADA23 /* NSNewsContentViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNewsContentViewControlleriPad.m; sourceTree = "<group>"; };
 		C033FD54179C332800BFF62C /* News64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = News64.png; sourceTree = "<group>"; };
 		C033FD56179C33C100BFF62C /* Map64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map64.png; sourceTree = "<group>"; };
 		C033FD58179C33EC00BFF62C /* Checklist64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Checklist64.png; sourceTree = "<group>"; };
@@ -152,8 +166,27 @@
 		C033FD60179C353700BFF62C /* Links64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Links64.png; sourceTree = "<group>"; };
 		C033FD62179C353B00BFF62C /* Contacts64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Contacts64.png; sourceTree = "<group>"; };
 		C033FD64179C354200BFF62C /* UEB64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UEB64.png; sourceTree = "<group>"; };
-		C03561F117EE530D00FFD009 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
-		C03561F317EE558F00FFD009 /* splash-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-568h@2x.png"; sourceTree = "<group>"; };
+		C039B86E186545740057C947 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		C041B3BE18655E2400C7EF81 /* NSiPadRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadRootViewController.h; sourceTree = "<group>"; };
+		C041B3BF18655E2400C7EF81 /* NSiPadRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadRootViewController.m; sourceTree = "<group>"; };
+		C041B3C518655E9D00C7EF81 /* NSiPadNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadNewsViewController.h; sourceTree = "<group>"; };
+		C041B3C618655E9D00C7EF81 /* NSiPadNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadNewsViewController.m; sourceTree = "<group>"; };
+		C041B3C718655E9D00C7EF81 /* NSiPadNewsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadNewsViewController.xib; sourceTree = "<group>"; };
+		C041B3CB18655EEA00C7EF81 /* NSiPadWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadWelcomeViewController.h; sourceTree = "<group>"; };
+		C041B3CC18655EEA00C7EF81 /* NSiPadWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadWelcomeViewController.m; sourceTree = "<group>"; };
+		C041B3CD18655EEA00C7EF81 /* NSiPadWelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadWelcomeViewController.xib; sourceTree = "<group>"; };
+		C041B3D01865D44A00C7EF81 /* NSiPadNewsContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadNewsContentViewController.h; sourceTree = "<group>"; };
+		C041B3D11865D44A00C7EF81 /* NSiPadNewsContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadNewsContentViewController.m; sourceTree = "<group>"; };
+		C041B3D21865D44A00C7EF81 /* NSiPadNewsContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadNewsContentViewController.xib; sourceTree = "<group>"; };
+		C041B3D71865F87500C7EF81 /* NSiPadFacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadFacebookViewController.h; sourceTree = "<group>"; };
+		C041B3D81865F87500C7EF81 /* NSiPadFacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadFacebookViewController.m; sourceTree = "<group>"; };
+		C041B3D91865F87500C7EF81 /* NSiPadFacebookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadFacebookViewController.xib; sourceTree = "<group>"; };
+		C041B3DC1865F88800C7EF81 /* NSiPadTwitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadTwitterViewController.h; sourceTree = "<group>"; };
+		C041B3DD1865F88800C7EF81 /* NSiPadTwitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadTwitterViewController.m; sourceTree = "<group>"; };
+		C041B3DE1865F88800C7EF81 /* NSiPadTwitterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadTwitterViewController.xib; sourceTree = "<group>"; };
+		C041B3E11865F89A00C7EF81 /* NSiPadYoutubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadYoutubeViewController.h; sourceTree = "<group>"; };
+		C041B3E21865F89A00C7EF81 /* NSiPadYoutubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadYoutubeViewController.m; sourceTree = "<group>"; };
+		C041B3E31865F89A00C7EF81 /* NSiPadYoutubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadYoutubeViewController.xib; sourceTree = "<group>"; };
 		C04429E1179ABC460022B0DE /* NSChecklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSChecklistViewController.h; sourceTree = "<group>"; };
 		C04429E2179ABC460022B0DE /* NSChecklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSChecklistViewController.m; sourceTree = "<group>"; };
 		C04429EA179ABC9B0022B0DE /* NSToDoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSToDoDetailsViewController.h; sourceTree = "<group>"; };
@@ -161,48 +194,59 @@
 		C04E45BF17A53308002BFF48 /* NSOverViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSOverViewViewController.h; sourceTree = "<group>"; };
 		C04E45C017A53308002BFF48 /* NSOverViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSOverViewViewController.m; sourceTree = "<group>"; };
 		C057A10F17C4E5B4009A49FA /* NewShef.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NewShef.entitlements; sourceTree = "<group>"; };
-		C069D85317EA391A0024DABA /* NSMapViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMapViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D85417EA391A0024DABA /* NSMapViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMapViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D85617EA3AD50024DABA /* NSInsideViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSInsideViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D85717EA3AD50024DABA /* NSInsideViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSInsideViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D85917EA3BBE0024DABA /* NSBuildingDetailViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBuildingDetailViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D85A17EA3BBE0024DABA /* NSBuildingDetailViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBuildingDetailViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D85C17EA40320024DABA /* NSMapListViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMapListViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D85D17EA40320024DABA /* NSMapListViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMapListViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D85F17EA40930024DABA /* NSOverViewViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSOverViewViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D86017EA40930024DABA /* NSOverViewViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSOverViewViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D86317EA46520024DABA /* NSFacebookViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFacebookViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D86417EA46520024DABA /* NSFacebookViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFacebookViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D86617EA46710024DABA /* NSTwitterViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTwitterViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D86717EA46710024DABA /* NSTwitterViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTwitterViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D86917EA46900024DABA /* NSYoutubeViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSYoutubeViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D86A17EA46900024DABA /* NSYoutubeViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSYoutubeViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D86D17EA49F50024DABA /* NSLinkViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLinkViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D86E17EA49F50024DABA /* NSLinkViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLinkViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D87017EA4A1A0024DABA /* NSWebsiteViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWebsiteViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D87117EA4A1A0024DABA /* NSWebsiteViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSWebsiteViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D87417EA4E9E0024DABA /* NSContactsViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSContactsViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D87517EA4E9E0024DABA /* NSContactsViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSContactsViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D87717EA4EFB0024DABA /* NSContactDetailViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSContactDetailViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D87817EA4EFB0024DABA /* NSContactDetailViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSContactDetailViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D87B17EA59A70024DABA /* NSUEBViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUEBViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D87C17EA59A70024DABA /* NSUEBViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUEBViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D87E17EA59C80024DABA /* NSUEBDetailViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUEBDetailViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D87F17EA59C80024DABA /* NSUEBDetailViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUEBDetailViewControlleriPad.m; sourceTree = "<group>"; };
-		C069D88717EAD0740024DABA /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
-		C069D88917EAD0BA0024DABA /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
-		C069D88E17EAD4300024DABA /* NSToDoDetailsViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSToDoDetailsViewControlleriPad.h; sourceTree = "<group>"; };
-		C069D88F17EAD4300024DABA /* NSToDoDetailsViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSToDoDetailsViewControlleriPad.m; sourceTree = "<group>"; };
-		C074D0B417B36A0800777179 /* NSHomeViewControlleriPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSHomeViewControlleriPad.h; sourceTree = "<group>"; };
-		C074D0B517B36A0800777179 /* NSHomeViewControlleriPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHomeViewControlleriPad.m; sourceTree = "<group>"; };
-		C090EA411796D9F000771382 /* NSContactDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSContactDetailViewController.h; sourceTree = "<group>"; };
-		C090EA421796D9F000771382 /* NSContactDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSContactDetailViewController.m; sourceTree = "<group>"; };
+		C0730E4718669390005111B9 /* NSiPadLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadLinkViewController.h; sourceTree = "<group>"; };
+		C0730E4818669390005111B9 /* NSiPadLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadLinkViewController.m; sourceTree = "<group>"; };
+		C0730E4918669390005111B9 /* NSiPadLinkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadLinkViewController.xib; sourceTree = "<group>"; };
+		C0730E4C1866968D005111B9 /* NSiPadWebsiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadWebsiteViewController.h; sourceTree = "<group>"; };
+		C0730E4D1866968D005111B9 /* NSiPadWebsiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadWebsiteViewController.m; sourceTree = "<group>"; };
+		C0730E4E1866968D005111B9 /* NSiPadWebsiteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadWebsiteViewController.xib; sourceTree = "<group>"; };
+		C0730E5218669A5F005111B9 /* NSiPadFAQsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadFAQsViewController.h; sourceTree = "<group>"; };
+		C0730E5318669A5F005111B9 /* NSiPadFAQsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadFAQsViewController.m; sourceTree = "<group>"; };
+		C0730E5418669A5F005111B9 /* NSiPadFAQsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadFAQsViewController.xib; sourceTree = "<group>"; };
+		C0730E631866C04C005111B9 /* NSiPadInsideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadInsideViewController.h; sourceTree = "<group>"; };
+		C0730E641866C04C005111B9 /* NSiPadInsideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadInsideViewController.m; sourceTree = "<group>"; };
+		C0730E651866C04C005111B9 /* NSiPadInsideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadInsideViewController.xib; sourceTree = "<group>"; };
+		C0730E6D1866F727005111B9 /* NSiPadMapListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadMapListViewController.h; sourceTree = "<group>"; };
+		C0730E6E1866F727005111B9 /* NSiPadMapListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadMapListViewController.m; sourceTree = "<group>"; };
+		C0730E6F1866F727005111B9 /* NSiPadMapListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadMapListViewController.xib; sourceTree = "<group>"; };
+		C0730E7218677F39005111B9 /* NSiPadContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadContactsViewController.h; sourceTree = "<group>"; };
+		C0730E7318677F39005111B9 /* NSiPadContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadContactsViewController.m; sourceTree = "<group>"; };
+		C0730E7418677F39005111B9 /* NSiPadContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadContactsViewController.xib; sourceTree = "<group>"; };
+		C0730E7818679571005111B9 /* NSiPadUEBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadUEBViewController.h; sourceTree = "<group>"; };
+		C0730E7918679571005111B9 /* NSiPadUEBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadUEBViewController.m; sourceTree = "<group>"; };
+		C0730E7A18679571005111B9 /* NSiPadUEBViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadUEBViewController.xib; sourceTree = "<group>"; };
+		C0730E7D1867A477005111B9 /* NSiPadUEBDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadUEBDetailViewController.h; sourceTree = "<group>"; };
+		C0730E7E1867A477005111B9 /* NSiPadUEBDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadUEBDetailViewController.m; sourceTree = "<group>"; };
+		C0730E7F1867A477005111B9 /* NSiPadUEBDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadUEBDetailViewController.xib; sourceTree = "<group>"; };
+		C0730E841867AC21005111B9 /* NSiPadChecklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadChecklistViewController.h; sourceTree = "<group>"; };
+		C0730E851867AC21005111B9 /* NSiPadChecklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadChecklistViewController.m; sourceTree = "<group>"; };
+		C0730E861867AC21005111B9 /* NSiPadChecklistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadChecklistViewController.xib; sourceTree = "<group>"; };
+		C0730E891867BC34005111B9 /* NSiPadToDoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadToDoDetailsViewController.h; sourceTree = "<group>"; };
+		C0730E8A1867BC34005111B9 /* NSiPadToDoDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadToDoDetailsViewController.m; sourceTree = "<group>"; };
+		C0730E8B1867BC34005111B9 /* NSiPadToDoDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadToDoDetailsViewController.xib; sourceTree = "<group>"; };
+		C0730E8E1867CBD3005111B9 /* NSiPadUCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadUCardViewController.h; sourceTree = "<group>"; };
+		C0730E8F1867CBD3005111B9 /* NSiPadUCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadUCardViewController.m; sourceTree = "<group>"; };
+		C0730E901867CBD3005111B9 /* NSiPadUCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadUCardViewController.xib; sourceTree = "<group>"; };
+		C0730E9318681D33005111B9 /* NSiPadUCardDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadUCardDetailViewController.h; sourceTree = "<group>"; };
+		C0730E9418681D33005111B9 /* NSiPadUCardDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadUCardDetailViewController.m; sourceTree = "<group>"; };
+		C0730E9518681D33005111B9 /* NSiPadUCardDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadUCardDetailViewController.xib; sourceTree = "<group>"; };
+		C0730E99186824C6005111B9 /* NSiPadTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadTermsViewController.h; sourceTree = "<group>"; };
+		C0730E9A186824C6005111B9 /* NSiPadTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadTermsViewController.m; sourceTree = "<group>"; };
+		C0730E9B186824C6005111B9 /* NSiPadTermsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadTermsViewController.xib; sourceTree = "<group>"; };
+		C081C683186C467500B9C5A9 /* NSNevMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNevMapViewController.h; sourceTree = "<group>"; };
+		C081C684186C467500B9C5A9 /* NSNevMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNevMapViewController.m; sourceTree = "<group>"; };
+		C081C686186C5C3600B9C5A9 /* NSNevSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNevSocialViewController.h; sourceTree = "<group>"; };
+		C081C687186C5C3600B9C5A9 /* NSNevSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNevSocialViewController.m; sourceTree = "<group>"; };
+		C081C695186CD54C00B9C5A9 /* NSTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTermsViewController.h; sourceTree = "<group>"; };
+		C081C696186CD54C00B9C5A9 /* NSTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTermsViewController.m; sourceTree = "<group>"; };
 		C090EABF17984D7D00771382 /* NSUEBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUEBViewController.h; sourceTree = "<group>"; };
 		C090EAC017984D7D00771382 /* NSUEBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUEBViewController.m; sourceTree = "<group>"; };
 		C090EAC217984D9700771382 /* NSUEBDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUEBDetailViewController.h; sourceTree = "<group>"; };
 		C090EAC317984D9700771382 /* NSUEBDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUEBDetailViewController.m; sourceTree = "<group>"; };
-		C097193017CECC2500632D56 /* NSChecklistViewControlleriPadtest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSChecklistViewControlleriPadtest.h; sourceTree = "<group>"; };
-		C097193117CECC2500632D56 /* NSChecklistViewControlleriPadtest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSChecklistViewControlleriPadtest.m; sourceTree = "<group>"; };
+		C091D1061871B102000156A8 /* ExpandableAccessoryView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExpandableAccessoryView.png; sourceTree = "<group>"; };
+		C091D1081871BF04000156A8 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		C091D10F187215C6000156A8 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		C091D110187215DE000156A8 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		C097193A17D3AEA200632D56 /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
 		C097193B17D3AEA200632D56 /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
 		C097193D17D3D1A900632D56 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
@@ -241,6 +285,9 @@
 		C09A822017CD3ADE00C24319 /* SubPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubPosition.m; sourceTree = "<group>"; };
 		C09C42B917C8A85700A21DE0 /* WelcomeTalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeTalk.h; sourceTree = "<group>"; };
 		C09C42BA17C8A85700A21DE0 /* WelcomeTalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeTalk.m; sourceTree = "<group>"; };
+		C0B20D0F186623E6006FDDFB /* NSiPadMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSiPadMapViewController.h; sourceTree = "<group>"; };
+		C0B20D10186623E6006FDDFB /* NSiPadMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSiPadMapViewController.m; sourceTree = "<group>"; };
+		C0B20D11186623E6006FDDFB /* NSiPadMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSiPadMapViewController.xib; sourceTree = "<group>"; };
 		C0B86790178D8628006E198F /* NewShef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewShef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B86793178D8628006E198F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C0B86795178D8628006E198F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -252,7 +299,6 @@
 		C0B867A2178D8628006E198F /* NSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSAppDelegate.h; sourceTree = "<group>"; };
 		C0B867A3178D8628006E198F /* NSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSAppDelegate.m; sourceTree = "<group>"; };
 		C0B867AC178D8628006E198F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		C0B867AF178D8628006E198F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		C0B867B9178D86A2006E198F /* NSWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWelcomeViewController.h; sourceTree = "<group>"; };
 		C0B867BA178D86A2006E198F /* NSWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSWelcomeViewController.m; sourceTree = "<group>"; };
 		C0B867C3178D961C006E198F /* NSNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNewsViewController.h; sourceTree = "<group>"; };
@@ -276,13 +322,6 @@
 		C0C80F551859AD1700D533F1 /* anonymous_person.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = anonymous_person.jpg; sourceTree = "<group>"; };
 		C0C8165217DA871D00CB18C2 /* NSMapListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMapListViewController.h; sourceTree = "<group>"; };
 		C0C8165317DA871D00CB18C2 /* NSMapListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMapListViewController.m; sourceTree = "<group>"; };
-		C0C8165517E02B9800CB18C2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		C0C8165717E02BB000CB18C2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		C0C8165917E02BBF00CB18C2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		C0C8165B17E02C9D00CB18C2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		C0C8165D17E02CBD00CB18C2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		C0C8165F17E02CE400CB18C2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		C0C8166117E02E0200CB18C2 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		C0CEAD3617D7146200BFB44E /* Finished.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Finished.h; sourceTree = "<group>"; };
 		C0CEAD3717D7146200BFB44E /* Finished.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Finished.m; sourceTree = "<group>"; };
 		C0D1F29E185D904F00E2E6D6 /* FAQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAQ.h; sourceTree = "<group>"; };
@@ -298,12 +337,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C091D111187215DE000156A8 /* libTestFlight.a in Frameworks */,
 				C011EF4E179EC51C006216D6 /* SystemConfiguration.framework in Frameworks */,
 				C097194417D478A800632D56 /* libsqlite3.dylib in Frameworks */,
 				C011EF4C179EC50E006216D6 /* QuartzCore.framework in Frameworks */,
 				C011EF4A179EC4FF006216D6 /* OpenGLES.framework in Frameworks */,
 				C011EF48179EC4EE006216D6 /* libz.dylib in Frameworks */,
 				C011EF46179EC4A6006216D6 /* libicucore.dylib in Frameworks */,
+				C012D82E1871831900EFA35C /* GoogleMaps.framework in Frameworks */,
 				C011EF44179EC492006216D6 /* libc++.dylib in Frameworks */,
 				C011EF42179EC47B006216D6 /* ImageIO.framework in Frameworks */,
 				C011EF40179EC470006216D6 /* GLKit.framework in Frameworks */,
@@ -315,7 +356,6 @@
 				C0B86794178D8628006E198F /* UIKit.framework in Frameworks */,
 				C0B86796178D8628006E198F /* Foundation.framework in Frameworks */,
 				C0B86798178D8628006E198F /* CoreGraphics.framework in Frameworks */,
-				C069D88817EAD0740024DABA /* GoogleMaps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,46 +375,10 @@
 				C09A81FB17CC25FD00C24319 /* NSBuildingDetailViewController.m */,
 				C0C8165217DA871D00CB18C2 /* NSMapListViewController.h */,
 				C0C8165317DA871D00CB18C2 /* NSMapListViewController.m */,
+				C081C683186C467500B9C5A9 /* NSNevMapViewController.h */,
+				C081C684186C467500B9C5A9 /* NSNevMapViewController.m */,
 			);
 			name = Map;
-			sourceTree = "<group>";
-		};
-		C024340F17E887B700AADA23 /* Welcome View Controller */ = {
-			isa = PBXGroup;
-			children = (
-				C024341017E8881300AADA23 /* NSWelcomeViewControlleriPad.h */,
-				C024341117E8881300AADA23 /* NSWelcomeViewControlleriPad.m */,
-			);
-			name = "Welcome View Controller";
-			sourceTree = "<group>";
-		};
-		C024341317E88C9D00AADA23 /* UCard */ = {
-			isa = PBXGroup;
-			children = (
-				C024341417E88CC400AADA23 /* NSUCardViewControlleriPad.h */,
-				C024341517E88CC400AADA23 /* NSUCardViewControlleriPad.m */,
-			);
-			name = UCard;
-			sourceTree = "<group>";
-		};
-		C024341717E890D800AADA23 /* FAQ */ = {
-			isa = PBXGroup;
-			children = (
-				C024341817E890F700AADA23 /* NSFAQsViewControlleriPad.h */,
-				C024341917E890F700AADA23 /* NSFAQsViewControlleriPad.m */,
-			);
-			name = FAQ;
-			sourceTree = "<group>";
-		};
-		C024341B17E8942000AADA23 /* News */ = {
-			isa = PBXGroup;
-			children = (
-				C024341C17E8946100AADA23 /* NSNewsViewControlleriPad.h */,
-				C024341D17E8946100AADA23 /* NSNewsViewControlleriPad.m */,
-				C024341F17E8947D00AADA23 /* NSNewsContentViewControlleriPad.h */,
-				C024342017E8947D00AADA23 /* NSNewsContentViewControlleriPad.m */,
-			);
-			name = News;
 			sourceTree = "<group>";
 		};
 		C033FD53179C331F00BFF62C /* Icons64 */ = {
@@ -393,6 +397,70 @@
 			name = Icons64;
 			sourceTree = "<group>";
 		};
+		C041B3C318655E4A00C7EF81 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				C041B3BE18655E2400C7EF81 /* NSiPadRootViewController.h */,
+				C041B3BF18655E2400C7EF81 /* NSiPadRootViewController.m */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		C041B3C418655E5B00C7EF81 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				C041B3C518655E9D00C7EF81 /* NSiPadNewsViewController.h */,
+				C041B3C618655E9D00C7EF81 /* NSiPadNewsViewController.m */,
+				C041B3C718655E9D00C7EF81 /* NSiPadNewsViewController.xib */,
+				C041B3D01865D44A00C7EF81 /* NSiPadNewsContentViewController.h */,
+				C041B3D11865D44A00C7EF81 /* NSiPadNewsContentViewController.m */,
+				C041B3D21865D44A00C7EF81 /* NSiPadNewsContentViewController.xib */,
+			);
+			name = News;
+			sourceTree = "<group>";
+		};
+		C041B3CA18655EBB00C7EF81 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				C041B3CB18655EEA00C7EF81 /* NSiPadWelcomeViewController.h */,
+				C041B3CC18655EEA00C7EF81 /* NSiPadWelcomeViewController.m */,
+				C041B3CD18655EEA00C7EF81 /* NSiPadWelcomeViewController.xib */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
+		C041B3D51865EF6100C7EF81 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				C0B20D0F186623E6006FDDFB /* NSiPadMapViewController.h */,
+				C0B20D10186623E6006FDDFB /* NSiPadMapViewController.m */,
+				C0B20D11186623E6006FDDFB /* NSiPadMapViewController.xib */,
+				C0730E631866C04C005111B9 /* NSiPadInsideViewController.h */,
+				C0730E641866C04C005111B9 /* NSiPadInsideViewController.m */,
+				C0730E651866C04C005111B9 /* NSiPadInsideViewController.xib */,
+				C0730E6D1866F727005111B9 /* NSiPadMapListViewController.h */,
+				C0730E6E1866F727005111B9 /* NSiPadMapListViewController.m */,
+				C0730E6F1866F727005111B9 /* NSiPadMapListViewController.xib */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		C041B3D61865EF7200C7EF81 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				C041B3D71865F87500C7EF81 /* NSiPadFacebookViewController.h */,
+				C041B3D81865F87500C7EF81 /* NSiPadFacebookViewController.m */,
+				C041B3D91865F87500C7EF81 /* NSiPadFacebookViewController.xib */,
+				C041B3DC1865F88800C7EF81 /* NSiPadTwitterViewController.h */,
+				C041B3DD1865F88800C7EF81 /* NSiPadTwitterViewController.m */,
+				C041B3DE1865F88800C7EF81 /* NSiPadTwitterViewController.xib */,
+				C041B3E11865F89A00C7EF81 /* NSiPadYoutubeViewController.h */,
+				C041B3E21865F89A00C7EF81 /* NSiPadYoutubeViewController.m */,
+				C041B3E31865F89A00C7EF81 /* NSiPadYoutubeViewController.xib */,
+			);
+			name = Social;
+			sourceTree = "<group>";
+		};
 		C04429E0179ABC190022B0DE /* Checklist */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,94 +472,95 @@
 			name = Checklist;
 			sourceTree = "<group>";
 		};
-		C069D85217EA38DD0024DABA /* GoogleMap */ = {
+		C0730E3C18669049005111B9 /* Link */ = {
 			isa = PBXGroup;
 			children = (
-				C069D85317EA391A0024DABA /* NSMapViewControlleriPad.h */,
-				C069D85417EA391A0024DABA /* NSMapViewControlleriPad.m */,
-				C069D85617EA3AD50024DABA /* NSInsideViewControlleriPad.h */,
-				C069D85717EA3AD50024DABA /* NSInsideViewControlleriPad.m */,
-				C069D85917EA3BBE0024DABA /* NSBuildingDetailViewControlleriPad.h */,
-				C069D85A17EA3BBE0024DABA /* NSBuildingDetailViewControlleriPad.m */,
-				C069D85C17EA40320024DABA /* NSMapListViewControlleriPad.h */,
-				C069D85D17EA40320024DABA /* NSMapListViewControlleriPad.m */,
-				C069D85F17EA40930024DABA /* NSOverViewViewControlleriPad.h */,
-				C069D86017EA40930024DABA /* NSOverViewViewControlleriPad.m */,
+				C0730E4718669390005111B9 /* NSiPadLinkViewController.h */,
+				C0730E4818669390005111B9 /* NSiPadLinkViewController.m */,
+				C0730E4918669390005111B9 /* NSiPadLinkViewController.xib */,
+				C0730E4C1866968D005111B9 /* NSiPadWebsiteViewController.h */,
+				C0730E4D1866968D005111B9 /* NSiPadWebsiteViewController.m */,
+				C0730E4E1866968D005111B9 /* NSiPadWebsiteViewController.xib */,
 			);
-			name = GoogleMap;
+			name = Link;
 			sourceTree = "<group>";
 		};
-		C069D86217EA45FC0024DABA /* Social */ = {
+		C0730E5118669A42005111B9 /* FAQ */ = {
 			isa = PBXGroup;
 			children = (
-				C069D86317EA46520024DABA /* NSFacebookViewControlleriPad.h */,
-				C069D86417EA46520024DABA /* NSFacebookViewControlleriPad.m */,
-				C069D86617EA46710024DABA /* NSTwitterViewControlleriPad.h */,
-				C069D86717EA46710024DABA /* NSTwitterViewControlleriPad.m */,
-				C069D86917EA46900024DABA /* NSYoutubeViewControlleriPad.h */,
-				C069D86A17EA46900024DABA /* NSYoutubeViewControlleriPad.m */,
+				C0730E5218669A5F005111B9 /* NSiPadFAQsViewController.h */,
+				C0730E5318669A5F005111B9 /* NSiPadFAQsViewController.m */,
+				C0730E5418669A5F005111B9 /* NSiPadFAQsViewController.xib */,
 			);
-			name = Social;
+			name = FAQ;
 			sourceTree = "<group>";
 		};
-		C069D86C17EA49CD0024DABA /* Useful link */ = {
+		C0730E571866AA6A005111B9 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				C069D86D17EA49F50024DABA /* NSLinkViewControlleriPad.h */,
-				C069D86E17EA49F50024DABA /* NSLinkViewControlleriPad.m */,
-				C069D87017EA4A1A0024DABA /* NSWebsiteViewControlleriPad.h */,
-				C069D87117EA4A1A0024DABA /* NSWebsiteViewControlleriPad.m */,
-			);
-			name = "Useful link";
-			sourceTree = "<group>";
-		};
-		C069D87317EA4E6E0024DABA /* Contacts */ = {
-			isa = PBXGroup;
-			children = (
-				C069D87417EA4E9E0024DABA /* NSContactsViewControlleriPad.h */,
-				C069D87517EA4E9E0024DABA /* NSContactsViewControlleriPad.m */,
-				C069D87717EA4EFB0024DABA /* NSContactDetailViewControlleriPad.h */,
-				C069D87817EA4EFB0024DABA /* NSContactDetailViewControlleriPad.m */,
+				C0730E7218677F39005111B9 /* NSiPadContactsViewController.h */,
+				C0730E7318677F39005111B9 /* NSiPadContactsViewController.m */,
+				C0730E7418677F39005111B9 /* NSiPadContactsViewController.xib */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
 		};
-		C069D87A17EA59890024DABA /* UEB */ = {
+		C0730E7718679551005111B9 /* UEB */ = {
 			isa = PBXGroup;
 			children = (
-				C069D87B17EA59A70024DABA /* NSUEBViewControlleriPad.h */,
-				C069D87C17EA59A70024DABA /* NSUEBViewControlleriPad.m */,
-				C069D87E17EA59C80024DABA /* NSUEBDetailViewControlleriPad.h */,
-				C069D87F17EA59C80024DABA /* NSUEBDetailViewControlleriPad.m */,
+				C0730E7818679571005111B9 /* NSiPadUEBViewController.h */,
+				C0730E7918679571005111B9 /* NSiPadUEBViewController.m */,
+				C0730E7A18679571005111B9 /* NSiPadUEBViewController.xib */,
+				C0730E7D1867A477005111B9 /* NSiPadUEBDetailViewController.h */,
+				C0730E7E1867A477005111B9 /* NSiPadUEBDetailViewController.m */,
+				C0730E7F1867A477005111B9 /* NSiPadUEBDetailViewController.xib */,
 			);
 			name = UEB;
 			sourceTree = "<group>";
 		};
-		C074D0B217B369C800777179 /* Controllers iPad */ = {
+		C0730E821867AA95005111B9 /* Checklist */ = {
 			isa = PBXGroup;
 			children = (
-				C069D87A17EA59890024DABA /* UEB */,
-				C069D87317EA4E6E0024DABA /* Contacts */,
-				C069D86C17EA49CD0024DABA /* Useful link */,
-				C069D86217EA45FC0024DABA /* Social */,
-				C069D85217EA38DD0024DABA /* GoogleMap */,
-				C024341B17E8942000AADA23 /* News */,
-				C024341717E890D800AADA23 /* FAQ */,
-				C024341317E88C9D00AADA23 /* UCard */,
-				C024340F17E887B700AADA23 /* Welcome View Controller */,
-				C097193317CECC2C00632D56 /* Checklist */,
-				C074D0B317B369D700777179 /* Home */,
+				C0730E841867AC21005111B9 /* NSiPadChecklistViewController.h */,
+				C0730E851867AC21005111B9 /* NSiPadChecklistViewController.m */,
+				C0730E861867AC21005111B9 /* NSiPadChecklistViewController.xib */,
+				C0730E891867BC34005111B9 /* NSiPadToDoDetailsViewController.h */,
+				C0730E8A1867BC34005111B9 /* NSiPadToDoDetailsViewController.m */,
+				C0730E8B1867BC34005111B9 /* NSiPadToDoDetailsViewController.xib */,
 			);
-			name = "Controllers iPad";
+			name = Checklist;
 			sourceTree = "<group>";
 		};
-		C074D0B317B369D700777179 /* Home */ = {
+		C0730E831867AAA8005111B9 /* UCard */ = {
 			isa = PBXGroup;
 			children = (
-				C074D0B417B36A0800777179 /* NSHomeViewControlleriPad.h */,
-				C074D0B517B36A0800777179 /* NSHomeViewControlleriPad.m */,
+				C0730E8E1867CBD3005111B9 /* NSiPadUCardViewController.h */,
+				C0730E8F1867CBD3005111B9 /* NSiPadUCardViewController.m */,
+				C0730E901867CBD3005111B9 /* NSiPadUCardViewController.xib */,
+				C0730E9318681D33005111B9 /* NSiPadUCardDetailViewController.h */,
+				C0730E9418681D33005111B9 /* NSiPadUCardDetailViewController.m */,
+				C0730E9518681D33005111B9 /* NSiPadUCardDetailViewController.xib */,
 			);
-			name = Home;
+			name = UCard;
+			sourceTree = "<group>";
+		};
+		C0730E981868230D005111B9 /* Terms */ = {
+			isa = PBXGroup;
+			children = (
+				C0730E99186824C6005111B9 /* NSiPadTermsViewController.h */,
+				C0730E9A186824C6005111B9 /* NSiPadTermsViewController.m */,
+				C0730E9B186824C6005111B9 /* NSiPadTermsViewController.xib */,
+			);
+			name = Terms;
+			sourceTree = "<group>";
+		};
+		C081C694186CD53500B9C5A9 /* Terms */ = {
+			isa = PBXGroup;
+			children = (
+				C081C695186CD54C00B9C5A9 /* NSTermsViewController.h */,
+				C081C696186CD54C00B9C5A9 /* NSTermsViewController.m */,
+			);
+			name = Terms;
 			sourceTree = "<group>";
 		};
 		C090EAAE1797D05900771382 /* Customize */ = {
@@ -516,15 +585,13 @@
 			name = Table;
 			sourceTree = "<group>";
 		};
-		C097193317CECC2C00632D56 /* Checklist */ = {
+		C091D10C18721589000156A8 /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
-				C097193017CECC2500632D56 /* NSChecklistViewControlleriPadtest.h */,
-				C097193117CECC2500632D56 /* NSChecklistViewControlleriPadtest.m */,
-				C069D88E17EAD4300024DABA /* NSToDoDetailsViewControlleriPad.h */,
-				C069D88F17EAD4300024DABA /* NSToDoDetailsViewControlleriPad.m */,
+				C091D110187215DE000156A8 /* libTestFlight.a */,
+				C091D10F187215C6000156A8 /* TestFlight.h */,
 			);
-			name = Checklist;
+			name = TestFlight;
 			sourceTree = "<group>";
 		};
 		C097193417CEDB5000632D56 /* iCloud */ = {
@@ -536,7 +603,7 @@
 			name = iCloud;
 			sourceTree = "<group>";
 		};
-		C09A820017CC338E00C24319 /* Useful link */ = {
+		C09A820017CC338E00C24319 /* Link */ = {
 			isa = PBXGroup;
 			children = (
 				C09A820117CC341D00C24319 /* NSLinkViewController.h */,
@@ -544,7 +611,7 @@
 				C09A820717CC893200C24319 /* NSWebsiteViewController.h */,
 				C09A820817CC893200C24319 /* NSWebsiteViewController.m */,
 			);
-			name = "Useful link";
+			name = Link;
 			sourceTree = "<group>";
 		};
 		C09C42B517C8A7D800A21DE0 /* Model */ = {
@@ -587,13 +654,29 @@
 			name = Button;
 			sourceTree = "<group>";
 		};
+		C0AA5B201863F1D2008AD85F /* Controllers iPad */ = {
+			isa = PBXGroup;
+			children = (
+				C039B86E186545740057C947 /* MainWindow.xib */,
+				C041B3C318655E4A00C7EF81 /* Root */,
+				C041B3CA18655EBB00C7EF81 /* Welcome */,
+				C041B3C418655E5B00C7EF81 /* News */,
+				C041B3D51865EF6100C7EF81 /* Map */,
+				C041B3D61865EF7200C7EF81 /* Social */,
+				C0730E7718679551005111B9 /* UEB */,
+				C0730E821867AA95005111B9 /* Checklist */,
+				C0730E831867AAA8005111B9 /* UCard */,
+				C0730E571866AA6A005111B9 /* Contacts */,
+				C0730E5118669A42005111B9 /* FAQ */,
+				C0730E3C18669049005111B9 /* Link */,
+				C0730E981868230D005111B9 /* Terms */,
+			);
+			name = "Controllers iPad";
+			sourceTree = "<group>";
+		};
 		C0B86787178D8628006E198F = {
 			isa = PBXGroup;
 			children = (
-				C03561F317EE558F00FFD009 /* splash-568h@2x.png */,
-				C0C8165917E02BBF00CB18C2 /* Default-568h@2x.png */,
-				C0C8165717E02BB000CB18C2 /* Default@2x.png */,
-				C0C8165517E02B9800CB18C2 /* Default.png */,
 				C0B86799178D8628006E198F /* New@Shef */,
 				C0B86792178D8628006E198F /* Frameworks */,
 				C0B86791178D8628006E198F /* Products */,
@@ -611,9 +694,10 @@
 		C0B86792178D8628006E198F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C069D88917EAD0BA0024DABA /* GoogleMaps.bundle */,
-				C069D88717EAD0740024DABA /* GoogleMaps.framework */,
+				C091D10C18721589000156A8 /* TestFlight */,
+				C012D82F1871837900EFA35C /* GoogleMaps.bundle */,
 				C097194317D478A800632D56 /* libsqlite3.dylib */,
+				C012D82D1871831900EFA35C /* GoogleMaps.framework */,
 				C011EF4D179EC51C006216D6 /* SystemConfiguration.framework */,
 				C011EF4B179EC50E006216D6 /* QuartzCore.framework */,
 				C011EF49179EC4FF006216D6 /* OpenGLES.framework */,
@@ -638,15 +722,15 @@
 			isa = PBXGroup;
 			children = (
 				C057A10F17C4E5B4009A49FA /* NewShef.entitlements */,
+				C0B867A2178D8628006E198F /* NSAppDelegate.h */,
+				C0B867A3178D8628006E198F /* NSAppDelegate.m */,
 				C097193417CEDB5000632D56 /* iCloud */,
 				C090EAAE1797D05900771382 /* Customize */,
 				C09C42B517C8A7D800A21DE0 /* Model */,
-				C074D0B217B369C800777179 /* Controllers iPad */,
+				C0AA5B201863F1D2008AD85F /* Controllers iPad */,
 				C0B867BC178D86AA006E198F /* Controllers iPhone */,
-				C0B867A2178D8628006E198F /* NSAppDelegate.h */,
-				C0B867A3178D8628006E198F /* NSAppDelegate.m */,
 				C0B867AB178D8628006E198F /* MainStoryboard_iPhone.storyboard */,
-				C0B867AE178D8628006E198F /* MainStoryboard_iPad.storyboard */,
+				C091D1081871BF04000156A8 /* Images-2.xcassets */,
 				C0B8679A178D8628006E198F /* Supporting Files */,
 			);
 			path = "New@Shef";
@@ -655,19 +739,17 @@
 		C0B8679A178D8628006E198F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C091D1061871B102000156A8 /* ExpandableAccessoryView.png */,
+				C012D7DC18716A2700EFA35C /* splash_iPhone.png */,
+				C012D7DE18716C4100EFA35C /* splash_iPad.png */,
 				C0D1F2A3185DBCC000E2E6D6 /* phone-icon.jpg */,
 				C0D1F2A1185DBCBC00E2E6D6 /* email-icon.jpg */,
 				C0C80F551859AD1700D533F1 /* anonymous_person.jpg */,
 				C0C80F531859A62600D533F1 /* staff.jpg */,
-				C03561F117EE530D00FFD009 /* background.jpg */,
-				C0C8166117E02E0200CB18C2 /* splash.png */,
 				C097D78A17CA514C00A03A8F /* NEWSHEF_DB.sql */,
 				C033FD53179C331F00BFF62C /* Icons64 */,
 				C0B8679B178D8628006E198F /* New@Shef-Info.plist */,
-				C0C8165B17E02C9D00CB18C2 /* Default.png */,
 				C0B8679C178D8628006E198F /* InfoPlist.strings */,
-				C0C8165D17E02CBD00CB18C2 /* Default@2x.png */,
-				C0C8165F17E02CE400CB18C2 /* Default-568h@2x.png */,
 				C0B8679F178D8628006E198F /* main.m */,
 				C0B867A1178D8628006E198F /* New@Shef-Prefix.pch */,
 			);
@@ -677,28 +759,29 @@
 		C0B867BC178D86AA006E198F /* Controllers iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				C09A820017CC338E00C24319 /* Useful link */,
-				C011EF4F179EC69B006216D6 /* Map */,
-				C04429E0179ABC190022B0DE /* Checklist */,
-				C0B86829178F3277006E198F /* UEB */,
-				C0B867DE178DE2FE006E198F /* Contacts */,
-				C0B867DA178DC612006E198F /* UCard */,
-				C0B867D4178DBB44006E198F /* FAQs */,
-				C0B867CC178D9E9B006E198F /* Social */,
-				C0B867C2178D95E6006E198F /* News */,
+				C0B867BD178D86B6006E198F /* Welcome */,
 				C0B867BE178D87F4006E198F /* Home */,
-				C0B867BD178D86B6006E198F /* Welcome View Controller */,
+				C0B867C2178D95E6006E198F /* News */,
+				C011EF4F179EC69B006216D6 /* Map */,
+				C0B867CC178D9E9B006E198F /* Social */,
+				C0B86829178F3277006E198F /* UEB */,
+				C04429E0179ABC190022B0DE /* Checklist */,
+				C0B867DA178DC612006E198F /* UCard */,
+				C0B867DE178DE2FE006E198F /* Contacts */,
+				C0B867D4178DBB44006E198F /* FAQs */,
+				C09A820017CC338E00C24319 /* Link */,
+				C081C694186CD53500B9C5A9 /* Terms */,
 			);
 			name = "Controllers iPhone";
 			sourceTree = "<group>";
 		};
-		C0B867BD178D86B6006E198F /* Welcome View Controller */ = {
+		C0B867BD178D86B6006E198F /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
 				C0B867B9178D86A2006E198F /* NSWelcomeViewController.h */,
 				C0B867BA178D86A2006E198F /* NSWelcomeViewController.m */,
 			);
-			name = "Welcome View Controller";
+			name = Welcome;
 			sourceTree = "<group>";
 		};
 		C0B867BE178D87F4006E198F /* Home */ = {
@@ -730,6 +813,8 @@
 				C0B86824178F224D006E198F /* NSTwitterViewController.m */,
 				C0B86826178F225C006E198F /* NSYoutubeViewController.h */,
 				C0B86827178F225C006E198F /* NSYoutubeViewController.m */,
+				C081C686186C5C3600B9C5A9 /* NSNevSocialViewController.h */,
+				C081C687186C5C3600B9C5A9 /* NSNevSocialViewController.m */,
 			);
 			name = Social;
 			sourceTree = "<group>";
@@ -759,8 +844,6 @@
 			children = (
 				C00832571791B2F500A5EFE2 /* NSContactsViewController.h */,
 				C00832581791B2F500A5EFE2 /* NSContactsViewController.m */,
-				C090EA411796D9F000771382 /* NSContactDetailViewController.h */,
-				C090EA421796D9F000771382 /* NSContactDetailViewController.m */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -803,7 +886,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NS;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Wanchun Zhang";
 				TargetAttributes = {
 					C0B8678F178D8628006E198F = {
@@ -833,30 +916,48 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0730E7C18679571005111B9 /* NSiPadUEBViewController.xib in Resources */,
 				C0B8679E178D8628006E198F /* InfoPlist.strings in Resources */,
 				C0C80F541859A62600D533F1 /* staff.jpg in Resources */,
+				C0730E921867CBD3005111B9 /* NSiPadUCardViewController.xib in Resources */,
 				C0B867AD178D8628006E198F /* MainStoryboard_iPhone.storyboard in Resources */,
-				C0B867B0178D8628006E198F /* MainStoryboard_iPad.storyboard in Resources */,
+				C091D1071871B102000156A8 /* ExpandableAccessoryView.png in Resources */,
 				C0C80F561859AD1700D533F1 /* anonymous_person.jpg in Resources */,
+				C012D7DF18716C4100EFA35C /* splash_iPad.png in Resources */,
+				C0730E671866C04C005111B9 /* NSiPadInsideViewController.xib in Resources */,
 				C033FD55179C332800BFF62C /* News64.png in Resources */,
+				C041B3E51865F89A00C7EF81 /* NSiPadYoutubeViewController.xib in Resources */,
 				C033FD57179C33C100BFF62C /* Map64.png in Resources */,
+				C041B3D41865D44A00C7EF81 /* NSiPadNewsContentViewController.xib in Resources */,
 				C033FD59179C33EC00BFF62C /* Checklist64.png in Resources */,
+				C0730E501866968D005111B9 /* NSiPadWebsiteViewController.xib in Resources */,
+				C041B3E01865F88800C7EF81 /* NSiPadTwitterViewController.xib in Resources */,
+				C0730E711866F727005111B9 /* NSiPadMapListViewController.xib in Resources */,
 				C033FD5B179C342300BFF62C /* UCard64.png in Resources */,
+				C041B3C918655E9D00C7EF81 /* NSiPadNewsViewController.xib in Resources */,
+				C0730E7618677F39005111B9 /* NSiPadContactsViewController.xib in Resources */,
 				C033FD5D179C345500BFF62C /* FAQs64.png in Resources */,
 				C033FD5F179C349700BFF62C /* Social64.png in Resources */,
 				C033FD61179C353700BFF62C /* Links64.png in Resources */,
-				C03561F417EE558F00FFD009 /* splash-568h@2x.png in Resources */,
+				C012D8301871837900EFA35C /* GoogleMaps.bundle in Resources */,
 				C033FD63179C353B00BFF62C /* Contacts64.png in Resources */,
+				C0730E881867AC21005111B9 /* NSiPadChecklistViewController.xib in Resources */,
 				C033FD65179C354200BFF62C /* UEB64.png in Resources */,
 				C097D78B17CA514C00A03A8F /* NEWSHEF_DB.sql in Resources */,
-				C0C8165A17E02BC000CB18C2 /* Default-568h@2x.png in Resources */,
-				C0C8165C17E02C9D00CB18C2 /* Default.png in Resources */,
-				C0C8165E17E02CBD00CB18C2 /* Default@2x.png in Resources */,
-				C0C8166217E02E0200CB18C2 /* splash.png in Resources */,
-				C03561F217EE530D00FFD009 /* background.jpg in Resources */,
+				C0730E5618669A5F005111B9 /* NSiPadFAQsViewController.xib in Resources */,
+				C0730E9718681D33005111B9 /* NSiPadUCardDetailViewController.xib in Resources */,
+				C012D7DD18716A2700EFA35C /* splash_iPhone.png in Resources */,
+				C0730E811867A477005111B9 /* NSiPadUEBDetailViewController.xib in Resources */,
+				C0730E8D1867BC34005111B9 /* NSiPadToDoDetailsViewController.xib in Resources */,
+				C041B3DB1865F87500C7EF81 /* NSiPadFacebookViewController.xib in Resources */,
+				C0730E4B18669390005111B9 /* NSiPadLinkViewController.xib in Resources */,
+				C041B3CF18655EEA00C7EF81 /* NSiPadWelcomeViewController.xib in Resources */,
+				C039B86F186545740057C947 /* MainWindow.xib in Resources */,
+				C0B20D13186623E6006FDDFB /* NSiPadMapViewController.xib in Resources */,
 				C0D1F2A4185DBCC000E2E6D6 /* phone-icon.jpg in Resources */,
 				C0D1F2A2185DBCBC00E2E6D6 /* email-icon.jpg in Resources */,
-				C069D88A17EAD0BA0024DABA /* GoogleMaps.bundle in Resources */,
+				C0730E9D186824C6005111B9 /* NSiPadTermsViewController.xib in Resources */,
+				C091D1091871BF04000156A8 /* Images-2.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,18 +968,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0730E5518669A5F005111B9 /* NSiPadFAQsViewController.m in Sources */,
+				C0730E4A18669390005111B9 /* NSiPadLinkViewController.m in Sources */,
 				C0B867A0178D8628006E198F /* main.m in Sources */,
+				C041B3DA1865F87500C7EF81 /* NSiPadFacebookViewController.m in Sources */,
+				C0730E9618681D33005111B9 /* NSiPadUCardDetailViewController.m in Sources */,
 				C0B867A4178D8628006E198F /* NSAppDelegate.m in Sources */,
 				C0B867BB178D86A2006E198F /* NSWelcomeViewController.m in Sources */,
 				C0B867C5178D961C006E198F /* NSNewsViewController.m in Sources */,
+				C0730E911867CBD3005111B9 /* NSiPadUCardViewController.m in Sources */,
+				C0730E661866C04C005111B9 /* NSiPadInsideViewController.m in Sources */,
 				C0B867CB178D96DA006E198F /* NSNewsContentViewController.m in Sources */,
 				C0B867D7178DBBD4006E198F /* NSFAQsViewController.m in Sources */,
 				C0B867DD178DCCB5006E198F /* NSUCardViewController.m in Sources */,
 				C0B86822178F223D006E198F /* NSFacebookViewController.m in Sources */,
 				C0B86825178F224D006E198F /* NSTwitterViewController.m in Sources */,
 				C0B86828178F225C006E198F /* NSYoutubeViewController.m in Sources */,
+				C041B3C118655E2400C7EF81 /* NSiPadRootViewController.m in Sources */,
 				C00832591791B2F500A5EFE2 /* NSContactsViewController.m in Sources */,
-				C090EA431796D9F000771382 /* NSContactDetailViewController.m in Sources */,
+				C081C685186C467500B9C5A9 /* NSNevMapViewController.m in Sources */,
 				C090EAC117984D7D00771382 /* NSUEBViewController.m in Sources */,
 				C090EAC417984D9700771382 /* NSUEBDetailViewController.m in Sources */,
 				C04429E3179ABC460022B0DE /* NSChecklistViewController.m in Sources */,
@@ -886,8 +994,10 @@
 				C0160146179C5FDE0008AB9C /* NSHomeViewController.m in Sources */,
 				C011EF52179EC6BE006216D6 /* NSMapViewController.m in Sources */,
 				C04E45C117A53308002BFF48 /* NSOverViewViewController.m in Sources */,
+				C0730E4F1866968D005111B9 /* NSiPadWebsiteViewController.m in Sources */,
+				C0730E701866F727005111B9 /* NSiPadMapListViewController.m in Sources */,
 				C0D1F2AA185E1D9E00E2E6D6 /* UICustomizedButton.m in Sources */,
-				C074D0B617B36A0800777179 /* NSHomeViewControlleriPad.m in Sources */,
+				C081C697186CD54C00B9C5A9 /* NSTermsViewController.m in Sources */,
 				C09C42BB17C8A85700A21DE0 /* WelcomeTalk.m in Sources */,
 				C097D79017CB589A00A03A8F /* VersionControl.m in Sources */,
 				C09A81F117CBEBD700C24319 /* GoogleMap.m in Sources */,
@@ -899,37 +1009,29 @@
 				C0D1F2A0185D904F00E2E6D6 /* FAQ.m in Sources */,
 				C09A820917CC893200C24319 /* NSWebsiteViewController.m in Sources */,
 				C09A820C17CC9B2A00C24319 /* Faculty.m in Sources */,
+				C0B20D12186623E6006FDDFB /* NSiPadMapViewController.m in Sources */,
 				C09A820F17CC9B3A00C24319 /* Department.m in Sources */,
+				C041B3DF1865F88800C7EF81 /* NSiPadTwitterViewController.m in Sources */,
+				C0730E7518677F39005111B9 /* NSiPadContactsViewController.m in Sources */,
+				C0730E9C186824C6005111B9 /* NSiPadTermsViewController.m in Sources */,
+				C0730E871867AC21005111B9 /* NSiPadChecklistViewController.m in Sources */,
+				C041B3E41865F89A00C7EF81 /* NSiPadYoutubeViewController.m in Sources */,
 				C09A821617CCFD1F00C24319 /* ExpandableTableView.m in Sources */,
 				C09A821717CCFD1F00C24319 /* ExpandableTableViewController.m in Sources */,
+				C041B3D31865D44A00C7EF81 /* NSiPadNewsContentViewController.m in Sources */,
+				C041B3CE18655EEA00C7EF81 /* NSiPadWelcomeViewController.m in Sources */,
 				C09A821E17CD3ACC00C24319 /* Position.m in Sources */,
 				C09A822117CD3ADE00C24319 /* SubPosition.m in Sources */,
-				C097193217CECC2500632D56 /* NSChecklistViewControlleriPadtest.m in Sources */,
+				C081C688186C5C3600B9C5A9 /* NSNevSocialViewController.m in Sources */,
 				C097193C17D3AEA200632D56 /* MyDocument.m in Sources */,
 				C097193F17D3D1AA00632D56 /* Group.m in Sources */,
+				C041B3C818655E9D00C7EF81 /* NSiPadNewsViewController.m in Sources */,
 				C097194217D3D1C000632D56 /* Activity.m in Sources */,
+				C0730E7B18679571005111B9 /* NSiPadUEBViewController.m in Sources */,
+				C0730E8C1867BC34005111B9 /* NSiPadToDoDetailsViewController.m in Sources */,
 				C0CEAD3817D7146200BFB44E /* Finished.m in Sources */,
 				C0C8165417DA871D00CB18C2 /* NSMapListViewController.m in Sources */,
-				C024341217E8881300AADA23 /* NSWelcomeViewControlleriPad.m in Sources */,
-				C024341617E88CC400AADA23 /* NSUCardViewControlleriPad.m in Sources */,
-				C024341A17E890F700AADA23 /* NSFAQsViewControlleriPad.m in Sources */,
-				C024341E17E8946100AADA23 /* NSNewsViewControlleriPad.m in Sources */,
-				C024342117E8947D00AADA23 /* NSNewsContentViewControlleriPad.m in Sources */,
-				C069D85517EA391A0024DABA /* NSMapViewControlleriPad.m in Sources */,
-				C069D85817EA3AD50024DABA /* NSInsideViewControlleriPad.m in Sources */,
-				C069D85B17EA3BBE0024DABA /* NSBuildingDetailViewControlleriPad.m in Sources */,
-				C069D85E17EA40320024DABA /* NSMapListViewControlleriPad.m in Sources */,
-				C069D86117EA40930024DABA /* NSOverViewViewControlleriPad.m in Sources */,
-				C069D86517EA46520024DABA /* NSFacebookViewControlleriPad.m in Sources */,
-				C069D86817EA46710024DABA /* NSTwitterViewControlleriPad.m in Sources */,
-				C069D86B17EA46900024DABA /* NSYoutubeViewControlleriPad.m in Sources */,
-				C069D86F17EA49F50024DABA /* NSLinkViewControlleriPad.m in Sources */,
-				C069D87217EA4A1A0024DABA /* NSWebsiteViewControlleriPad.m in Sources */,
-				C069D87617EA4E9E0024DABA /* NSContactsViewControlleriPad.m in Sources */,
-				C069D87917EA4EFB0024DABA /* NSContactDetailViewControlleriPad.m in Sources */,
-				C069D87D17EA59A70024DABA /* NSUEBViewControlleriPad.m in Sources */,
-				C069D88017EA59C80024DABA /* NSUEBDetailViewControlleriPad.m in Sources */,
-				C069D89017EAD4310024DABA /* NSToDoDetailsViewControlleriPad.m in Sources */,
+				C0730E801867A477005111B9 /* NSiPadUEBDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,14 +1052,6 @@
 				C0B867AC178D8628006E198F /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		C0B867AE178D8628006E198F /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C0B867AF178D8628006E198F /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -989,9 +1083,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -1014,35 +1110,45 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
 		C0B867B7178D8628006E198F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "New@Shef/NewShef.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Wanchun Zhang (Q5FRL4CTUE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../Downloads/GoogleMaps-iOS-1.4.0\"",
-					"\"$(SRCROOT)\"",
+					"\\\"$(SRCROOT)/../../../Downloads/GoogleMaps-iOS-1.4.0\\\"",
+					"$(SRCROOT)",
+					"/Users/wanchunzhang/Desktop/News@Shef/New@Shef",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "New@Shef/New@Shef-Prefix.pch";
 				INFOPLIST_FILE = "New@Shef/New@Shef-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/wanchunzhang/Desktop/News@Shef/New@Shef",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = NewShef;
-				PROVISIONING_PROFILE = "92F2BA1E-39E3-4CEF-8249-55E2129D1025";
-				VALID_ARCHS = "armv7s armv7";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1050,27 +1156,33 @@
 		C0B867B8178D8628006E198F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "New@Shef/NewShef.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Wanchun Zhang (Q5FRL4CTUE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../Downloads/GoogleMaps-iOS-1.4.0\"",
-					"\"$(SRCROOT)\"",
+					"\\\"$(SRCROOT)/../../../Downloads/GoogleMaps-iOS-1.4.0\\\"",
+					"$(SRCROOT)",
+					"/Users/wanchunzhang/Desktop/News@Shef/New@Shef",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "New@Shef/New@Shef-Prefix.pch";
 				INFOPLIST_FILE = "New@Shef/New@Shef-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/wanchunzhang/Desktop/News@Shef/New@Shef",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = NewShef;
-				PROVISIONING_PROFILE = "92F2BA1E-39E3-4CEF-8249-55E2129D1025";
-				"PROVISIONING_PROFILE[sdk=*]" = "0FB5B1D4-0EAF-4715-B618-A16CEBA62DFB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0FB5B1D4-0EAF-4715-B618-A16CEBA62DFB";
-				VALID_ARCHS = "armv7s armv7";
+				PROVISIONING_PROFILE = "";
+			 
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -87,10 +87,12 @@
                                 style:UIBarButtonItemStyleBordered
                                 target:self
                                 action:@selector(goBack)];
-    btnBack.tintColor = [UIColor blueColor];
+    UIColor *iosBlue = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    btnBack.tintColor = iosBlue;
     self.navigationItem.leftBarButtonItem = btnBack;
 
-    btnDone.tintColor = [UIColor blueColor];
+ 
+    btnDone.tintColor = iosBlue;
  
     if ([self connectedToNetwork] == YES)
     {

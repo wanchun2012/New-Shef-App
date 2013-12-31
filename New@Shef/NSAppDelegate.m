@@ -9,6 +9,7 @@
 #import "NSAppDelegate.h"
 #import "NSiPadRootViewController.h"
 #import "NSiPadWelcomeViewController.h"
+#import "TestFlight.h"
 
 @implementation NSAppDelegate
 @synthesize   splitViewController, detailViewController, rootViewController,window;
@@ -34,7 +35,7 @@
     BOOL iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
     if (iPad)
     {
-        NSLog(@"Now, time to do some crazy stuff on iPad, lets wash bathroom T.T");
+        NSLog(@"Now, time to do some crazy stuff on iPad T.T");
         // Override point for customization after app launch.
         self.splitViewController =[[UISplitViewController alloc]init];
         self.rootViewController=[[NSiPadRootViewController alloc]init];
@@ -58,9 +59,13 @@
         CGFloat screenHeight = screenSize.height;
         CGRect frame = CGRectMake(0, 0, screenWidth,screenHeight);
         self.splitViewController.view.frame = frame;
-        NSLog(@"Lets wash bathroom again on Monday");
+        NSLog(@"ipad loading ends");
     }
     
+    //testflight
+    //[TestFlight takeOff:@"5489f157df02c9e050c4e72a29b29340_MzE5MDI1MjAxMy0xMi0zMCAxNjowMzozNy4wMjA0NzE"];
+    //testflight research server
+    [TestFlight takeOff:@"9a71e21dcf48e0c8e06a1407d4d29bc1_MzE5MDQxMjAxMy0xMi0zMCAxNzowMzo1OS4yMzU4NDA"];
     return YES;
 }
 							
@@ -68,6 +73,8 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+ 
+ 
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

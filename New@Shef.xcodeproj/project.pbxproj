@@ -19,13 +19,13 @@
 		C011EF48179EC4EE006216D6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C011EF47179EC4EE006216D6 /* libz.dylib */; };
 		C011EF4A179EC4FF006216D6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C011EF49179EC4FF006216D6 /* OpenGLES.framework */; };
 		C011EF4C179EC50E006216D6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C011EF4B179EC50E006216D6 /* QuartzCore.framework */; };
-		C011EF4E179EC51C006216D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C011EF4D179EC51C006216D6 /* SystemConfiguration.framework */; };
 		C011EF52179EC6BE006216D6 /* NSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C011EF51179EC6BE006216D6 /* NSMapViewController.m */; };
 		C012D7DD18716A2700EFA35C /* splash_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = C012D7DC18716A2700EFA35C /* splash_iPhone.png */; };
 		C012D7DF18716C4100EFA35C /* splash_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = C012D7DE18716C4100EFA35C /* splash_iPad.png */; };
 		C012D82E1871831900EFA35C /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C012D82D1871831900EFA35C /* GoogleMaps.framework */; };
 		C012D8301871837900EFA35C /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C012D82F1871837900EFA35C /* GoogleMaps.bundle */; };
 		C0160146179C5FDE0008AB9C /* NSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0160145179C5FDE0008AB9C /* NSHomeViewController.m */; };
+		C0262CE01876A57A00B3C4A5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C011EF4D179EC51C006216D6 /* SystemConfiguration.framework */; };
 		C033FD55179C332800BFF62C /* News64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD54179C332800BFF62C /* News64.png */; };
 		C033FD57179C33C100BFF62C /* Map64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD56179C33C100BFF62C /* Map64.png */; };
 		C033FD59179C33EC00BFF62C /* Checklist64.png in Resources */ = {isa = PBXBuildFile; fileRef = C033FD58179C33EC00BFF62C /* Checklist64.png */; };
@@ -85,7 +85,7 @@
 		C090EAC417984D9700771382 /* NSUEBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C090EAC317984D9700771382 /* NSUEBDetailViewController.m */; };
 		C091D1071871B102000156A8 /* ExpandableAccessoryView.png in Resources */ = {isa = PBXBuildFile; fileRef = C091D1061871B102000156A8 /* ExpandableAccessoryView.png */; };
 		C091D1091871BF04000156A8 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C091D1081871BF04000156A8 /* Images-2.xcassets */; };
-		C091D111187215DE000156A8 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C091D110187215DE000156A8 /* libTestFlight.a */; };
+		C0955F7C1872D02000FE8599 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0955F7B1872D02000FE8599 /* libTestFlight.a */; };
 		C097193C17D3AEA200632D56 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = C097193B17D3AEA200632D56 /* MyDocument.m */; };
 		C097193F17D3D1AA00632D56 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = C097193E17D3D1A900632D56 /* Group.m */; };
 		C097194217D3D1C000632D56 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = C097194117D3D1C000632D56 /* Activity.m */; };
@@ -245,8 +245,8 @@
 		C090EAC317984D9700771382 /* NSUEBDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSUEBDetailViewController.m; sourceTree = "<group>"; };
 		C091D1061871B102000156A8 /* ExpandableAccessoryView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExpandableAccessoryView.png; sourceTree = "<group>"; };
 		C091D1081871BF04000156A8 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
-		C091D10F187215C6000156A8 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		C091D110187215DE000156A8 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		C0955F7B1872D02000FE8599 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		C0955F7D1872D02F00FE8599 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		C097193A17D3AEA200632D56 /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
 		C097193B17D3AEA200632D56 /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
 		C097193D17D3D1A900632D56 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
@@ -337,8 +337,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C091D111187215DE000156A8 /* libTestFlight.a in Frameworks */,
-				C011EF4E179EC51C006216D6 /* SystemConfiguration.framework in Frameworks */,
+				C0262CE01876A57A00B3C4A5 /* SystemConfiguration.framework in Frameworks */,
+				C0955F7C1872D02000FE8599 /* libTestFlight.a in Frameworks */,
 				C097194417D478A800632D56 /* libsqlite3.dylib in Frameworks */,
 				C011EF4C179EC50E006216D6 /* QuartzCore.framework in Frameworks */,
 				C011EF4A179EC4FF006216D6 /* OpenGLES.framework in Frameworks */,
@@ -588,8 +588,8 @@
 		C091D10C18721589000156A8 /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
-				C091D110187215DE000156A8 /* libTestFlight.a */,
-				C091D10F187215C6000156A8 /* TestFlight.h */,
+				C0955F7B1872D02000FE8599 /* libTestFlight.a */,
+				C0955F7D1872D02F00FE8599 /* TestFlight.h */,
 			);
 			name = TestFlight;
 			sourceTree = "<group>";
@@ -1180,7 +1180,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = NewShef;
 				PROVISIONING_PROFILE = "";
-			 
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

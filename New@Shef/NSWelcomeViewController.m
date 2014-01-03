@@ -20,13 +20,14 @@
 
 NSString *serverVersion;
 NSString *imagetype;
-
+NSInteger numOfAlert;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
         // Custom initialization
+        numOfAlert = 0;
     }
     return self;
 }
@@ -280,6 +281,7 @@ NSString *imagetype;
 {
     if (buttonIndex == 0)
     {
+        numOfAlert --;
           exit(-1);
     }
  
@@ -289,9 +291,11 @@ NSString *imagetype;
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
     if (connect==NULL) {
- 
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        if (numOfAlert<1) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            numOfAlert ++;
+        }
         return NO;
     }
     return YES;

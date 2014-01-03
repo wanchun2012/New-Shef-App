@@ -19,10 +19,12 @@
 @synthesize appDelegate, popoverController, uebDetailVC;
 NSString *serverVersion;
 NSString *statusImage;
+NSInteger numOfAlert;
 -(id) init {
 	if (self=[super init]) {
 		self.appDelegate = (NSAppDelegate *)[[UIApplication sharedApplication] delegate];
         statusImage =@"";
+        numOfAlert = 0;
 	}
 	return self;
 }
@@ -308,12 +310,8 @@ NSString *statusImage;
 -(NSString *) getUEBDescription:(int)Id
 {
     NSString *temp=@"";
-    if ([self connectedToNetwork] == NO) {
-        // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-        //  [alert show];
-        
-    }
-    else {
+    if ([self connectedToNetwork] == YES) {
+ 
         NSString *urlstr =[NSString stringWithFormat:GETDescription, Id];
         NSURL *url = [NSURL URLWithString: urlstr];
         NSData *data = [NSData dataWithContentsOfURL:url];
@@ -492,7 +490,9 @@ NSString *statusImage;
 {
     if (buttonIndex == 0)
     {
+        numOfAlert --;
         exit(-1);
+        
     }
     
 }
@@ -501,9 +501,11 @@ NSString *statusImage;
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
     if (connect==NULL) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        
+        if (numOfAlert<1) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            numOfAlert ++;
+        }
     }
     
     return (connect!=NULL)?YES:NO;

@@ -19,9 +19,11 @@
 
 NSString *serverVersion;
 NSString *imagetype;
+NSInteger numOfAlert;
 -(id) init {
 	if (self=[super init]) {
 		self.appDelegate = (NSAppDelegate *)[[UIApplication sharedApplication] delegate];
+        numOfAlert = 0;
 	}
 	return self;
 }
@@ -203,13 +205,9 @@ NSString *imagetype;
     NSLog(@"NSWelcomeViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     UIImage *image;
-    if ([self connectedToNetwork] == NO)
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
+ 
         [self getVersionWebService];
         modelVersionControl = [[VersionControl alloc] init];
         [modelVersionControl initDB];
@@ -279,7 +277,7 @@ NSString *imagetype;
 
 -(void)mainThreadFinishing:(UIImage *)image
 {
-    if ([self connectedToNetwork])
+    if ([self connectedToNetwork]==YES)
     {
         UITextView * mainContent = [[UITextView alloc]initWithFrame:CGRectMake(50,50, self.view.frame.size.width-260.f, 0)];
         mainContent.text = modelWelcomeTalk.welcomeText;
@@ -314,16 +312,24 @@ NSString *imagetype;
 {
     if (buttonIndex == 0)
     {
-         exit(-1); 
+        numOfAlert --;
+        exit(-1);
     }
- 
+    
 }
 
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        if (numOfAlert<1) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            numOfAlert ++;
+        }
+        return NO;
+    }
+    return YES;
 }
-
 
 @end

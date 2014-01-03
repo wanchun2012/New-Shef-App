@@ -18,13 +18,14 @@
 @implementation NSUEBViewController
 NSString *serverVersion;
 NSString *statusImage;
-
+NSInteger numOfAlert;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
         statusImage =@"";
+        numOfAlert = 0;
     }
     return self;
 }
@@ -534,18 +535,21 @@ NSString *statusImage;
 {
     if (buttonIndex == 0)
     {
+        numOfAlert --;
         exit(-1);
     }
- 
     
 }
+
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
     if (connect==NULL) {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        if (numOfAlert<1) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            numOfAlert ++;
+        }
         return NO;
     }
     return YES;

@@ -8,7 +8,7 @@
 
 #import "NSOverViewViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
-
+ 
 @interface NSOverViewViewController()
 {
     GMSMapView *mapView_;
@@ -57,13 +57,9 @@
 
 - (void)loadView
 {
-    if ([self connectedToNetwork] == NO)
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
+ 
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:53.381309
                                                                 longitude:-1.484587
                                                                      zoom:15];
@@ -101,7 +97,12 @@
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
-
 @end

@@ -63,9 +63,9 @@
     }
     
     //testflight
-    //[TestFlight takeOff:@"5489f157df02c9e050c4e72a29b29340_MzE5MDI1MjAxMy0xMi0zMCAxNjowMzozNy4wMjA0NzE"];
-    //testflight research server
-    [TestFlight takeOff:@"9a71e21dcf48e0c8e06a1407d4d29bc1_MzE5MDQxMjAxMy0xMi0zMCAxNzowMzo1OS4yMzU4NDA"];
+    // start of your application:didFinishLaunchingWithOptions // ...
+    [TestFlight takeOff:@"ebe4f11f-bf62-415b-be28-c5fc9d73eee5"];
+    // The rest of your application:didFinishLaunchingWithOptions method// ...
     return YES;
 }
 							

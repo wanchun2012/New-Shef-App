@@ -7,7 +7,7 @@
 //
 #import <QuartzCore/QuartzCore.h>
 #import "NSToDoDetailsViewController.h"
-
+ 
 @interface NSToDoDetailsViewController ()
 
 @end
@@ -39,15 +39,9 @@
     [titleView sizeToFit];
     
     self.btnDone.tintColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];;
-    if ([self connectedToNetwork] == NO)
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
-    
-       
+ 
             // iCloud loading
             NSLog(@"iCloud loading..........................");
           
@@ -282,7 +276,12 @@
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
-
 @end

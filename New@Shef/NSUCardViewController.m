@@ -7,6 +7,7 @@
 //
 
 #import "NSUCardViewController.h"
+ 
 #define SOURCETYPE UIImagePickerControllerSourceTypeCamera
 @interface NSUCardViewController ()
 
@@ -56,8 +57,7 @@
 {
     if ([self connectedToNetwork] == NO)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+ 
         btnChoose.enabled = NO;
         btnTake.enabled = NO;
         btnLink.enabled = NO;
@@ -142,8 +142,7 @@
     
     if ([self connectedToNetwork] == NO)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+      
         btnChoose.enabled = NO;
         btnTake.enabled = NO;
         btnLink.enabled = NO;
@@ -190,6 +189,12 @@
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 @end

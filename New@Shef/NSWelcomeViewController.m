@@ -11,7 +11,7 @@
 //             http://stackoverflow.com/questions/9415221/delete-image-from-app-directory-in-iphone
 #import <QuartzCore/QuartzCore.h>
 #import "NSWelcomeViewController.h"
-
+ 
 @interface NSWelcomeViewController ()
 @end
 
@@ -153,13 +153,9 @@ NSString *imagetype;
     NSLog(@"NSWelcomeViewController: %s","backgroundThread starting...");
     [self performSelectorOnMainThread:@selector(mainThreadStarting) withObject:nil waitUntilDone:NO];
     UIImage *image;
-    if ([self connectedToNetwork] == NO)
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
+ 
         [self getVersionWebService];
         modelVersionControl = [[VersionControl alloc] init];
         [modelVersionControl initDB];
@@ -292,7 +288,13 @@ NSString *imagetype;
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+ 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 
 @end

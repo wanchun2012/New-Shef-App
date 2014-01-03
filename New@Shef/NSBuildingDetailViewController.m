@@ -10,7 +10,7 @@
 //
 
 #import "NSBuildingDetailViewController.h"
-
+ 
 @interface NSBuildingDetailViewController ()
 
 @end
@@ -40,13 +40,9 @@
     titleView.textColor = [UIColor whiteColor]; // Your color here
     self.navigationItem.titleView = titleView;
     [titleView sizeToFit];
-    if ([self connectedToNetwork] == NO)
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
+ 
         [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
     }
     [super viewDidLoad];
@@ -111,7 +107,13 @@
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 
 @end

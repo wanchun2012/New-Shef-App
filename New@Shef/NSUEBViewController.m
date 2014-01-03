@@ -14,7 +14,7 @@
 #import "NSUEBDetailViewController.h"
 #import "Position.h"
 #import "SubPosition.h"
-
+ 
 @implementation NSUEBViewController
 NSString *serverVersion;
 NSString *statusImage;
@@ -53,13 +53,9 @@ NSString *statusImage;
     [titleView sizeToFit];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    if ([self connectedToNetwork] == NO)
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
+ 
         [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
     }
     [super viewDidLoad];
@@ -286,12 +282,8 @@ NSString *statusImage;
 -(NSString *) getUEBDescription:(int)Id
 {
     NSString *temp=@"";
-    if ([self connectedToNetwork] == NO) {
-       // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No internet, please try later?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-      //  [alert show];
-        
-    }
-    else {
+    if ([self connectedToNetwork] == YES) {
+ 
     NSString *urlstr =[NSString stringWithFormat:GETDescription, Id];
     NSURL *url = [NSURL URLWithString: urlstr];
     NSData *data = [NSData dataWithContentsOfURL:url];
@@ -550,8 +542,13 @@ NSString *statusImage;
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
-
 
 @end

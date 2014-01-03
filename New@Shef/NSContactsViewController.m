@@ -10,6 +10,7 @@
 #import "Faculty.h"
 #import "Department.h"
 #import "UICustomizedButton.h"
+ 
 @implementation NSContactsViewController
 
 NSString *serverVersion;
@@ -49,13 +50,9 @@ NSString *emailAddress;
     [titleView sizeToFit];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    if ([self connectedToNetwork] == NO)
+    if ([self connectedToNetwork] == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
+ 
         [NSThread detachNewThreadSelector:@selector(backgroundThread) toTarget:self withObject:nil];
     }
     [super viewDidLoad];
@@ -483,7 +480,13 @@ NSString *emailAddress;
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "NSToDoDetailsViewController.h"
 #import "Activity.h"
 #import "Group.h"
-
+ 
 @interface NSChecklistViewController ()
 
 @end
@@ -56,14 +56,9 @@ NSIndexPath *selectedPath=0;
     
     if ([self iCloudIsAvailable])
     {
-        if ([self connectedToNetwork] == NO)
+        if ([self connectedToNetwork] == YES)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-      
-        else
-        {
+     
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLoad) name:@"loadiCloud" object:nil];
 
             // iCloud loading
@@ -538,7 +533,13 @@ NSIndexPath *selectedPath=0;
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 
 @end

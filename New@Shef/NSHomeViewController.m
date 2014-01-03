@@ -8,7 +8,7 @@
 
 #import "NSHomeViewController.h"
 #import <QuartzCore/QuartzCore.h>
-
+ 
 @interface NSHomeViewController ()
 
 @end
@@ -97,12 +97,7 @@
    //   ||[[segue identifier] isEqualToString:@"segueContacts"]
    //   ||[[segue identifier] isEqualToString:@"segueLinks"]
         ||[[segue identifier] isEqualToString:@"segueFAQ"]) {
-        
-        if ([self connectedToNetwork] == NO)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-        }
+     
     }
 }
 
@@ -115,11 +110,18 @@
 
     
 }
+ 
 
 - (BOOL) connectedToNetwork
 {
     NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    return (connect!=NULL)?YES:NO;
+    if (connect==NULL) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    return YES;
 }
 
 @end

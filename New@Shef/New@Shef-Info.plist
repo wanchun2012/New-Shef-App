@@ -21,7 +21,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6</string>
+	<string>1.8</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -30,6 +30,8 @@
 	<true/>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow</string>
+	<key>UIApplicationExitsOnSuspend</key>
+	<true/>
 	<key>UILaunchImageFile~iphone</key>
 	<string></string>
 	<key>UIMainStoryboardFile~iphone</key>
@@ -48,7 +50,5 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIApplicationExitsOnSuspend</key>
-	<true/>
 </dict>
 </plist>

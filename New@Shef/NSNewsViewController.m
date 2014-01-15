@@ -8,6 +8,8 @@
 // Reference: 1. XML parser
 // http://ipad.about.com/od/iPad-App-Dev/a/How-To-Parse-Xml-Files-In-Xcode-Objective-C.htm
 //
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 #import "NSNewsViewController.h"
 #import "NSNewsContentViewController.h"
@@ -224,8 +226,11 @@
 }
 - (BOOL) connectedToNetwork
 {
-    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    if (connect==NULL) {
+    BOOL result = NO;
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    result = !(networkStatus==NotReachable);
+    if (result == NO) {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];

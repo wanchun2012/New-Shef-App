@@ -51,6 +51,7 @@
 		C041B3E51865F89A00C7EF81 /* NSiPadYoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C041B3E31865F89A00C7EF81 /* NSiPadYoutubeViewController.xib */; };
 		C04429E3179ABC460022B0DE /* NSChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04429E2179ABC460022B0DE /* NSChecklistViewController.m */; };
 		C04429EC179ABC9B0022B0DE /* NSToDoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04429EB179ABC9B0022B0DE /* NSToDoDetailsViewController.m */; };
+		C047C9BE18864BCC005393D1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C047C9BD18864BCC005393D1 /* Reachability.m */; };
 		C04E45C117A53308002BFF48 /* NSOverViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C04E45C017A53308002BFF48 /* NSOverViewViewController.m */; };
 		C0730E4A18669390005111B9 /* NSiPadLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0730E4818669390005111B9 /* NSiPadLinkViewController.m */; };
 		C0730E4B18669390005111B9 /* NSiPadLinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0730E4918669390005111B9 /* NSiPadLinkViewController.xib */; };
@@ -191,6 +192,8 @@
 		C04429E2179ABC460022B0DE /* NSChecklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSChecklistViewController.m; sourceTree = "<group>"; };
 		C04429EA179ABC9B0022B0DE /* NSToDoDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSToDoDetailsViewController.h; sourceTree = "<group>"; };
 		C04429EB179ABC9B0022B0DE /* NSToDoDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSToDoDetailsViewController.m; sourceTree = "<group>"; };
+		C047C9BC18864BBD005393D1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		C047C9BD18864BCC005393D1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		C04E45BF17A53308002BFF48 /* NSOverViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSOverViewViewController.h; sourceTree = "<group>"; };
 		C04E45C017A53308002BFF48 /* NSOverViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSOverViewViewController.m; sourceTree = "<group>"; };
 		C057A10F17C4E5B4009A49FA /* NewShef.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NewShef.entitlements; sourceTree = "<group>"; };
@@ -472,6 +475,15 @@
 			name = Checklist;
 			sourceTree = "<group>";
 		};
+		C047C9BB18864BA7005393D1 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				C047C9BC18864BBD005393D1 /* Reachability.h */,
+				C047C9BD18864BCC005393D1 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		C0730E3C18669049005111B9 /* Link */ = {
 			isa = PBXGroup;
 			children = (
@@ -721,6 +733,7 @@
 		C0B86799178D8628006E198F /* New@Shef */ = {
 			isa = PBXGroup;
 			children = (
+				C047C9BB18864BA7005393D1 /* Reachability */,
 				C057A10F17C4E5B4009A49FA /* NewShef.entitlements */,
 				C0B867A2178D8628006E198F /* NSAppDelegate.h */,
 				C0B867A3178D8628006E198F /* NSAppDelegate.m */,
@@ -1007,6 +1020,7 @@
 				C09A820317CC341D00C24319 /* NSLinkViewController.m in Sources */,
 				C09A820617CC36F700C24319 /* Link.m in Sources */,
 				C0D1F2A0185D904F00E2E6D6 /* FAQ.m in Sources */,
+				C047C9BE18864BCC005393D1 /* Reachability.m in Sources */,
 				C09A820917CC893200C24319 /* NSWebsiteViewController.m in Sources */,
 				C09A820C17CC9B2A00C24319 /* Faculty.m in Sources */,
 				C0B20D12186623E6006FDDFB /* NSiPadMapViewController.m in Sources */,

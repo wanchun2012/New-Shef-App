@@ -5,7 +5,8 @@
 //  Created by Wanchun Zhang on 26/12/2013.
 //  Copyright (c) 2013 Wanchun Zhang. All rights reserved.
 //
-
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 #import "NSNevMapViewController.h"
 
 @interface NSNevMapViewController ()

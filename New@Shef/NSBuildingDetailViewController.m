@@ -8,7 +8,8 @@
 // Reference: 1. inside view
 //           http://jingjong404.blogspot.co.uk/2013/09/webviewgoogle.html
 //
-
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 #import "NSBuildingDetailViewController.h"
  
 @interface NSBuildingDetailViewController ()
@@ -106,8 +107,11 @@
 
 - (BOOL) connectedToNetwork
 {
-    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    if (connect==NULL) {
+    BOOL result = NO;
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    result = !(networkStatus==NotReachable);
+    if (result == NO) {
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];

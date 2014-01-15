@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Wanchun Zhang. All rights reserved.
 //
 
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
+
 #import "NSiPadContactsViewController.h"
 #import "NSiPadRootViewController.h"
 #import "Faculty.h"
@@ -359,8 +362,7 @@ NSString *emailAddress;
     [cell.contentView addSubview:btnEmail];
     [btnEmail setBackgroundImage:imgEmail forState:UIControlStateNormal];
     [btnEmail addTarget:self action:@selector(sendEmail:)  forControlEvents:UIControlEventTouchUpInside];
-    
-    
+
     if (department.name == NULL) {
         cell.userInteractionEnabled = false;
         cell.textLabel.text = @"";
@@ -462,14 +464,18 @@ NSString *emailAddress;
 
 - (BOOL) connectedToNetwork
 {
-    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    if (connect==NULL) {
+    BOOL result = NO;
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    result = !(networkStatus == NotReachable);
+ 
+    if (result == NO) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
         
     }
     
-    return (connect!=NULL)?YES:NO;
+    return result;
 }
 
 

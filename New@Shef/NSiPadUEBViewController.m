@@ -5,6 +5,9 @@
 //  Created by Wanchun Zhang on 22/12/2013.
 //  Copyright (c) 2013 Wanchun Zhang. All rights reserved.
 //
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
+
 #import "NSiPadUEBDetailViewController.h"
 #import "NSiPadUEBViewController.h"
 #import "NSiPadRootViewController.h"
@@ -499,8 +502,12 @@ NSInteger numOfAlert;
 
 - (BOOL) connectedToNetwork
 {
-    NSString *connect = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://google.co.uk"] encoding:NSUTF8StringEncoding error:nil];
-    if (connect==NULL) {
+    BOOL result = NO;
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    result = !(networkStatus==NotReachable);
+    
+    if (result == NO) {
         if (numOfAlert<1) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NOINTERNETALERTTITLE message:NOINTERNETMSG delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
@@ -508,9 +515,7 @@ NSInteger numOfAlert;
         }
     }
     
-    return (connect!=NULL)?YES:NO;
+    return result;
 }
-
-
 
 @end
